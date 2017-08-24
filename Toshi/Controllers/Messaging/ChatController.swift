@@ -188,10 +188,8 @@ final class ChatController: OverlayController {
         let topInset = ChatsFloatingHeaderView.height + 64.0 + activeNetworkViewHeight
         let bottomInset = textInputHeight
 
-        // The collectionView is inverted 180 degrees
-        // 10 + 2 hmm....?
-        collectionView.contentInset = UIEdgeInsets(top: bottomInset + buttonsHeight + 10, left: 0, bottom: topInset + 2 + 10, right: 0)
-        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: bottomInset + buttonsHeight, left: 0, bottom: topInset + 2, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: topInset + 2, left: 0, bottom: bottomInset + buttonsHeight + 10, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: topInset, left: 0, bottom: bottomInset, right: 0)
     }
 
     fileprivate func registerNotifications() {
@@ -212,8 +210,6 @@ final class ChatController: OverlayController {
         addSubviewsAndConstraints()
 
         textInputView.delegate = self
-
-        collectionView.transform = CGAffineTransform (scaleX: 1, y: -1)
 
         controlsViewDelegateDatasource.controlsCollectionView = controlsView
         subcontrolsViewDelegateDatasource.subcontrolsCollectionView = subcontrolsView
@@ -401,9 +397,9 @@ final class ChatController: OverlayController {
     }
 
     fileprivate func scrollToBottom(animated: Bool = true) {
-        guard collectionView.numberOfItems(inSection: 0) > 0 else { return }
+        guard let numbers = collectionView.numberOfItems(inSection: 0) as Int?, numbers > 0 else { return }
 
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: numbers - 1, section: 0), at: .bottom, animated: true)
     }
 
     fileprivate func adjustToPaymentState(_ state: TSInteraction.PaymentState, at indexPath: IndexPath) {
@@ -646,8 +642,6 @@ extension ChatController: UICollectionViewDataSource {
             cell.messageText = message.text
         }
 
-        cell.transform = collectionView.transform
-
         return cell
     }
 
@@ -665,12 +659,12 @@ extension ChatController: UICollectionViewDataSource {
             }
 
             // this is the first cell of many
-            return currentMessage.isOutgoing == nextMessage.isOutgoing ? .bottom : .single
+            return currentMessage.isOutgoing == nextMessage.isOutgoing ? .top : .single
         }
 
         guard let nextMessage = viewModel.messageModels.element(at: indexPath.item + 1) else {
             // this is the last cell
-            return currentMessage.isOutgoing == previousMessage.isOutgoing ? .top : .single
+            return currentMessage.isOutgoing == previousMessage.isOutgoing ? .bottom : .single
         }
 
         if currentMessage.isOutgoing != previousMessage.isOutgoing, currentMessage.isOutgoing != nextMessage.isOutgoing {
@@ -681,10 +675,10 @@ extension ChatController: UICollectionViewDataSource {
             return .middle
         } else if currentMessage.isOutgoing == previousMessage.isOutgoing {
             // the previous message is from the same user but the next message is not
-            return .top
+            return .bottom
         } else {
             // the next message is from the same user but the previous message is not
-            return .bottom
+            return .top
         }
     }
 }

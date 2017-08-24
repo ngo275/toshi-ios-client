@@ -40,8 +40,9 @@ final class ChatViewModel {
 
         countAllMessages()
 
-        loadNextChunk(notifiesAboutLastMessage: true)
+        //loadNextChunk(notifiesAboutLastMessage: true)
 
+        loadMessages(notifiesAboutLastMessage: true)
         registerNotifications()
 
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -146,9 +147,9 @@ final class ChatViewModel {
         YapDatabaseViewMappings(groups: [self.thread.uniqueId], view: TSMessageDatabaseViewExtensionName)
     }()
 
-    fileprivate lazy var loadedMappings: YapDatabaseViewMappings = {
-        YapDatabaseViewMappings(groups: [self.thread.uniqueId], view: TSMessageDatabaseViewExtensionName)
-    }()
+//    fileprivate lazy var loadedMappings: YapDatabaseViewMappings = {
+//        YapDatabaseViewMappings(groups: [self.thread.uniqueId], view: TSMessageDatabaseViewExtensionName)
+//    }()
 
     fileprivate lazy var editingDatabaseConnection: YapDatabaseConnection? = {
         self.storageManager?.newDatabaseConnection()
@@ -176,12 +177,12 @@ final class ChatViewModel {
     }
 
     fileprivate func loadNextChunk(notifiesAboutLastMessage: Bool = false) {
-        let nextChunkSize = self.nextChunkSize()
+        //let nextChunkSize = self.nextChunkSize()
 
-        guard let rangeOptions = YapDatabaseViewRangeOptions.flexibleRange(withLength: nextChunkSize, offset: loadedMessagesCount, from: .end) as YapDatabaseViewRangeOptions? else { return }
-        self.loadedMappings.setRangeOptions(rangeOptions, forGroup: self.thread.uniqueId)
+        //guard let rangeOptions = YapDatabaseViewRangeOptions.flexibleRange(withLength: nextChunkSize, offset: loadedMessagesCount, from: .end) as YapDatabaseViewRangeOptions? else { return }
+        //self.loadedMappings.setRangeOptions(rangeOptions, forGroup: self.thread.uniqueId)
 
-        self.loadMessages(notifiesAboutLastMessage: notifiesAboutLastMessage)
+        //self.loadMessages(notifiesAboutLastMessage: notifiesAboutLastMessage)
     }
 
     @objc
@@ -209,7 +210,7 @@ final class ChatViewModel {
             guard let strongSelf = self else { return }
 
             strongSelf.mappings.update(with: transaction)
-            strongSelf.loadedMappings.update(with: transaction)
+            //strongSelf.loadedMappings.update(with: transaction)
 
             for change in yapDatabaseChanges.rowChanges {
 
@@ -222,7 +223,7 @@ final class ChatViewModel {
                     DispatchQueue.main.async {
                         let result = strongSelf.interactor.handleSignalMessage(signalMessage, shouldProcessCommands: true)
 
-                        strongSelf.messages.insert(result, at: 0)
+                        strongSelf.messages.append(result)
 
                         strongSelf.output?.didReceiveLastMessage()
 
@@ -315,18 +316,18 @@ final class ChatViewModel {
     func loadMessages(notifiesAboutLastMessage: Bool) {
         uiDatabaseConnection.asyncRead { [weak self] transaction in
             guard let strongSelf = self else { return }
-            strongSelf.loadedMappings.update(with: transaction)
+            //strongSelf.loadedMappings.update(with: transaction)
 
             var messages = [Message]()
 
-            let numberOfItemsInSection = strongSelf.loadedMappings.numberOfItems(inSection: 0)
+            let numberOfItemsInSection = strongSelf.mappings.numberOfItems(inSection: 0)
             strongSelf.loadedMessagesCount += numberOfItemsInSection
 
             for i in 0 ..< numberOfItemsInSection {
                 let indexPath = IndexPath(row: Int(i), section: 0)
                 guard let dbExtension = transaction.ext(TSMessageDatabaseViewExtensionName) as? YapDatabaseViewTransaction else { return }
 
-                guard let signalMessage = dbExtension.object(at: indexPath, with: strongSelf.loadedMappings) as? TSMessage else { return }
+                guard let signalMessage = dbExtension.object(at: indexPath, with: strongSelf.mappings) as? TSMessage else { return }
 
                 var shouldProcess = false
                 if SofaType(sofa: signalMessage.body ?? "") == .paymentRequest {
@@ -346,7 +347,7 @@ final class ChatViewModel {
                 }
 
                 return message1.date.compare(message2.date) == .orderedAscending
-            }.reversed()
+            }//.reversed()
 
             DispatchQueue.main.async {
                 strongSelf.messages.append(contentsOf: new)
