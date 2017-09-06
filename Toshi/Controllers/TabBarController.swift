@@ -76,18 +76,14 @@ open class TabBarController: UITabBarController {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO: Refactor all this navigation controllers subclasses into one, they have similar code
+        NotificationCenter.default.addObserver(self, selector: #selector(chatDBCreated(_:)), name: .ChatDatabaseCreated, object: nil)
+
         browseController = BrowseNavigationController(rootViewController: BrowseController())
         favoritesController = FavoritesNavigationController(rootViewController: FavoritesController())
 
         messagingController = ChatsNavigationController(nibName: nil, bundle: nil)
         let chatsController = ChatsController()
-
-        if let address = UserDefaults.standard.string(forKey: self.messagingController.selectedThreadAddressKey), let thread = chatsController.thread(withAddress: address) as TSThread? {
-            messagingController.viewControllers = [chatsController, ChatController(thread: thread)]
-        } else {
-            messagingController.viewControllers = [chatsController]
-        }
+        messagingController.viewControllers = [chatsController]
 
         settingsController = SettingsNavigationController(rootViewController: SettingsController())
 
@@ -150,6 +146,14 @@ open class TabBarController: UITabBarController {
     fileprivate func presentScanner() {
         SoundPlayer.playSound(type: .menuButton)
         Navigator.presentModally(scannerController)
+    }
+
+    @objc fileprivate func chatDBCreated(_ notification: Notification) {
+        guard let chatsController = messagingController.viewControllers.first as? ChatsController else { return }
+
+        if let address = UserDefaults.standard.string(forKey: self.messagingController.selectedThreadAddressKey), let thread = chatsController.thread(withAddress: address) as TSThread? {
+            self.messagingController.pushViewController(ChatController(thread: thread), animated: true)
+        }
     }
 
     public func openDeepLinkURL(_ url: URL) {

@@ -114,6 +114,7 @@
 		2B47941A1F1E06BB00AC3EB4 /* ProfileEditItem .swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */; };
 		2B47941B1F1E06BB00AC3EB4 /* ProfileEditItem .swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */; };
 		2B695CBA1EF9B9A80025119B /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE66A0B1EF910B6007A7130 /* Editable.swift */; };
+		2B7C8B791F4F34AB0094C557 /* WorkingRangeSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */; };
 		2BAB90A71EC1194B005D98C6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A01EC1194B005D98C6 /* Accelerate.framework */; };
 		2BAB90A81EC1194B005D98C6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A11EC1194B005D98C6 /* AudioToolbox.framework */; };
 		2BAB90A91EC1194B005D98C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */; };
@@ -1327,6 +1328,7 @@
 		2B435CB01F135DBF00C91272 /* ProfileEditConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditConfigurator.swift; sourceTree = "<group>"; };
 		2B44A1391F4AEBFF00B9C760 /* ExchangeRateAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIClient.swift; sourceTree = "<group>"; };
 		2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileEditItem .swift"; sourceTree = "<group>"; };
+		2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingRangeSectionController.swift; sourceTree = "<group>"; };
 		2BAB90A01EC1194B005D98C6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2BAB90A11EC1194B005D98C6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -3713,6 +3715,7 @@
 			isa = PBXGroup;
 			children = (
 				9F5F297D1E2677F200C652A3 /* ChatController.swift */,
+				2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */,
 				2B10A3FE1F082CAC00E0F7DC /* ChatInteractor.swift */,
 				2B10A3FB1F082C9300E0F7DC /* ChatViewModel.swift */,
 				9F844BD41E30D880001C5498 /* ChatsController.swift */,
@@ -5026,6 +5029,7 @@
 				9F48C1571E9CD911008BA637 /* CacheExpiry+Default.swift in Sources */,
 				9F4D80381EEA8B4500FB5361 /* PSLMDBTable.m in Sources */,
 				A9E1DCDA1F1E1A72001A4ABE /* IconLabelButton.swift in Sources */,
+				2B7C8B791F4F34AB0094C557 /* WorkingRangeSectionController.swift in Sources */,
 				9F4D7F0C1EEA8B4500FB5361 /* Painting.m in Sources */,
 				9F4D7EFE1EEA8B4500FB5361 /* ImageBlur.m in Sources */,
 				9F4D7F7A1EEA8B4500FB5361 /* ASActor.m in Sources */,

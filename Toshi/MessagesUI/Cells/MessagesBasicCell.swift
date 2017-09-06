@@ -145,6 +145,14 @@ class MessagesBasicCell: UICollectionViewCell {
 
         bubbleView.addSubview(messagesCornerView)
         messagesCornerView.edges(to: bubbleView)
+
+        layer.setAffineTransform(CGAffineTransform(scaleX: 1, y: -1))
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        layer.setAffineTransform(CGAffineTransform(scaleX: 1, y: -1))
     }
 
     override func prepareForReuse() {

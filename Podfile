@@ -11,6 +11,7 @@ abstract_target 'CocoaPods' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'SwiftLint'
+  pod 'IGListKit'
 
   target 'Development' do
       

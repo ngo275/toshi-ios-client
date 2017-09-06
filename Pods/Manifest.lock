@@ -32,6 +32,11 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - HKDFKit (0.0.3)
+  - IGListKit (3.0.0):
+    - IGListKit/Default (= 3.0.0)
+  - IGListKit/Default (3.0.0):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.0.0)
   - libPhoneNumber-iOS (0.9.10)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
@@ -112,6 +117,7 @@ DEPENDENCIES:
   - AxolotlKit (from `https://github.com/WhisperSystems/SignalProtocolKit.git`)
   - Crashlytics
   - Fabric
+  - IGListKit
   - pop
   - SignalServiceKit (from `https://github.com/toshiapp/SignalServiceKit.git`, commit `3820816d116875e417df478880ba5825c7f28c18`)
   - SocketRocket (from `https://github.com/facebook/SocketRocket.git`)
@@ -146,6 +152,7 @@ SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   HKDFKit: c058305d6f64b84f28c50bd7aa89574625bcb62a
+  IGListKit: 9eab6856a15fa25ad72018ff9d9eb2178c240fff
   libPhoneNumber-iOS: f721ae4d5854bce60934f9fb9b0b28e8e68913cb
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
@@ -160,6 +167,6 @@ SPEC CHECKSUMS:
   UnionFind: c33be5adb12983981d6e827ea94fc7f9e370f52d
   YapDatabase: cd911121580ff16675f65ad742a9eb0ab4d9e266
 
-PODFILE CHECKSUM: 22aaa1cdd1ff3f9c29d2cc3ec1c55764161a8ab8
+PODFILE CHECKSUM: f7980c0ce53bc971cbcfe59dbb1c46342907a77e
 
 COCOAPODS: 1.2.1
