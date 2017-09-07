@@ -20,7 +20,7 @@
 
 int main(int argc, char* argv[]) {
     @autoreleasepool {
-        BOOL runningTests = NSClassFromString(@"XCTestCase") != nil;
+        BOOL runningTests = NSClassFromString(@"XCTestCase") != nil || NSClassFromString(@"QuickSpec") != nil;
         if(runningTests) {
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([TestAppDelegate class]));
         }

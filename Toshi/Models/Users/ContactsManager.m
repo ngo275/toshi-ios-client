@@ -56,6 +56,32 @@
     [AvatarManager.shared startDownloadContactsAvatars];
 }
 
+- (void)refreshContactWithAddress:(NSString *)address
+{
+    __weak typeof(self)weakSelf = self;
+    [[IDAPIClient shared] retrieveUserWithUsername:address completion:^(TokenUser * _Nullable contact) {
+
+        typeof(self)strongSelf = weakSelf;
+        [strongSelf refreshContact:contact];
+    }];
+}
+
+- (void)refreshContact:(TokenUser *)contact
+{
+    NSUInteger existingContactIndex = [self.tokenContacts indexOfObjectPassingTest:^BOOL(TokenUser * _Nonnull object, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [object.address isEqualToString:contact.address];
+    }];
+
+    NSMutableArray *mutableContacts = self.tokenContacts.mutableCopy;
+    if (existingContactIndex != NSNotFound) {
+        [mutableContacts replaceObjectAtIndex:existingContactIndex withObject:contact];
+    } else {
+        [mutableContacts addObject:contact];
+    }
+
+    self.tokenContacts = mutableContacts.copy;
+}
+
 - (void)databaseChanged:(NSNotification *)notification
 {
     NSArray <NSNotification *> *notifications = [self.databaseConnection beginLongLivedReadTransaction];
@@ -94,9 +120,8 @@
         for (NSData *contactData in contactsData) {
             NSDictionary<NSString *, id> *json = [NSJSONSerialization JSONObjectWithData:contactData options:0 error:0];
 
-            if (json[@"address"] != [[Cereal shared] address]) {
+            if (![json[@"token_id"] isEqualToString:[[Cereal shared] address]]) {
                 TokenUser *tokenContact = [[TokenUser alloc] initWithJson:json shouldSave:NO];
-
                 [contacts addObject:tokenContact];
             }
         }

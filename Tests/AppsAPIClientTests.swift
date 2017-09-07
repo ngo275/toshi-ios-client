@@ -15,25 +15,141 @@
 
 import XCTest
 import UIKit
+import Quick
+import Nimble
 import Teapot
 
-class AppsAPIClientTests: XCTestCase {
-    var subject: AppsAPIClient!
+//swiftlint:disable force_cast
+class AppsAPIClientTests: QuickSpec {
 
-    override func setUp() {
-        super.setUp()
+    override func spec() {
+        describe("the Apps API Client") {
+            var subject: AppsAPIClient!
 
-        let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self))
-        subject = AppsAPIClient(teapot: mockTeapot)
-    }
+            context("Happy path 😎") {
+                let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getTopRatedApps")
+                subject = AppsAPIClient(teapot: mockTeapot)
 
-    func testGetFeaturedApps() {
-        let expect = self.expectation(description: "test")
-        subject.getFeaturedApps { (user, error) in
-            XCTAssertNil(error)
-            XCTAssertNotNil(user)
-            expect.fulfill()
+                it("fetches the top rated apps") {
+                    waitUntil { done in
+                        subject.getTopRatedApps { users, _ in
+                            expect(users?.first?.about).to(equal("The toppest of all the apps"))
+                            
+                            done()
+                        }
+                    }
+                }
+
+                it("fetches the featured apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getFeaturedApps")
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.getFeaturedApps { users, _ in
+                            expect(users?.first?.about).to(equal("It's all about tests"))
+                            done()
+                        }
+                    }
+                }
+
+                it("searches") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "search")
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.search("Test") { users, _ in
+                            expect(users[2].about).to(equal("The third most searchest of all the apps"))
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("⚠ Unauthorized error 🔒") {
+                it("fetches the top rated apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getTopRatedApps", statusCode: .unauthorized)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.getTopRatedApps { users, error in
+                            expect(users?.count).to(equal(0))
+                            expect(error).toNot(beNil())
+
+                            done()
+                        }
+                    }
+                }
+
+                it("fetches the featured apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getFeaturedApps", statusCode: .unauthorized)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.getFeaturedApps { users, error in
+                            expect(users?.count).to(equal(0))
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+
+                it("searches") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "search", statusCode: .unauthorized)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.search("Test") { user, error in
+                            expect(user.count).to(equal(0))
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("⚠ Not found error 🕳") {
+
+                it("fetches the top rated apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getTopRatedApps", statusCode: .notFound)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.getTopRatedApps { users, error in
+                            expect(users?.count).to(equal(0))
+                            expect(error).toNot(beNil())
+
+                            done()
+                        }
+                    }
+                }
+
+                it("fetches the featured apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getFeaturedApps", statusCode: .notFound)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.getFeaturedApps { users, error in
+                            expect(users?.count).to(equal(0))
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+
+                it("searches") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "search", statusCode: .notFound)
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
+                    waitUntil { done in
+                        subject.search("Test") { user, error in
+                            expect(user.count).to(equal(0))
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+            }
         }
-        self.waitForExpectations(timeout: 100)
     }
 }
+//swiftlint:enable force_cast

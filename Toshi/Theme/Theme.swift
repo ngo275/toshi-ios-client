@@ -57,7 +57,11 @@ extension Theme {
     }
 
     public static var tintColor: UIColor {
-        return UIColor(hex: "01C236")
+        #if TOSHIDEV
+            return UIColor(hex: "007AFF")
+        #else
+            return UIColor(hex: "01C236")
+        #endif
     }
 
     public static var sectionTitleColor: UIColor {

@@ -5,7 +5,7 @@ github "UseSweet/SweetUIKit" "master"
 github "bakkenbaeck/CameraScanner" "01708dc3f1b440177173b48377ca18f6748fa58e"
 github "bakkenbaeck/EtherealCereal" ~> 0.0.3
 github "bakkenbaeck/Formulaic" "12d290e608d6da68d4956c265740621ce7d44f56"
-github "bakkenbaeck/Teapot" ~> 1.0
+github "bakkenbaeck/Teapot" "master"
 github "hyperoslo/ImagePicker" "8cb970f"
 github "ibireme/YYText" "02eba9ffd392892a2fca5ed98f6628d29003ef78"
 github "marketplacer/keychain-swift" ~> 7.0
@@ -16,3 +16,5 @@ github "toshiapp/HDWallet" "9dc214e2cf6fe5702cff11c09db156e8aee523c9"
 github "toshiapp/NoChat" "6010896237977829294b394cc616951eeb8a36bd"
 github "roberthein/TinyConstraints" "42513def02c9958d32b7fe315a19f4e5f3aee202"
 github "roberthein/BouncyLayout" "fb889d9721cad687078f617e410158dcf64cd2d9"
+github "Quick/Quick"
+github "Quick/Nimble"

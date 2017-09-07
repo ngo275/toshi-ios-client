@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9F9238B01E24F1D2004BEEE0"
+               BlueprintIdentifier = "A9603D371F4DABDC00BF57B1"
                BuildableName = "Toshi.app"
                BlueprintName = "Development"
                ReferencedContainer = "container:Toshi.xcodeproj">
@@ -28,21 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14147EA01E8119F0006BD47B"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
-               ReferencedContainer = "container:Toshi.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9F9238B01E24F1D2004BEEE0"
+            BlueprintIdentifier = "A9603D371F4DABDC00BF57B1"
             BuildableName = "Toshi.app"
             BlueprintName = "Development"
             ReferencedContainer = "container:Toshi.xcodeproj">
@@ -65,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9F9238B01E24F1D2004BEEE0"
+            BlueprintIdentifier = "A9603D371F4DABDC00BF57B1"
             BuildableName = "Toshi.app"
             BlueprintName = "Development"
             ReferencedContainer = "container:Toshi.xcodeproj">
@@ -84,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9F9238B01E24F1D2004BEEE0"
+            BlueprintIdentifier = "A9603D371F4DABDC00BF57B1"
             BuildableName = "Toshi.app"
             BlueprintName = "Development"
             ReferencedContainer = "container:Toshi.xcodeproj">

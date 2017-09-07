@@ -457,7 +457,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
                         self.controlsView.layoutIfNeeded()
                     }) { completed in
                         if completed {
-                            self.scrollToBottom()
+                            //self.scrollToBottom()
                         }
                     }
 
@@ -653,6 +653,32 @@ final class ChatController: OverlayController, ListAdapterDataSource {
 
         showMediaPickerBlock(nil)
     }
+    
+    fileprivate func approvePaymentForIndexPath(_ indexPath: IndexPath) {
+        guard let message = self.viewModel.messageModels.element(at: indexPath.row) as MessageModel? else { return }
+        
+        adjustToPaymentState(.pendingConfirmation, at: indexPath)
+        
+        guard let paymentRequest = message.sofaWrapper as? SofaPaymentRequest else { return }
+        
+        showActivityIndicator()
+        
+        viewModel.interactor.sendPayment(in: paymentRequest.value) { [weak self] (success: Bool) in
+            let state: TSInteraction.PaymentState = success ? .approved : .failed
+            self?.adjustToPaymentState(state, at: indexPath)
+            DispatchQueue.main.asyncAfter(seconds: 2.0) {
+                self?.hideActiveNetworkViewIfNeeded()
+            }
+        }
+    }
+    
+    fileprivate func declinePaymentForIndexPath(_ indexPath: IndexPath) {
+        adjustToPaymentState(.rejected, at: indexPath)
+        
+        DispatchQueue.main.asyncAfter(seconds: 2.0) {
+            self.hideActiveNetworkViewIfNeeded()
+        }
+    }
 
     private func positionType(for indexPath: IndexPath) -> MessagePositionType {
 
@@ -692,6 +718,81 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     }
 }
 
+//extension ChatController: UITableViewDelegate {
+//
+//    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        if viewModel.messageModels[indexPath.row].type == .image {
+//
+//            let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
+//            controller.transitioningDelegate = self
+//            controller.dismissDelegate = self
+//            controller.title = title
+//            Navigator.presentModally(controller)
+//        }
+//    }
+//}
+
+//extension ChatController: UITableViewDataSource {
+//
+//    public func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+//        guard let messages = self.viewModel.messageModels as [MessageModel]? else { return 0 }
+//
+//        return messages.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row == self.viewModel.messageModels.count - 1 {
+//            self.viewModel.updateMessagesRange(from: indexPath)
+//        }
+//    }
+//
+//    public func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let message = viewModel.messageModels[indexPath.item]
+//        let cell = tableView.dequeueReusableCell(withIdentifier: message.reuseIdentifier, for: indexPath)
+//
+//        if let cell = cell as? MessagesBasicCell {
+//
+//            if !message.isOutgoing, let avatarPath = self.viewModel.contact?.avatarPath as String? {
+//                AvatarManager.shared.avatar(for: avatarPath, completion: { image, _ in
+//                    cell.avatarImageView.image = image
+//                })
+//            }
+//
+//            cell.isOutGoing = message.isOutgoing
+//            cell.positionType = positionType(for: indexPath)
+//        }
+//
+//        if let cell = cell as? MessagesImageCell, message.type == .image {
+//            cell.messageImage = message.image
+//        } else if let cell = cell as? MessagesPaymentCell, (message.type == .payment) || (message.type == .paymentRequest), let signalMessage = message.signalMessage {
+//            cell.titleLabel.text = message.title
+//            cell.subtitleLabel.text = message.subtitle
+//            cell.messageLabel.text = message.text
+//            cell.setPaymentState(signalMessage.paymentState, for: message.type)
+//            cell.selectionDelegate = self
+//
+//            let isPaymentOpen = (message.signalMessage?.paymentState ?? .none) == .none
+//            let isMessageActionable = message.isActionable
+//
+//            let isOpenPaymentRequest = isMessageActionable && isPaymentOpen
+//            if isOpenPaymentRequest {
+//                showActiveNetworkViewIfNeeded()
+//            }
+//
+//        } else if let cell = cell as? MessagesTextCell, message.type == .simple {
+//            cell.messageText = message.text
+//        }
+//
+//        cell.transform = self.tableView.transform
+//
+//        return cell
+//    }
+
+
+//}
+
 extension ChatController:  WorkingRangeDataSource {
 
     func messagePosition(for index: Int) -> MessagePositionType {
@@ -704,9 +805,6 @@ extension ChatController:  WorkingRangeDataSource {
         if index == self.viewModel.messageModels.count - 1 {
             self.viewModel.updateMessagesRange()
         }
-
-        print("Building cell for idnex \(index)")
-        //self.viewModel.
     }
 }
 
@@ -801,32 +899,35 @@ extension MessageModel {
 extension ChatController: MessagesPaymentCellDelegate {
 
     func approvePayment(for cell: MessagesPaymentCell) {
-        guard let indexPath = collectionView.indexPath(for: cell) as IndexPath? else { return }
-        guard let message = self.viewModel.messageModels.element(at: indexPath.item) as MessageModel? else { return }
+        guard let indexPath = self.collectionView.indexPath(for: cell) as IndexPath? else { return }
+        guard let message = self.viewModel.messageModels.element(at: indexPath.row) as MessageModel? else { return }
 
-        adjustToPaymentState(.pendingConfirmation, at: indexPath)
+        let messageText: String
+        if let fiat = message.fiatValueString, let eth = message.ethereumValueString {
+            messageText = String(format: Localized("payment_request_confirmation_warning_message"), fiat, eth, thread.name())
+        } else {
+            messageText = String(format: Localized("payment_request_confirmation_warning_message_fallback"), thread.name())
 
-        guard let paymentRequest = message.sofaWrapper as? SofaPaymentRequest else { return }
-
-        showActivityIndicator()
-
-        viewModel.interactor.sendPayment(in: paymentRequest.value) { [weak self] (success: Bool) in
-            let state: TSInteraction.PaymentState = success ? .approved : .failed
-            self?.adjustToPaymentState(state, at: indexPath)
-            DispatchQueue.main.asyncAfter(seconds: 2.0) {
-                self?.hideActiveNetworkViewIfNeeded()
-            }
         }
+
+        let alert = UIAlertController(title: Localized("payment_request_confirmation_warning_title"), message: messageText, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: Localized("payment_request_confirmation_warning_action_cancel"), style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+
+        alert.addAction(UIAlertAction(title: Localized("payment_request_confirmation_warning_action_confirm"), style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+            self.approvePaymentForIndexPath(indexPath)
+        }))
+
+        Navigator.presentModally(alert)
     }
 
     func declinePayment(for cell: MessagesPaymentCell) {
         guard let indexPath = collectionView.indexPath(for: cell) as IndexPath? else { return }
 
-        adjustToPaymentState(.rejected, at: indexPath)
-
-        DispatchQueue.main.asyncAfter(seconds: 2.0) {
-            self.hideActiveNetworkViewIfNeeded()
-        }
+        declinePaymentForIndexPath(indexPath)
     }
 }
 
@@ -841,6 +942,7 @@ extension ChatController: ChatViewModelOutput {
     func didReload() {
         self.sendGreetingTriggerIfNeeded()
 
+        print("\n\n Did reload - performing updates")
         self.adapter.performUpdates(animated: false)
     }
 

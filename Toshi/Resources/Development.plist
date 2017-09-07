@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Toshi Dev</string>
+	<string>Toshi Debug</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,6 +47,8 @@
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>InitialGreetingAddress</key>
+	<string>0xdf0096052836251b0fafd4f0f12771deea5c8748</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -61,9 +63,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Required to upload pictures.</string>
 	<key>TokenChatServiceBaseURL</key>
-	<string>https://token-chat-service-development.herokuapp.com</string>
-	<key>InitialGreetingAddress</key>
-	<string>0xdf0096052836251b0fafd4f0f12771deea5c8748</string>
+	<string>https://chat.internal.service.toshi.org</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-UI-Display-Black.otf</string>
@@ -89,11 +89,6 @@
 		<string>SF-UI-Text-SemiboldItalic.otf</string>
 		<string>SF-UI-Text-Ultrathin.otf</string>
 		<string>SF-UI-Text-UltrathinItalic.otf</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
