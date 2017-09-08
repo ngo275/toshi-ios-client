@@ -20,60 +20,8 @@ import MobileCoreServices
 import ImagePicker
 import AVFoundation
 
-final class ChatController: OverlayController, ListAdapterDataSource {
-    /**
-     Asks the data source for a view to use as the collection view background when the list is empty.
+final class ChatController: OverlayController {
 
-     @param listAdapter The list adapter requesting this information.
-
-     @return A view to use as the collection view background, or `nil` if you don't want a background view.
-
-     @note This method is called every time the list adapter is updated. You are free to return new views every time,
-     but for performance reasons you may want to retain the view and return it here. The infra is only responsible for
-     adding the background view and maintaining its visibility.
-     */
-    func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        return nil
-    }
-
-    /**
-     Asks the data source for a section controller for the specified object in the list.
-
-     @param listAdapter The list adapter requesting this information.
-     @param object An object in the list.
-
-     @return A new section controller instance that can be displayed in the list.
-
-     @note New section controllers should be initialized here for objects when asked. You may pass any other data to
-     the section controller at this time.
-
-     Section controllers are initialized for all objects whenever the `IGListAdapter` is created, updated, or reloaded.
-     Section controllers are reused when objects are moved or updated. Maintaining the `-[IGListDiffable diffIdentifier]`
-     guarantees this.
-     */
-    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        let workingRangeSectionController = WorkingRangeSectionController()
-        workingRangeSectionController.datasource = self
-
-        return workingRangeSectionController
-    }
-
-    /**
-     Asks the data source for the objects to display in the list.
-
-     @param listAdapter The list adapter requesting this information.
-
-     @return An array of objects for the list.
-     */
-    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return self.viewModel.messageModels
-    }
-
-    lazy var adapter: ListAdapter = {
-        ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize:3)
-    }()
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate static let subcontrolsViewWidth: CGFloat = 228.0
     fileprivate static let buttonMargin: CGFloat = 10
 
@@ -85,6 +33,10 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     fileprivate lazy var viewModel: ChatViewModel = ChatViewModel(output: self, thread: self.thread)
     fileprivate lazy var imagesCache: NSCache<NSString, UIImage> = NSCache()
     fileprivate lazy var disposable: SMetaDisposable = SMetaDisposable()
+
+    fileprivate lazy var adapter: ListAdapter = {
+        ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize:3)
+    }()
 
     fileprivate var buttons: [SofaMessage.Button] = [] {
         didSet {
@@ -154,7 +106,6 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = Theme.viewBackgroundColor
         view.scrollsToTop = false
-        //view.dataSource = self
         view.delegate = self
         view.keyboardDismissMode = .interactive
 
@@ -711,6 +662,24 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     }
 }
 
+extension ChatController: ListAdapterDataSource {
+
+    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+        return nil
+    }
+
+    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        let workingRangeSectionController = WorkingRangeSectionController()
+        workingRangeSectionController.datasource = self
+
+        return workingRangeSectionController
+    }
+
+    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+        return self.viewModel.messageModels
+    }
+}
+
 extension ChatController:  WorkingRangeDataSource {
 
     func messagePosition(for message: MessageModel) -> MessagePositionType {
@@ -832,8 +801,6 @@ extension ChatController: ChatViewModelOutput {
 
     func didReceiveLastMessage() {
         self.adjustToLastMessage()
-
-        //self.adapter.performUpdates(animated: false)
     }
 
     func didReloadMessage(_ messageModel: MessageModel) {
