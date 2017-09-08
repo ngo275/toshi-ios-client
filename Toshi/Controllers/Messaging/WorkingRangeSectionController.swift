@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol WorkingRangeDataSource: class {
-    func messagePosition(for index: Int) -> MessagePositionType
+    func messagePosition(for message: MessageModel) -> MessagePositionType
     func didPrepareCell(for message: MessageModel)
 }
 
@@ -19,7 +19,7 @@ final class WorkingRangeSectionController: ListSectionController, ListWorkingRan
 
     override init() {
         super.init()
-        
+
         workingRangeDelegate = self
     }
 
@@ -62,7 +62,7 @@ final class WorkingRangeSectionController: ListSectionController, ListWorkingRan
             }
 
             cell.isOutGoing = message.isOutgoing
-            cell.positionType = self.datasource?.messagePosition(for: index) ?? .single
+            cell.positionType = self.datasource?.messagePosition(for: message) ?? .single
         }
 
         if let cell = cell as? MessagesImageCell, message.type == .image {
@@ -79,7 +79,7 @@ final class WorkingRangeSectionController: ListSectionController, ListWorkingRan
 
             let isOpenPaymentRequest = isMessageActionable && isPaymentOpen
             if isOpenPaymentRequest {
-               // showActiveNetworkViewIfNeeded()
+                // showActiveNetworkViewIfNeeded()
             }
 
         } else if let cell = cell as? MessagesTextCell, message.type == .simple {
@@ -99,11 +99,11 @@ final class WorkingRangeSectionController: ListSectionController, ListWorkingRan
 
     // MARK: ListWorkingRangeDelegate
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerWillEnterWorkingRange sectionController: ListSectionController) {
-
+        
     }
-
+    
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerDidExitWorkingRange sectionController: ListSectionController) {
-
+        
     }
     
 }

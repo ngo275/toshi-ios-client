@@ -23,11 +23,11 @@ import AVFoundation
 final class ChatController: OverlayController, ListAdapterDataSource {
     /**
      Asks the data source for a view to use as the collection view background when the list is empty.
-     
+
      @param listAdapter The list adapter requesting this information.
-     
+
      @return A view to use as the collection view background, or `nil` if you don't want a background view.
-     
+
      @note This method is called every time the list adapter is updated. You are free to return new views every time,
      but for performance reasons you may want to retain the view and return it here. The infra is only responsible for
      adding the background view and maintaining its visibility.
@@ -38,15 +38,15 @@ final class ChatController: OverlayController, ListAdapterDataSource {
 
     /**
      Asks the data source for a section controller for the specified object in the list.
-     
+
      @param listAdapter The list adapter requesting this information.
      @param object An object in the list.
-     
+
      @return A new section controller instance that can be displayed in the list.
-     
+
      @note New section controllers should be initialized here for objects when asked. You may pass any other data to
      the section controller at this time.
-     
+
      Section controllers are initialized for all objects whenever the `IGListAdapter` is created, updated, or reloaded.
      Section controllers are reused when objects are moved or updated. Maintaining the `-[IGListDiffable diffIdentifier]`
      guarantees this.
@@ -55,26 +55,14 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         let workingRangeSectionController = WorkingRangeSectionController()
         workingRangeSectionController.datasource = self
 
-     //   if let message = object as? MessageModel {
-//
-//            let index = self.viewModel.messageModels.index(where: { $0.identifier == message.identifier })
-            print("Section index:")
-//           // guard index != nil else { return workingRangeSectionController }
-//
-//            //let indexPath = IndexPath(row: index!, section: 0)
-//            workingRangeSectionController.positionType = .single //self.positionType(for: indexPath)
-//            workingRangeSectionController.avatarPath = self.viewModel.contact?.avatarPath
-            //workingRangeSectionController.message = self.viewModel.messageModels.first
-     //   }
-
         return workingRangeSectionController
     }
 
     /**
      Asks the data source for the objects to display in the list.
-     
+
      @param listAdapter The list adapter requesting this information.
-     
+
      @return An array of objects for the list.
      */
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
@@ -152,12 +140,12 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     fileprivate lazy var networkView: ActiveNetworkView = {
         self.defaultActiveNetworkView()
     }()
-    
+
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
-        
+
         return layout
     }()
 
@@ -167,7 +155,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         view.backgroundColor = Theme.viewBackgroundColor
         view.scrollsToTop = false
         //view.dataSource = self
-        //view.delegate = self
+        view.delegate = self
         view.keyboardDismissMode = .interactive
 
         view.register(MessagesImageCell.self)
@@ -278,6 +266,8 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         adapter.collectionView = collectionView
         adapter.dataSource = self
 
+        self.collectionView.delegate = self
+
         textInputView.delegate = self
 
         collectionView.transform = CGAffineTransform (scaleX: 1, y: -1)
@@ -288,13 +278,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         hideSubcontrolsMenu()
         setupActivityIndicator()
         setupActiveNetworkView(hidden: true)
-
     }
-
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        collectionView.frame = view.bounds
-//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -429,51 +413,51 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     }
 
     fileprivate func adjustToNewButtons() {
-            self.controlsView.isHidden = true
-            self.updateSubcontrols(with: nil)
-            self.controlsViewHeightConstraint?.constant = !self.buttons.isEmpty ? 250 : 0
-            self.controlsViewDelegateDatasource.items = self.buttons
-            self.controlsView.reloadData()
+        self.controlsView.isHidden = true
+        self.updateSubcontrols(with: nil)
+        self.controlsViewHeightConstraint?.constant = !self.buttons.isEmpty ? 250 : 0
+        self.controlsViewDelegateDatasource.items = self.buttons
+        self.controlsView.reloadData()
 
-            let duration = !self.buttons.isEmpty ? 0.0 : 0.3
+        let duration = !self.buttons.isEmpty ? 0.0 : 0.3
 
-            UIView.animate(withDuration: duration, delay: 0.0, options: [.curveEaseIn, .beginFromCurrentState], animations: {
-                self.controlsView.layoutIfNeeded()
-            }) { _ in
-            }
+        UIView.animate(withDuration: duration, delay: 0.0, options: [.curveEaseIn, .beginFromCurrentState], animations: {
+            self.controlsView.layoutIfNeeded()
+        }) { _ in
+        }
 
-            var height: CGFloat = 0
+        var height: CGFloat = 0
 
-            let controlCells = self.controlsView.visibleCells.flatMap { cell in cell as? ControlCell }
+        let controlCells = self.controlsView.visibleCells.flatMap { cell in cell as? ControlCell }
 
-            for controlCell in controlCells {
-                height = max(height, controlCell.frame.maxY)
-            }
+        for controlCell in controlCells {
+            height = max(height, controlCell.frame.maxY)
+        }
 
-            self.controlsViewHeightConstraint?.constant = 0
-            UIView.animate(withDuration: 0, delay: 0, animations: {
-                self.controlsView.layoutIfNeeded()
-            }, completion: { completed in
+        self.controlsViewHeightConstraint?.constant = 0
+        UIView.animate(withDuration: 0, delay: 0, animations: {
+            self.controlsView.layoutIfNeeded()
+        }, completion: { completed in
 
-                if completed {
-                    self.controlsView.isHidden = false
+            if completed {
+                self.controlsView.isHidden = false
 
-                    self.buttonsHeight = height > 0 ? height + (2 * ChatController.buttonMargin) : 0
+                self.buttonsHeight = height > 0 ? height + (2 * ChatController.buttonMargin) : 0
 
-                    guard height > 0 else { return }
-                    self.controlsViewHeightConstraint?.constant = height + (2 * ChatController.buttonMargin)
+                guard height > 0 else { return }
+                self.controlsViewHeightConstraint?.constant = height + (2 * ChatController.buttonMargin)
 
-                    UIView.animate(withDuration: 0.5, delay: 0.5, options: [.curveEaseIn, .beginFromCurrentState], animations: {
-                        self.controlsView.layoutIfNeeded()
-                    }) { completed in
-                        if completed {
-                            //self.scrollToBottom()
-                        }
+                UIView.animate(withDuration: 0.5, delay: 0.5, options: [.curveEaseIn, .beginFromCurrentState], animations: {
+                    self.controlsView.layoutIfNeeded()
+                }) { completed in
+                    if completed {
+                        self.scrollToBottom()
                     }
-
-                    self.controlsView.deselectButtons()
                 }
-            })
+
+                self.controlsView.deselectButtons()
+            }
+        })
     }
 
     fileprivate func adjustToLastMessage() {
@@ -483,10 +467,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     }
 
     fileprivate func scrollToBottom(animated: Bool = true) {
-        guard adapter.objects().count > 0 else { return } // collectionView.numberOfItems(inSection: 0) as Int?, numbers > 0 else { return }
-
-        let contentSizeHeight = collectionView.contentSize.height - collectionView.bounds.height
-        collectionView.setContentOffset(CGPoint(x: 0, y: contentSizeHeight), animated: false)
+        guard adapter.objects().count > 0 else { return }
 
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
     }
@@ -498,7 +479,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         signalMessage.save()
 
         (collectionView.cellForItem(at: indexPath) as? MessagesPaymentCell)?.setPaymentState(signalMessage.paymentState, for: message.type)
-        
+
         collectionView.performBatchUpdates({
             // Calling this even when it's empty should animate the changes.
         }, completion: nil)
@@ -622,7 +603,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         guard AccessChecker.checkPhotoAuthorizationStatus(intent: PhotoAccessIntentRead, alertDismissCompletion: nil) else { return }
         guard let dismissBlock = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
-        } as? () -> Void else { return }
+            } as? () -> Void else { return }
 
         let showMediaPickerBlock: ((MediaAssetGroup?) -> Void) = { [weak self] group in
             let intent: MediaAssetsControllerIntent = .sendMedia
@@ -663,16 +644,16 @@ final class ChatController: OverlayController, ListAdapterDataSource {
 
         showMediaPickerBlock(nil)
     }
-    
+
     fileprivate func approvePaymentForIndexPath(_ indexPath: IndexPath) {
         guard let message = self.viewModel.messageModels.element(at: indexPath.row) as MessageModel? else { return }
-        
+
         adjustToPaymentState(.pendingConfirmation, at: indexPath)
-        
+
         guard let paymentRequest = message.sofaWrapper as? SofaPaymentRequest else { return }
-        
+
         showActivityIndicator()
-        
+
         viewModel.interactor.sendPayment(in: paymentRequest.value) { [weak self] success in
             let state: TSInteraction.PaymentState = success ? .approved : .failed
             self?.adjustToPaymentState(state, at: indexPath)
@@ -683,40 +664,24 @@ final class ChatController: OverlayController, ListAdapterDataSource {
             }
         }
     }
-    
+
     fileprivate func declinePaymentForIndexPath(_ indexPath: IndexPath) {
         adjustToPaymentState(.rejected, at: indexPath)
-        
+
         DispatchQueue.main.asyncAfter(seconds: 2.0) {
             self.hideActiveNetworkViewIfNeeded()
         }
     }
-
-//extension ChatController: UITableViewDelegate {
-
-//    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if viewModel.messageModels[indexPath.row].type == .image {
-//
-//            let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
-//            controller.transitioningDelegate = self
-//            controller.dismissDelegate = self
-//            controller.title = title
-//            Navigator.presentModally(controller)
-//        }
-//    }
-
-
-
-    private func positionType(for indexPath: IndexPath) -> MessagePositionType {
+    
+    fileprivate func positionType(for indexPath: IndexPath) -> MessagePositionType {
 
         guard let currentMessage = viewModel.messageModels.element(at: indexPath.item) else {
             // there are no cells
             return .single
         }
 
-        guard let previousMessage = viewModel.messageModels.element(at: indexPath.item - 1) else {
-            guard let nextMessage = viewModel.messageModels.element(at: indexPath.item + 1) else {
+        guard let previousMessage = viewModel.messageModels.element(at: indexPath.item + 1) else {
+            guard let nextMessage = viewModel.messageModels.element(at: indexPath.item - 1) else {
                 // this is the first and only cell
                 return .single
             }
@@ -746,85 +711,18 @@ final class ChatController: OverlayController, ListAdapterDataSource {
     }
 }
 
-//extension ChatController: UITableViewDelegate {
-//
-//    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if viewModel.messageModels[indexPath.row].type == .image {
-//
-//            let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
-//            controller.transitioningDelegate = self
-//            controller.dismissDelegate = self
-//            controller.title = title
-//            Navigator.presentModally(controller)
-//        }
-//    }
-//}
-
-//extension ChatController: UITableViewDataSource {
-//
-//    public func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-//        guard let messages = self.viewModel.messageModels as [MessageModel]? else { return 0 }
-//
-//        return messages.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if indexPath.row == self.viewModel.messageModels.count - 1 {
-//            self.viewModel.updateMessagesRange(from: indexPath)
-//        }
-//    }
-//
-//    public func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let message = viewModel.messageModels[indexPath.item]
-//        let cell = tableView.dequeueReusableCell(withIdentifier: message.reuseIdentifier, for: indexPath)
-//
-//        if let cell = cell as? MessagesBasicCell {
-//
-//            if !message.isOutgoing, let avatarPath = self.viewModel.contact?.avatarPath as String? {
-//                AvatarManager.shared.avatar(for: avatarPath, completion: { image, _ in
-//                    cell.avatarImageView.image = image
-//                })
-//            }
-//
-//            cell.isOutGoing = message.isOutgoing
-//            cell.positionType = positionType(for: indexPath)
-//        }
-//
-//        if let cell = cell as? MessagesImageCell, message.type == .image {
-//            cell.messageImage = message.image
-//        } else if let cell = cell as? MessagesPaymentCell, (message.type == .payment) || (message.type == .paymentRequest), let signalMessage = message.signalMessage {
-//            cell.titleLabel.text = message.title
-//            cell.subtitleLabel.text = message.subtitle
-//            cell.messageLabel.text = message.text
-//            cell.setPaymentState(signalMessage.paymentState, for: message.type)
-//            cell.selectionDelegate = self
-//
-//            let isPaymentOpen = (message.signalMessage?.paymentState ?? .none) == .none
-//            let isMessageActionable = message.isActionable
-//
-//            let isOpenPaymentRequest = isMessageActionable && isPaymentOpen
-//            if isOpenPaymentRequest {
-//                showActiveNetworkViewIfNeeded()
-//            }
-//
-//        } else if let cell = cell as? MessagesTextCell, message.type == .simple {
-//            cell.messageText = message.text
-//        }
-//
-//        cell.transform = self.tableView.transform
-//
-//        return cell
-//    }
-
-
-//}
-
 extension ChatController:  WorkingRangeDataSource {
 
-    func messagePosition(for index: Int) -> MessagePositionType {
-        return .single
+    func messagePosition(for message: MessageModel) -> MessagePositionType {
+        guard let index = self.viewModel.messageModels.index(of: message) as Int? else {
+            return .single
+        }
+
+        guard let indexPath = IndexPath(item: index, section: 0) as IndexPath? else { return .single }
+
+        print("Message index: \(index) text: \(String(describing: message.text))")
+        print("Cell position :\(positionType(for: indexPath))")
+        return positionType(for: indexPath)
     }
 
     func didPrepareCell(for message: MessageModel) {
@@ -837,9 +735,9 @@ extension ChatController:  WorkingRangeDataSource {
 }
 
 extension ChatController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         if viewModel.messageModels[indexPath.item].type == .image {
 
             let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
@@ -850,63 +748,6 @@ extension ChatController: UICollectionViewDelegate {
         }
     }
 }
-
-//extension ChatController: UICollectionViewDataSource {
-    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        guard let messages = self.viewModel.messageModels as [MessageModel]? else { return 0 }
-//
-//        return messages.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.item == self.viewModel.messageModels.count - 1 {
-//            self.viewModel.updateMessagesRange(from: indexPath)
-//        }
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let message = viewModel.messageModels[indexPath.item]
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: message.reuseIdentifier, for: indexPath)
-//
-//        if let cell = cell as? MessagesBasicCell {
-//
-//            if !message.isOutgoing, let avatarPath = self.viewModel.contact?.avatarPath as String? {
-//                AvatarManager.shared.avatar(for: avatarPath, completion: { image, _ in
-//                    cell.avatarImageView.image = image
-//                })
-//            }
-//
-//            cell.isOutGoing = message.isOutgoing
-//            cell.positionType = positionType(for: indexPath)
-//        }
-//
-//        if let cell = cell as? MessagesImageCell, message.type == .image {
-//            cell.messageImage = message.image
-//        } else if let cell = cell as? MessagesPaymentCell, (message.type == .payment) || (message.type == .paymentRequest), let signalMessage = message.signalMessage {
-//            cell.titleLabel.text = message.title
-//            cell.subtitleLabel.text = message.subtitle
-//            cell.messageLabel.text = message.text
-//            cell.setPaymentState(signalMessage.paymentState, for: message.type)
-//            cell.selectionDelegate = self
-//
-//            let isPaymentOpen = (message.signalMessage?.paymentState ?? .none) == .none
-//            let isMessageActionable = message.isActionable
-//
-//            let isOpenPaymentRequest = isMessageActionable && isPaymentOpen
-//            if isOpenPaymentRequest {
-//                showActiveNetworkViewIfNeeded()
-//            }
-//
-//        } else if let cell = cell as? MessagesTextCell, message.type == .simple {
-//            cell.messageText = message.text
-//        }
-//
-//        return cell
-//    }
-
-
-//}
 
 extension MessageModel {
 
@@ -993,6 +834,10 @@ extension ChatController: ChatViewModelOutput {
         self.adjustToLastMessage()
 
         //self.adapter.performUpdates(animated: false)
+    }
+
+    func didReloadMessage(_ messageModel: MessageModel) {
+        self.adapter.reloadObjects([messageModel])
     }
 
     fileprivate func sendGreetingTriggerIfNeeded() {
@@ -1125,10 +970,10 @@ extension ChatController: ImagePickerDelegate {
 extension ChatController: ChatsFloatingHeaderViewDelegate {
 
     func messagesFloatingView(_: ChatsFloatingHeaderView, didPressRequestButton _: UIButton) {
-        
+
         let paymentController = PaymentController(withPaymentType: .request, continueOption: .next)
         paymentController.delegate = self
-        
+
         let navigationController = PaymentNavigationController(rootViewController: paymentController)
         Navigator.presentModally(navigationController)
     }
@@ -1140,7 +985,7 @@ extension ChatController: ChatsFloatingHeaderViewDelegate {
 
         let paymentController = PaymentController(withPaymentType: .send, continueOption: .send)
         paymentController.delegate = self
-        
+
         let navigationController = PaymentNavigationController(rootViewController: paymentController)
         Navigator.presentModally(navigationController)
     }
@@ -1251,52 +1096,52 @@ extension ChatController: ControlViewActionDelegate {
         controlsView.deselectButtons()
         subcontrolsViewHeightConstraint?.constant = view.frame.height
         subcontrolsView.isHidden = true
-
+        
         let controlCell = SubcontrolCell(frame: .zero)
         var maxWidth: CGFloat = 0.0
-
+        
         button.subcontrols.forEach { button in
             controlCell.button.setTitle(button.label, for: .normal)
             let bounds = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 38)
             maxWidth = max(maxWidth, controlCell.button.titleLabel!.textRect(forBounds: bounds, limitedToNumberOfLines: 1).width + controlCell.buttonInsets.left + controlCell.buttonInsets.right)
         }
-
+        
         subcontrolsViewDelegateDatasource.items = button.subcontrols
-
+        
         viewModel.currentButton = button
-
+        
         subcontrolsView.reloadData()
-
+        
         DispatchQueue.main.asyncAfter(seconds: 0.1) {
             var height: CGFloat = 0
-
+            
             for cell in self.subcontrolsView.visibleCells {
                 height += cell.frame.height
             }
-
+            
             self.subcontrolsViewHeightConstraint?.constant = height
             self.subcontrolsView.isHidden = false
             self.view.layoutIfNeeded()
-
+            
             completion?()
         }
     }
 }
 
 extension ChatController: ActiveNetworkDisplaying {
-
+    
     var activeNetworkView: ActiveNetworkView {
         return networkView
     }
-
+    
     var activeNetworkViewConstraints: [NSLayoutConstraint] {
         return [activeNetworkView.topAnchor.constraint(equalTo: ethereumPromptView.bottomAnchor, constant: -1),
                 activeNetworkView.leftAnchor.constraint(equalTo: view.leftAnchor),
                 activeNetworkView.rightAnchor.constraint(equalTo: view.rightAnchor)]
     }
-
+    
     func requestLayoutUpdate() {
-
+        
         UIView.animate(withDuration: 0.2) {
             self.updateContentInset()
             self.view.layoutIfNeeded()

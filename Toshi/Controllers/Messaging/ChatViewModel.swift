@@ -27,6 +27,7 @@ protocol ChatViewModelOutput: ChatInteractorOutput {
     func didRequireGreetingIfNeeded()
     func didRequireKeyboardVisibilityUpdate(_ sofaMessage: SofaMessage)
     func didReceiveLastMessage()
+    func didReloadMessage(_ messageModel: MessageModel)
 }
 
 final class ChatViewModel {
@@ -75,39 +76,39 @@ final class ChatViewModel {
         return queue
     }()
 
-    private(set) var messages: [Message] = [] {
-        didSet {
-            reloadQueue.cancelAllOperations()
+    private(set) var messages: [Message] = []
 
-            let operation = BlockOperation()
-            operation.addExecutionBlock { [weak self] in
+    fileprivate func messagesDidUpdate() {
+        reloadQueue.cancelAllOperations()
 
-                guard operation.isCancelled == false else { return }
-                guard let strongSelf = self else { return }
+        let operation = BlockOperation()
+        operation.addExecutionBlock { [weak self] in
 
-                for message in strongSelf.messages {
-                    if let paymentRequest = message.sofaWrapper as? SofaPaymentRequest {
-                        message.fiatValueString = EthereumConverter.fiatValueStringWithCode(forWei: paymentRequest.value, exchangeRate: ExchangeRateClient.exchangeRate)
-                        message.ethereumValueString = EthereumConverter.ethereumValueString(forWei: paymentRequest.value)
-                    } else if let payment = message.sofaWrapper as? SofaPayment {
-                        message.fiatValueString = EthereumConverter.fiatValueStringWithCode(forWei: payment.value, exchangeRate: ExchangeRateClient.exchangeRate)
-                        message.ethereumValueString = EthereumConverter.ethereumValueString(forWei: payment.value)
-                    }
-                }
+            guard operation.isCancelled == false else { return }
+            guard let strongSelf = self else { return }
 
-                strongSelf.visibleMessages = strongSelf.messages.filter { message -> Bool in
-                    message.isDisplayable
-                }
-
-                guard operation.isCancelled == false else { return }
-
-                DispatchQueue.main.async {
-                    strongSelf.output?.didReload()
+            for message in strongSelf.messages {
+                if let paymentRequest = message.sofaWrapper as? SofaPaymentRequest {
+                    message.fiatValueString = EthereumConverter.fiatValueStringWithCode(forWei: paymentRequest.value, exchangeRate: ExchangeRateClient.exchangeRate)
+                    message.ethereumValueString = EthereumConverter.ethereumValueString(forWei: paymentRequest.value)
+                } else if let payment = message.sofaWrapper as? SofaPayment {
+                    message.fiatValueString = EthereumConverter.fiatValueStringWithCode(forWei: payment.value, exchangeRate: ExchangeRateClient.exchangeRate)
+                    message.ethereumValueString = EthereumConverter.ethereumValueString(forWei: payment.value)
                 }
             }
 
-            reloadQueue.addOperation(operation)
+            strongSelf.visibleMessages = strongSelf.messages.filter { message -> Bool in
+                message.isDisplayable
+            }
+
+            guard operation.isCancelled == false else { return }
+
+            DispatchQueue.main.async {
+                strongSelf.output?.didReload()
+            }
         }
+
+        reloadQueue.addOperation(operation)
     }
 
     var visibleMessages: [Message] = [] {
@@ -185,7 +186,7 @@ final class ChatViewModel {
 
         guard let rangeOptions = YapDatabaseViewRangeOptions.flexibleRange(withLength: nextChunkSize, offset: loadedMessagesCount, from: .end) as YapDatabaseViewRangeOptions? else {
             self.output?.didRequireGreetingIfNeeded()
-            
+
             return
         }
 
@@ -196,7 +197,7 @@ final class ChatViewModel {
 
     @objc
     fileprivate func yapDatabaseDidChange(notification _: NSNotification) {
-        
+
         let notifications = uiDatabaseConnection.beginLongLivedReadTransaction()
 
         // If changes do not affect current view, update and return without updating collection view
@@ -234,8 +235,6 @@ final class ChatViewModel {
 
                         strongSelf.messages.insert(result, at: 0)
 
-                        strongSelf.output?.didReceiveLastMessage()
-
                         if let sofaMessage = result.sofaWrapper as? SofaMessage {
                             strongSelf.output?.didRequireKeyboardVisibilityUpdate(sofaMessage)
                         }
@@ -263,6 +262,9 @@ final class ChatViewModel {
                             let updatedMessage = strongSelf.interactor.handleSignalMessage(signalMessage, shouldProcessCommands: false)
                             strongSelf.messages[index] = updatedMessage
                         }
+
+                        strongSelf.messagesDidUpdate()
+                        strongSelf.output?.didReceiveLastMessage()
                     }
                 default:
                     break
@@ -356,13 +358,14 @@ final class ChatViewModel {
                 if message1.date.compare(message2.date) == .orderedSame {
                     return message1.signalMessage.hasAttachments()
                 }
-
+                
                 return message1.date.compare(message2.date) == .orderedAscending
-            }.reversed()
-
+                }.reversed()
+            
             DispatchQueue.main.async {
                 strongSelf.messages.append(contentsOf: new)
-
+                strongSelf.messagesDidUpdate()
+                
                 if notifiesAboutLastMessage {
                     strongSelf.output?.didReceiveLastMessage()
                 }
