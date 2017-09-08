@@ -27,10 +27,11 @@ class AppsAPIClientTests: QuickSpec {
             var subject: AppsAPIClient!
 
             context("Happy path 😎") {
-                let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getTopRatedApps")
-                subject = AppsAPIClient(teapot: mockTeapot)
 
                 it("fetches the top rated apps") {
+                    let mockTeapot = MockTeapot(bundle: Bundle(for: AppsAPIClientTests.self), mockFilename: "getTopRatedApps")
+                    subject = AppsAPIClient(teapot: mockTeapot)
+
                     waitUntil { done in
                         subject.getTopRatedApps { users, _ in
                             expect(users?.first?.about).to(equal("The toppest of all the apps"))

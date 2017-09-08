@@ -95,18 +95,20 @@ public class EthereumAPIClient: NSObject {
             let json = RequestParameter(params)
 
             self.activeTeapot.post(path, parameters: json, headerFields: headers) { result in
-                switch result {
-                case .success(let json, _):
-                    completion(json, nil)
-                case .failure(let json, _, let error):
-                    print(error)
-                    guard let jsonError = (json?.dictionary?["errors"] as? [[String: Any]])?.first else {
-                        completion(nil, error)
-                        return
-                    }
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let json, _):
+                        completion(json, nil)
+                    case .failure(let json, _, let error):
+                        print(error)
+                        guard let jsonError = (json?.dictionary?["errors"] as? [[String: Any]])?.first else {
+                            completion(nil, error)
+                            return
+                        }
 
-                    let json = RequestParameter(jsonError)
-                    completion(json, error)
+                        let json = RequestParameter(jsonError)
+                        completion(json, error)
+                    }
                 }
             }
         }

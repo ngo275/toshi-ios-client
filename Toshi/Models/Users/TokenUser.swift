@@ -359,8 +359,12 @@ public class TokenUser: NSObject, NSCoding {
     }
 
     private func updateLocalCurrencyLocaleCache() {
-        cachedCurrencyLocale = Locale.availableIdentifiers
-            .map { Locale(identifier: $0) }
-            .first(where: { self.localCurrency == $0.currencyCode })
+        if Locale.current.currencyCode == self.localCurrency {
+            cachedCurrencyLocale = Locale.current
+        } else if let defaultLocaleForCurrency = Currency.defaultLocalesForCurrencies[self.localCurrency] {
+            self.cachedCurrencyLocale = Locale(identifier: defaultLocaleForCurrency)
+        } else {
+            self.cachedCurrencyLocale = Locale.current
+        }
     }
 }

@@ -289,14 +289,6 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         setupActivityIndicator()
         setupActiveNetworkView(hidden: true)
 
-        viewModel.fetchAndUpdateBalance { [weak self] balance, error in
-            if let error = error {
-                let alertController = UIAlertController.errorAlert(error as NSError)
-                Navigator.presentModally(alertController)
-            } else {
-                self?.set(balance: balance)
-            }
-        }
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -308,6 +300,8 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         super.viewWillAppear(animated)
 
         isVisible = true
+
+        viewModel.loadFirstMessages()
 
         viewModel.reloadDraft { [weak self] placeholder in
             self?.textInputView.text = placeholder
@@ -324,6 +318,7 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatarImageView)
 
         updateContentInset()
+        updateBalance()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -343,6 +338,17 @@ final class ChatController: OverlayController, ListAdapterDataSource {
 
         viewModel.thread.markAllAsRead()
         SignalNotificationManager.updateApplicationBadgeNumber()
+    }
+
+    fileprivate func updateBalance() {
+        viewModel.fetchAndUpdateBalance { [weak self] balance, error in
+            if let error = error {
+                let alertController = UIAlertController.errorAlert(error as NSError)
+                Navigator.presentModally(alertController)
+            } else {
+                self?.set(balance: balance)
+            }
+        }
     }
 
     fileprivate func addSubviewsAndConstraints() {
@@ -380,7 +386,11 @@ final class ChatController: OverlayController, ListAdapterDataSource {
 
     func sendPayment(with parameters: [String: Any]) {
         showActivityIndicator()
-        viewModel.interactor.sendPayment(with: parameters)
+        viewModel.interactor.sendPayment(with: parameters) { [weak self] success in
+            if success {
+                self?.updateBalance()
+            }
+        }
     }
 
     func keyboardWillShow() {
@@ -663,11 +673,13 @@ final class ChatController: OverlayController, ListAdapterDataSource {
         
         showActivityIndicator()
         
-        viewModel.interactor.sendPayment(in: paymentRequest.value) { [weak self] (success: Bool) in
+        viewModel.interactor.sendPayment(in: paymentRequest.value) { [weak self] success in
             let state: TSInteraction.PaymentState = success ? .approved : .failed
             self?.adjustToPaymentState(state, at: indexPath)
             DispatchQueue.main.asyncAfter(seconds: 2.0) {
                 self?.hideActiveNetworkViewIfNeeded()
+
+                self?.updateBalance()
             }
         }
     }
@@ -679,6 +691,22 @@ final class ChatController: OverlayController, ListAdapterDataSource {
             self.hideActiveNetworkViewIfNeeded()
         }
     }
+
+//extension ChatController: UITableViewDelegate {
+
+//    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        if viewModel.messageModels[indexPath.row].type == .image {
+//
+//            let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
+//            controller.transitioningDelegate = self
+//            controller.dismissDelegate = self
+//            controller.title = title
+//            Navigator.presentModally(controller)
+//        }
+//    }
+
+
 
     private func positionType(for indexPath: IndexPath) -> MessagePositionType {
 
@@ -939,9 +967,11 @@ extension ChatController: ImagesViewControllerDismissDelegate {
 }
 
 extension ChatController: ChatViewModelOutput {
-    func didReload() {
-        self.sendGreetingTriggerIfNeeded()
 
+    func didRequireGreetingIfNeeded() {
+        self.sendGreetingTriggerIfNeeded()
+    }
+    func didReload() {
         print("\n\n Did reload - performing updates")
         self.adapter.performUpdates(animated: false)
     }
@@ -1136,7 +1166,11 @@ extension ChatController: PaymentControllerDelegate {
 
         case .send:
             showActivityIndicator()
-            viewModel.interactor.sendPayment(in: valueInWei)
+            viewModel.interactor.sendPayment(in: valueInWei, completion: { [weak self] success in
+                if success {
+                    self?.updateBalance()
+                }
+            })
         }
     }
 }

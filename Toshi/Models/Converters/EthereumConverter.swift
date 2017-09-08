@@ -18,8 +18,6 @@ import SweetSwift
 
 struct EthereumConverter {
 
-    static let forcedLocale = "en_US"
-
     /// The conversion rate between wei and eth. Each eth is made up of 1 x 10^18 wei.
     private static let weisToEtherConstant = NSDecimalNumber(string: "1000000000000000000")
 
@@ -71,10 +69,11 @@ struct EthereumConverter {
         let currentFiatConversion = NSDecimalNumber(decimal: exchangeRate)
         let fiat: NSDecimalNumber = ether.multiplying(by: currentFiatConversion)
 
-        let locale = TokenUser.current?.cachedCurrencyLocale ?? Locale(identifier: forcedLocale)
+        let locale = TokenUser.current?.cachedCurrencyLocale ?? Currency.forcedLocale
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = locale
+        numberFormatter.currencyCode = TokenUser.current?.localCurrency
 
         return "\(numberFormatter.string(from: fiat)!)"
     }
@@ -84,7 +83,8 @@ struct EthereumConverter {
     /// - Parameter balance: the value in wei
     /// - Returns: the fiat currency value with redundant 3 letter code for clarity.
     public static func fiatValueStringWithCode(forWei balance: NSDecimalNumber, exchangeRate: Decimal) -> String {
-        let locale = TokenUser.current?.cachedCurrencyLocale ?? Locale(identifier: forcedLocale)
+        let locale = TokenUser.current?.cachedCurrencyLocale ?? Currency.forcedLocale
+        let localCurrency = TokenUser.current?.localCurrency ?? Currency.forcedLocale.currencyCode
 
         let ether = balance.dividing(by: weisToEtherConstant)
         let currentFiatConversion = NSDecimalNumber(decimal: exchangeRate)
@@ -93,10 +93,11 @@ struct EthereumConverter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = locale
+        numberFormatter.currencyCode = localCurrency
 
-        let fiatValueString = numberFormatter.string(from: fiat)!
+        let fiatValueString = numberFormatter.string(from: fiat) ?? ""
 
-        return numberFormatter.currencySymbol == numberFormatter.currencyCode ? fiatValueString : "\(fiatValueString) \(locale.currencyCode!)"
+        return numberFormatter.currencySymbol == numberFormatter.currencyCode ? fiatValueString : fiatValueString + " " + localCurrency!
     }
 
     /// Complete formatted string value for a given wei, with fiat aligned left and eth aligned right.

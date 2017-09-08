@@ -116,6 +116,10 @@
 		2B4BCD5B1F599BEA00F9E609 /* token.cer in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0AC8B1F278677000D2A58 /* token.cer */; };
 		2B695CBA1EF9B9A80025119B /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE66A0B1EF910B6007A7130 /* Editable.swift */; };
 		2B7C8B791F4F34AB0094C557 /* WorkingRangeSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */; };
+		2BA888EB1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
+		2BA888EC1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
+		2BA888ED1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
+		2BA888EE1F60156D00B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
 		2BAB90A71EC1194B005D98C6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A01EC1194B005D98C6 /* Accelerate.framework */; };
 		2BAB90A81EC1194B005D98C6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A11EC1194B005D98C6 /* AudioToolbox.framework */; };
 		2BAB90A91EC1194B005D98C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */; };
@@ -1946,6 +1950,7 @@
 		2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileEditItem .swift"; sourceTree = "<group>"; };
 		2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingRangeSectionController.swift; sourceTree = "<group>"; };
 		2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistributionDevTokenURLPaths.swift; sourceTree = "<group>"; };
+		2BA888EA1F600ED500B03D8E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		2BAB90A01EC1194B005D98C6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2BAB90A11EC1194B005D98C6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1972,7 +1977,7 @@
 		2BC6925C1EE937E800285070 /* Emptiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emptiable.swift; sourceTree = "<group>"; };
 		2BC85F7B1F0F939C00BCB171 /* InputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputCell.xib; sourceTree = "<group>"; };
 		2BC85F7E1F0F946600BCB171 /* InputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
-		2BD0AC8B1F278677000D2A58 /* token.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = token.cer; path = token.cer; sourceTree = "<group>"; };
+		2BD0AC8B1F278677000D2A58 /* token.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = token.cer; sourceTree = "<group>"; };
 		2BD135AD1EE1A1E000B9F454 /* SplashNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashNavigationController.swift; sourceTree = "<group>"; };
 		2BD6FB3F1F02927F00F1E2BF /* IndexPath+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IndexPath+Additions.swift"; sourceTree = "<group>"; };
 		2BE66A081EF9027B007A7130 /* UIScrollView+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Keyboard.swift"; sourceTree = "<group>"; };
@@ -2870,7 +2875,7 @@
 		A90E5A301F069CAF00DAA501 /* BrowseAllController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseAllController.swift; sourceTree = "<group>"; };
 		A916290C1F3B5828008A7F36 /* PaymentAddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentAddressController.swift; sourceTree = "<group>"; };
 		A916290E1F3C3A02008A7F36 /* PaymentAddressInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentAddressInputView.swift; sourceTree = "<group>"; };
-		A91629101F3C64FE008A7F36 /* PaymentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentNavigationController.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
+		A91629101F3C64FE008A7F36 /* PaymentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		A91629151F3C7CFD008A7F36 /* Payment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		A9181D211EDD8154005B63F6 /* RoundIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundIconButton.swift; sourceTree = "<group>"; };
 		A9191DC51F2203DD00498A4F /* AdvancedSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AdvancedSettings.storyboard; sourceTree = "<group>"; };
@@ -3138,15 +3143,12 @@
 			isa = PBXGroup;
 			children = (
 				D197B18BC61D2FA9F500E49F /* Mocks */,
-				84FFE1E71F3C7F39008CEEF2 /* EthereumAddressTests.swift */,
-				84C459011F41B7AA00D534B8 /* QRCodeIntentTests.swift */,
 				D197B7EC7030BE4C4508AACD /* EthereumConverterTests.swift */,
 				D197B00DD27312EDFE1B9ECB /* AppsAPIClientTests.swift */,
 				D197B33D03FC3E507BE3B3C1 /* EthereumAPIClientTests.swift */,
 				D197B6D88C3CCC7B7A890925 /* RatingsClientTests.swift */,
 				84FFE1E71F3C7F39008CEEF2 /* EthereumAddressTests.swift */,
 				D197BDA113837D7DCFE1A66F /* ExchangeRateAPIClientTests.swift */,
-				D197BF87696253A90F28E651,
 				14147EA51E8119F0006BD47B /* Info.plist */,
 				84C459011F41B7AA00D534B8 /* QRCodeIntentTests.swift */,
 			);
@@ -3260,7 +3262,6 @@
 			children = (
 				2BD0AC8B1F278677000D2A58 /* token.cer */,
 			);
-			name = "Certificate(dis)";
 			path = "Certificate(dis)";
 			sourceTree = "<group>";
 		};
@@ -3277,7 +3278,6 @@
 			children = (
 				6AE44D961F45C38B00F5AF02 /* CurrencyPicker.swift */,
 			);
-			name = LocalCurrency;
 			path = LocalCurrency;
 			sourceTree = "<group>";
 		};
@@ -4285,6 +4285,7 @@
 				9FA12BF11E65D135003705F6 /* SoundPlayer.swift */,
 				9FC72A331E250E2D00EF1141 /* UserBootstrapParameters.swift */,
 				9FCDBAD31E27DE8800A70E07 /* Yap.swift */,
+				2BA888EA1F600ED500B03D8E /* Currency.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4635,7 +4636,6 @@
 				D197B51174AC53CDB04F5EE4 /* EthereumAPIClient */,
 				D197BC65AA22A50C491B80E2 /* IDAPIClient */,
 				D197BC7D9EB5F21D89994F25 /* ExchangeRateAPIClient */,
-				D197B5F1BAE4D188FD9C6BE8,
 				D197B1451DB719E76A084950 /* timestamp.json */,
 				D197B68934D29AC2FFC10D6C /* RatingsClient */,
 			);
@@ -4665,11 +4665,7 @@
 			isa = PBXGroup;
 			children = (
 				D197B707B59B3F92F8A4B3EC /* getLatestPublicUsers.json */,
-				D197BC49D6434651AD1AB12D,
 				D197B29F0030A48233E69AD9 /* nonExistingUser.json */,
-				D197B69697F2A5B4F3BEF380,
-				D197B86AE2B082254100761E,
-				D197B94796A42187ABCF7864,
 				D197B12C40488CB1523BB212 /* user.json */,
 				D197BA847282226E502C8CEE /* getTopRatedPublicUsers.json */,
 				D197B4747DA95DF531E0C300 /* searchContacts.json */,
@@ -4820,7 +4816,7 @@
 					};
 					9F9238B01E24F1D2004BEEE0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 29X3GG489T;
+						DevelopmentTeam = BH32JXCQWU;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -4839,7 +4835,7 @@
 						};
 					};
 					A9603D371F4DABDC00BF57B1 = {
-						DevelopmentTeam = 29X3GG489T;
+						DevelopmentTeam = BH32JXCQWU;
 					};
 				};
 			};
@@ -4876,12 +4872,6 @@
 				D197B12668721515F3F87A31 /* search.json in Resources */,
 				D197B30022F9B4D9D27325F7 /* getTopRatedApps.json in Resources */,
 				D197B74275EBC3A229F0D4D9 /* timestamp.json in Resources */,
-				D197B1B3CDE47BDF904EC7DA,
-				D197B7909D9C06655A840305,
-				D197B3A81CA06238BBED66F4,
-				D197BE842A720DC7D1F75F2E,
-				D197B57C1E5ECC5B8C071A0E,
-				D197B7D0B9EE0D87ADD7058A,
 				D197B9DDD90826832295B645 /* getRate.json in Resources */,
 				D197B93C624C3E8D1F43B232 /* getCurrencies.json in Resources */,
 				D197B93806978360C8100D50 /* score.json in Resources */,
@@ -5387,6 +5377,7 @@
 				84AED6FE1F42ED91003C38E8 /* String+Regex.swift in Sources */,
 				9FE533881F0B9C5500B0C2B5 /* EthereumConverter.swift in Sources */,
 				E60A52AB1F28E0F30032CAC0 /* Yap.swift in Sources */,
+				2BA888EE1F60156D00B03D8E /* Currency.swift in Sources */,
 				E60A52A81F28DC750032CAC0 /* TokenUser.swift in Sources */,
 				D197B9D646686EF7FE2D78B8 /* UINotificationName+Additions.swift in Sources */,
 				D197B1E784F2176023D0F635 /* YapDatabaseViewConnection+Additions.swift in Sources */,
@@ -5397,7 +5388,6 @@
 				D197B35BF9744D2F37972747 /* EthereumAPIClientTests.swift in Sources */,
 				D197B6C89BDD1FE57CA3DA33 /* RatingsClientTests.swift in Sources */,
 				D197B54E550A80E09BFE6501 /* RatingsClient.swift in Sources */,
-				D197BD179C71B127A7315785,
 				D197BB5265BB1DA3032B68AA /* ExchangeRateAPIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5915,6 +5905,7 @@
 				D197BEB965F76FE14EF90555 /* ActiveNetworkDisplaying.swift in Sources */,
 				D197B11DD70DB5696FFC4FD2 /* UINotificationName+Additions.swift in Sources */,
 				D197B968EE5E2CE52CC92F1D /* YapDatabaseViewConnection+Additions.swift in Sources */,
+				2BA888ED1F600ED500B03D8E /* Currency.swift in Sources */,
 				D197B341D7AC04907550BFA3 /* TestAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6257,6 +6248,7 @@
 				9F4D7FE01EEA8B4500FB5361 /* MediaPickerModernGalleryMixin.m in Sources */,
 				2BC4C07F1EF3ED4700F99CE2 /* ActivityIndicating.swift in Sources */,
 				9F4D7FDC1EEA8B4500FB5361 /* MediaPickerGalleryVideoScrubber.m in Sources */,
+				2BA888EB1F600ED500B03D8E /* Currency.swift in Sources */,
 				9F4D80EC1EEA8B4500FB5361 /* MenuSheetDimView.m in Sources */,
 				9F4D81301EEA8B4600FB5361 /* PhotoCropAreaView.m in Sources */,
 				9F4D81061EEA8B4500FB5361 /* ModernGalleryImageItemContainerView.m in Sources */,
@@ -6952,6 +6944,7 @@
 				A9603F341F4DABDC00BF57B1 /* ActiveNetworkDisplaying.swift in Sources */,
 				A9603F351F4DABDC00BF57B1 /* UINotificationName+Additions.swift in Sources */,
 				A9603F361F4DABDC00BF57B1 /* YapDatabaseViewConnection+Additions.swift in Sources */,
+				2BA888EC1F600ED500B03D8E /* Currency.swift in Sources */,
 				A9603F371F4DABDC00BF57B1 /* TestAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7211,7 +7204,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
-				DEVELOPMENT_TEAM = 29X3GG489T;
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7260,7 +7253,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = NO;
-				DEVELOPMENT_TEAM = 29X3GG489T;
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7303,7 +7296,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
-				DEVELOPMENT_TEAM = 29X3GG489T;
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7347,7 +7340,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = NO;
-				DEVELOPMENT_TEAM = 29X3GG489T;
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

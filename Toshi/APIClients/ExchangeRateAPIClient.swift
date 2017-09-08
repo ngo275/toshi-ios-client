@@ -16,8 +16,6 @@
 import Foundation
 import Teapot
 
-public typealias Currency = (code: String, name: String)
-
 let ExchangeRateClient = ExchangeRateAPIClient.shared
 
 public final class ExchangeRateAPIClient {

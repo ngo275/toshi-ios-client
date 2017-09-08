@@ -53,16 +53,18 @@ final class ChatsInteractor: NSObject {
     fileprivate var messageSender: MessageSender?
 
     func sendMessage(sofaWrapper: SofaWrapper, date: Date = Date(), completion: ((Bool) -> Void)? = nil) {
-        let timestamp = NSDate.ows_millisecondsSince1970(for: date)
-        let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: thread, messageBody: sofaWrapper.content)
+        DispatchQueue.main.async {
+            let timestamp = NSDate.ows_millisecondsSince1970(for: date)
+            let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: sofaWrapper.content)
 
-        messageSender?.send(outgoingMessage, success: {
-            completion?(true)
-            print("message sent")
-        }, failure: { error in
-            completion?(false)
-            print(error)
-        })
+            self.messageSender?.send(outgoingMessage, success: {
+                completion?(true)
+                print("message sent")
+            }, failure: { error in
+                completion?(false)
+                print(error)
+            })
+        }
     }
 
     func send(image: UIImage) {

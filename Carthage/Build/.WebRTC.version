@@ -1,18 +1,6 @@
 {
-  "iOS" : [
-    {
-      "hash" : "934214c1b78982c1401f916c930acf693c0314c116abd78b361602fab8e7e3f6",
-      "name" : "WebRTC"
-    }
-  ],
   "commitish" : "60.10.18252",
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-
-  ],
-  "Mac" : [
+  "iOS" : [
 
   ]
 }

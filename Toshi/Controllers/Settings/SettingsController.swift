@@ -149,14 +149,13 @@ open class SettingsController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleBalanceUpdate(notification:)), name: .ethereumBalanceUpdateNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleUpdateLocalCurrency), name: .localCurrencyUpdated, object: nil)
-
-        self.fetchAndUpdateBalance()
     }
 
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         IDAPIClient.shared.updateContact(with: Cereal.shared.address)
+        self.fetchAndUpdateBalance()
     }
 
     @objc private func updateUI() {

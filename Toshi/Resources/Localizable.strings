@@ -112,3 +112,9 @@
 /* Network Requests */
 "request_generic_error" = "Something went wrong";
 
+/* Generic Alerts */
+
+"network-alert-title" = "Be aware!";
+"network-alert-text" = "Toshi is not an appropriate wallet for storage of large sums of ETH.";
+"alert-ok-action-title" = "OK";
+

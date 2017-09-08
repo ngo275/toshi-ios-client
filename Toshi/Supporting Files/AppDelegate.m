@@ -120,8 +120,9 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 - (void)showNetworkAlertIfNeeded {
     // To drive this point really home we could show this for every launch instead.
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DidShowMoneyAlert"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Be aware!" message:@"Toshi is running on Testnet. Do not send Ethereum from Mainnet." preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDefault handler:nil]];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"network-alert-title", nil) message:NSLocalizedString(@"network-alert-text", nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"alert-ok-action-title", nil) style:UIAlertActionStyleCancel handler:nil]];
+        alert.view.tintColor = Theme.tintColor;
 
         [self.window.rootViewController presentViewController:alert animated:YES completion:^{
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DidShowMoneyAlert"];
