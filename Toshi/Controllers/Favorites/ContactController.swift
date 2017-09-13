@@ -174,7 +174,7 @@ public class ContactController: UIViewController {
     }
 
     public required init?(coder _: NSCoder) {
-        fatalError("")
+        fatalError("The method `init?(coder)` is not implemented for this class.")
     }
 
     open override func loadView() {
@@ -189,7 +189,7 @@ public class ContactController: UIViewController {
 
         setupActivityIndicator()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(displayActions))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(didSelectMoreButton))
         view.backgroundColor = Theme.settingsBackgroundColor
 
         addSubviewsAndConstraints()
@@ -391,31 +391,64 @@ public class ContactController: UIViewController {
         Navigator.presentModally(rateUserController)
     }
 
-    @objc private func displayActions() {
+    @objc private func didSelectMoreButton() {
         let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let blockingManager = OWSBlockingManager.shared()
         let address = contact.address
 
         if contact.isBlocked {
-            actions.addAction(UIAlertAction(title: "Unblock", style: .destructive, handler: { _ in
-                blockingManager.removeBlockedPhoneNumber(address)
-            }))
+            let unblockAction = UIAlertAction(title: Localized("unblock_action_title"), style: .destructive) { _ in
+                OWSBlockingManager.shared().removeBlockedPhoneNumber(address)
+
+                let alert = UIAlertController.dismissableAlert(title: Localized("unblock_user_title"), message: Localized("unblock_user_message"))
+                Navigator.presentModally(alert)
+            }
+
+            actions.addAction(unblockAction)
         } else {
-            actions.addAction(UIAlertAction(title: "Block", style: .destructive, handler: { _ in
-                blockingManager.addBlockedPhoneNumber(address)
-            }))
+            let blockUserAction = UIAlertAction(title: Localized("block_action_title"), style: .destructive) { _ in
+                self.didSelectBlockUser()
+            }
+
+            actions.addAction(blockUserAction)
         }
 
-        actions.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { _ in
+        let reportAction = UIAlertAction(title: Localized("report_action_title"), style: .destructive) { _ in
             self.idAPIClient.reportUser(address: address) { success, errorMessage in
-                print(success)
-                print(errorMessage)
+                self.showReportUserFeedbackAlert(success, message: errorMessage)
             }
-        }))
+        }
 
-        actions.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        actions.addAction(reportAction)
+        actions.addAction(UIAlertAction(title: Localized("cancel_action"), style: .cancel))
 
         Navigator.presentModally(actions)
+    }
+
+    private func showReportUserFeedbackAlert(_ success: Bool, message: String) {
+        guard success else {
+            let alert = UIAlertController.dismissableAlert(title: Localized("error_title"), message: message)
+            Navigator.presentModally(alert)
+
+            return
+        }
+
+        let alert = UIAlertController.dismissableAlert(title: Localized("report_feedback_alert_title"), message: Localized("report_feedback_alert_message"))
+        Navigator.presentModally(alert)
+    }
+
+    private func didSelectBlockUser() {
+        let alert = UIAlertController(title: Localized("block_alert_title"), message: Localized("block_alert_message"), preferredStyle: .alert)
+        let blockAction = UIAlertAction(title: Localized("block_action_title"), style: .default) { _ in
+            OWSBlockingManager.shared().addBlockedPhoneNumber(self.contact.address)
+
+            let alert = UIAlertController.dismissableAlert(title: Localized("block_feedback_alert_title"), message: Localized("block_feedback_alert_message"))
+            Navigator.presentModally(alert)
+        }
+
+        alert.addAction(blockAction)
+        alert.addAction(UIAlertAction(title: Localized("cancel_action"), style: .cancel))
+
+        Navigator.presentModally(alert)
     }
 
     fileprivate func updateReputation() {
@@ -478,21 +511,18 @@ extension ContactController: PaymentControllerDelegate {
 
             let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction))"
 
-            etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] json, error in
+            etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] success, json, message in
                 guard let strongSelf = self else { return }
 
                 strongSelf.hideActivityIndicator()
 
-                if error != nil {
-
-                    var message = "Something went wrong"
-                    if let json = json?.dictionary as [String: Any]?, let jsonMessage = json["message"] as? String {
-                        message = jsonMessage
-                    }
-
-                    let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: message)
+                guard success else {
+                    let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: message ?? "Something went wrong")
                     Navigator.presentModally(alert)
-                } else if let json = json?.dictionary {
+                    return
+                }
+
+                if let json = json?.dictionary {
                     guard let txHash = json["tx_hash"] as? String else { fatalError("Error recovering transaction hash.") }
                     let payment = SofaPayment(txHash: txHash, valueHex: value.toHexString)
 

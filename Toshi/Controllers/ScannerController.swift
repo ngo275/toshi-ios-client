@@ -53,11 +53,6 @@ class ScannerController: ScannerViewController {
     override func setupToolbarItems() {
         toolbar.setItems([self.cancelItem], animated: true)
     }
-
-    fileprivate func showErrorAlert() {
-        let controller = UIAlertController.dismissableAlert(title: "Something went wrong")
-        Navigator.presentModally(controller)
-    }
 }
 
 extension ScannerController: ActivityIndicating {
@@ -74,7 +69,7 @@ extension ScannerController: PaymentPresentable {
         setNeedsStatusBarAppearanceUpdate()
     }
 
-    func paymentFailed(with _: Error?, result _: [String: Any]) {
+    func paymentFailed() {
         startScanning()
         isStatusBarHidden = false
         startScanning()
@@ -101,7 +96,7 @@ extension ScannerController: PaymentPresentable {
 
             guard let transaction = transaction as String? else {
                 self?.hideActivityIndicator()
-                self?.showErrorAlert()
+                self?.presentPaymentError(withErrorMessage: error?.localizedDescription ?? "Something went wrong")
                 self?.startScanning()
 
                 return
@@ -109,23 +104,18 @@ extension ScannerController: PaymentPresentable {
 
             let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction))"
 
-            EthereumAPIClient.shared.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] json, error in
+            EthereumAPIClient.shared.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] success, json, message in
 
                 self?.hideActivityIndicator()
 
-                guard let json = json?.dictionary else {
-                    self?.showErrorAlert()
+                guard success, let json = json?.dictionary else {
+                    self?.presentPaymentError(withErrorMessage: message ?? "Something went wrong")
                     self?.startScanning()
-
                     return
                 }
 
-                if error != nil {
-                    self?.presentPaymentError(error: error, json: json)
-                } else {
-                    self?.presentSuccessAlert { [weak self] _ in
-                        self?.startScanning()
-                    }
+                self?.presentSuccessAlert { [weak self] _ in
+                    self?.startScanning()
                 }
             }
         }

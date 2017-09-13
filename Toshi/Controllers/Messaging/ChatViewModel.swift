@@ -250,8 +250,8 @@ final class ChatViewModel {
                     let indexPath = change.indexPath
 
                     guard let signalMessage = dbExtension.object(at: indexPath, with: strongSelf.mappings) as? TSMessage else { return }
-                    guard let message = (strongSelf.messages.first { $0.signalMessage == signalMessage }) as Message? else { return }
-
+                    guard let message = strongSelf.messages.first(where: { $0.signalMessage.uniqueId == signalMessage.uniqueId }) as Message? else { return }
+                    
                     DispatchQueue.main.async {
                         if let loadedSignalMessage = message.signalMessage as? TSOutgoingMessage, let newSignalMessage = signalMessage as? TSOutgoingMessage {
                             loadedSignalMessage.setState(newSignalMessage.messageState)
@@ -370,6 +370,28 @@ final class ChatViewModel {
                     strongSelf.output?.didReceiveLastMessage()
                 }
             }
+        }
+    }
+    
+    func deleteItemAt(_ indexPath: IndexPath) {
+        
+        if let message = messageModels.element(at: indexPath.item)?.signalMessage {
+            
+            TSStorageManager.shared().dbConnection?.asyncReadWrite { [weak self] transaction in
+                
+                message.remove(with: transaction)
+                
+                DispatchQueue.main.async {
+                    self?.messages.remove(at: indexPath.item)
+                }
+            }
+        }
+    }
+    
+    func resendItemAt(_ indexPath: IndexPath) {
+
+        if let message = messageModels.element(at: indexPath.item)?.signalMessage as? TSOutgoingMessage {
+            interactor.send(message)
         }
     }
 }

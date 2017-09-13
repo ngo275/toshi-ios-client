@@ -623,7 +623,28 @@ final class ChatController: OverlayController {
             self.hideActiveNetworkViewIfNeeded()
         }
     }
-    
+
+//    let message = viewModel.messageModels[indexPath.item]
+//
+//    if let signalMessage = message.signalMessage as? TSOutgoingMessage, signalMessage.messageState == .unsent {
+//
+//    let delete = UIAlertAction(title: Localized("messages_sent_error_action_delete"), style: .destructive, handler: { _ in
+//    self.viewModel.deleteItemAt(indexPath)
+//    })
+//
+//    let resend = UIAlertAction(title: Localized("messages_sent_error_action_resend"), style: .destructive, handler: { _ in
+//    self.viewModel.resendItemAt(indexPath)
+//    })
+//
+//    let cancel = UIAlertAction(title: Localized("messages_sent_error_action_cancel"), style: .cancel)
+//
+//    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//    actionSheet.addAction(resend)
+//    actionSheet.addAction(delete)
+//    actionSheet.addAction(cancel)
+//
+//    Navigator.presentModally(actionSheet)
+
     fileprivate func positionType(for indexPath: IndexPath) -> MessagePositionType {
 
         guard let currentMessage = viewModel.messageModels.element(at: indexPath.item) else {
@@ -680,7 +701,7 @@ extension ChatController: ListAdapterDataSource {
     }
 }
 
-extension ChatController:  WorkingRangeDataSource {
+extension ChatController: WorkingRangeDataSource {
 
     func messagePosition(for message: MessageModel) -> MessagePositionType {
         guard let index = self.viewModel.messageModels.index(of: message) as Int? else {
@@ -707,7 +728,28 @@ extension ChatController: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if viewModel.messageModels[indexPath.item].type == .image {
+        let message = viewModel.messageModels[indexPath.item]
+
+        if let signalMessage = message.signalMessage as? TSOutgoingMessage, signalMessage.messageState == .unsent {
+
+            let delete = UIAlertAction(title: Localized("messages_sent_error_action_delete"), style: .destructive, handler: { _ in
+                self.viewModel.deleteItemAt(indexPath)
+            })
+
+            let resend = UIAlertAction(title: Localized("messages_sent_error_action_resend"), style: .destructive, handler: { _ in
+                self.viewModel.resendItemAt(indexPath)
+            })
+
+            let cancel = UIAlertAction(title: Localized("messages_sent_error_action_cancel"), style: .cancel)
+
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            actionSheet.addAction(resend)
+            actionSheet.addAction(delete)
+            actionSheet.addAction(cancel)
+
+            Navigator.presentModally(actionSheet)
+
+        } else if viewModel.messageModels[indexPath.item].type == .image {
 
             let controller = ImagesViewController(messages: viewModel.messageModels, initialIndexPath: indexPath)
             controller.transitioningDelegate = self
@@ -822,10 +864,10 @@ extension ChatController: ChatViewModelOutput {
 
 extension ChatController: ChatInteractorOutput {
 
-    func didCatchError(_ error: Error) {
+    func didCatchError(_ message: String) {
         hideActivityIndicator()
 
-        let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: error.localizedDescription)
+        let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: message)
         Navigator.presentModally(alert)
     }
 

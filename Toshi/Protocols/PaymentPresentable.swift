@@ -21,7 +21,7 @@ typealias ActionHandler = ((UIAlertAction) -> Swift.Void)
 protocol PaymentPresentable: class {
     func displayPaymentConfirmation(userInfo: UserInfo, parameters: [String: Any])
 
-    func paymentFailed(with error: Error?, result: [String: Any])
+    func paymentFailed()
 
     func presentSuccessAlert(with actionBlock: ((UIAlertAction) -> Swift.Void)?)
 
@@ -65,13 +65,12 @@ extension PaymentPresentable where Self: UIViewController {
         Navigator.presentModally(paymentConfirmationController)
     }
 
-    func paymentFailed(with _: Error?, result _: [String: Any]) {}
+    func paymentFailed() {}
 
-    func presentPaymentError(error: Error?, json: [String: Any]) {
-        let message = json["message"] as? String
+    func presentPaymentError(withErrorMessage message: String) {
         let alert = UIAlertController(title: "Error completing transaction", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.paymentFailed(with: error, result: json)
+            self.paymentFailed()
         }
 
         alert.addAction(okAction)

@@ -59,7 +59,7 @@ extension BrowseSearchResultView: UITableViewDelegate {
 }
 
 extension BrowseSearchResultView: UITableViewDataSource {
-
+	
     func tableView(_: UITableView, estimatedHeightForRowAt _: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }

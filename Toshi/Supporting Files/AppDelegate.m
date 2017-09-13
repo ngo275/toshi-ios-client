@@ -231,6 +231,8 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
     attributtes = @{NSForegroundColorAttributeName: [Theme tintColor], NSFontAttributeName: [Theme regularWithSize:17]};
     UIBarButtonItem *barButtonAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UINavigationBar class]]];
     [barButtonAppearance setTitleTextAttributes:attributtes forState:UIControlStateNormal];
+
+    [[UIView appearanceWhenContainedInInstancesOfClasses:@[[UIAlertController class]]] setTintColor:[Theme tintColor]];
 }
 
 - (void)setupSignalService {

@@ -114,6 +114,8 @@
 		2B47941B1F1E06BB00AC3EB4 /* ProfileEditItem .swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */; };
 		2B4BCD5A1F59954E00F9E609 /* DistributionDevTokenURLPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */; };
 		2B4BCD5B1F599BEA00F9E609 /* token.cer in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0AC8B1F278677000D2A58 /* token.cer */; };
+		2B5EF4EB1F6969F9002C2145 /* WorkingRangeSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */; };
+		2B5EF4EC1F6969FA002C2145 /* WorkingRangeSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */; };
 		2B695CBA1EF9B9A80025119B /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE66A0B1EF910B6007A7130 /* Editable.swift */; };
 		2B7C8B791F4F34AB0094C557 /* WorkingRangeSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */; };
 		2BA888EB1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
@@ -1137,6 +1139,7 @@
 		A91629141F3C6614008A7F36 /* PaymentAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916290C1F3B5828008A7F36 /* PaymentAddressController.swift */; };
 		A91629161F3C7CFD008A7F36 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91629151F3C7CFD008A7F36 /* Payment.swift */; };
 		A91629171F3C85D6008A7F36 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91629151F3C7CFD008A7F36 /* Payment.swift */; };
+		A9180FB11F5452A000DC668E /* MessagesErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9180FB01F5452A000DC668E /* MessagesErrorView.swift */; };
 		A9181D221EDD8154005B63F6 /* RoundIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9181D211EDD8154005B63F6 /* RoundIconButton.swift */; };
 		A9191DC91F2203DD00498A4F /* AdvancedSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9191DC51F2203DD00498A4F /* AdvancedSettings.storyboard */; };
 		A9191DCA1F2203DD00498A4F /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9191DC61F2203DD00498A4F /* AdvancedSettingsController.swift */; };
@@ -1770,6 +1773,8 @@
 		A9AC74141E78231A00365029 /* PassphraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AC74131E78231A00365029 /* PassphraseView.swift */; };
 		A9AC74171E78277700365029 /* PassphraseWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AC74161E78277700365029 /* PassphraseWordView.swift */; };
 		A9AC74181E78277700365029 /* PassphraseWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AC74161E78277700365029 /* PassphraseWordView.swift */; };
+		A9AFDD481F5FF80500C0A256 /* MessagesErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9180FB01F5452A000DC668E /* MessagesErrorView.swift */; };
+		A9AFDD491F5FF80600C0A256 /* MessagesErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9180FB01F5452A000DC668E /* MessagesErrorView.swift */; };
 		A9BA6B791EF7CEAD007C3206 /* AddMoneyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA6B781EF7CEAD007C3206 /* AddMoneyController.swift */; };
 		A9BA6B7B1EF7D582007C3206 /* AddMoneyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA6B7A1EF7D582007C3206 /* AddMoneyHeader.swift */; };
 		A9BA6B7D1EF7D746007C3206 /* AddMoneyBulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA6B7C1EF7D746007C3206 /* AddMoneyBulletPoint.swift */; };
@@ -1948,8 +1953,8 @@
 		2B435CB01F135DBF00C91272 /* ProfileEditConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditConfigurator.swift; sourceTree = "<group>"; };
 		2B44A1391F4AEBFF00B9C760 /* ExchangeRateAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIClient.swift; sourceTree = "<group>"; };
 		2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileEditItem .swift"; sourceTree = "<group>"; };
-		2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingRangeSectionController.swift; sourceTree = "<group>"; };
 		2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistributionDevTokenURLPaths.swift; sourceTree = "<group>"; };
+		2B7C8B781F4F34AB0094C557 /* WorkingRangeSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingRangeSectionController.swift; sourceTree = "<group>"; };
 		2BA888EA1F600ED500B03D8E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		2BAB90A01EC1194B005D98C6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2BAB90A11EC1194B005D98C6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2877,6 +2882,7 @@
 		A916290E1F3C3A02008A7F36 /* PaymentAddressInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentAddressInputView.swift; sourceTree = "<group>"; };
 		A91629101F3C64FE008A7F36 /* PaymentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		A91629151F3C7CFD008A7F36 /* Payment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		A9180FB01F5452A000DC668E /* MessagesErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesErrorView.swift; sourceTree = "<group>"; };
 		A9181D211EDD8154005B63F6 /* RoundIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundIconButton.swift; sourceTree = "<group>"; };
 		A9191DC51F2203DD00498A4F /* AdvancedSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AdvancedSettings.storyboard; sourceTree = "<group>"; };
 		A9191DC61F2203DD00498A4F /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
@@ -4593,6 +4599,7 @@
 				A9E1DCD81F1E1A72001A4ABE /* IconLabelButton.swift */,
 				A9E1DCD91F1E1A72001A4ABE /* IconLabelView.swift */,
 				A963D52F1F288E5D00297FDF /* MessagesCornerView.swift */,
+				A9180FB01F5452A000DC668E /* MessagesErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4835,7 +4842,7 @@
 						};
 					};
 					A9603D371F4DABDC00BF57B1 = {
-						DevelopmentTeam = BH32JXCQWU;
+						DevelopmentTeam = 3TAZ984YN3;
 					};
 				};
 			};
@@ -5601,8 +5608,10 @@
 				A921D3641E7C145E00EE3221 /* Collection+Additions.swift in Sources */,
 				9F4D7F191EEA8B4500FB5361 /* PaintShader.m in Sources */,
 				9F4D81691EEA8B4600FB5361 /* PhotoPaintSettingsWrapperView.m in Sources */,
+				A9AFDD491F5FF80600C0A256 /* MessagesErrorView.swift in Sources */,
 				9F4D80251EEA8B4500FB5361 /* UIControl+HitTestEdgeInsets.m in Sources */,
 				149F9A761E72E29A00FB74AA /* ContactsManager.m in Sources */,
+				2B5EF4EB1F6969F9002C2145 /* WorkingRangeSectionController.swift in Sources */,
 				9F4D80051EEA8B4500FB5361 /* PSKeyValueCoder.m in Sources */,
 				A9191DCD1F22040E00498A4F /* AdvancedSettingsController.swift in Sources */,
 				A997B1011EF94B4F00A143FE /* AddMoneyItem.swift in Sources */,
@@ -6292,6 +6301,7 @@
 				A90E5A291F03CE0400DAA501 /* BrowseAppCell.swift in Sources */,
 				2BE66A0C1EF910B6007A7130 /* Editable.swift in Sources */,
 				9F4D80E21EEA8B4500FB5361 /* MediaPickerPhotoStripView.m in Sources */,
+				A9180FB11F5452A000DC668E /* MessagesErrorView.swift in Sources */,
 				A9ED6CD01E83CD8400160637 /* Footnote.swift in Sources */,
 				9F4D7EE41EEA8B4500FB5361 /* TGMediaAvatarEditorTransition.m in Sources */,
 				9F4D801E1EEA8B4500FB5361 /* TransitionLayout.m in Sources */,
@@ -6640,8 +6650,10 @@
 				A9603E041F4DABDC00BF57B1 /* Collection+Additions.swift in Sources */,
 				A9603E051F4DABDC00BF57B1 /* PaintShader.m in Sources */,
 				A9603E061F4DABDC00BF57B1 /* PhotoPaintSettingsWrapperView.m in Sources */,
+				A9AFDD481F5FF80500C0A256 /* MessagesErrorView.swift in Sources */,
 				A9603E071F4DABDC00BF57B1 /* UIControl+HitTestEdgeInsets.m in Sources */,
 				A9603E081F4DABDC00BF57B1 /* ContactsManager.m in Sources */,
+				2B5EF4EC1F6969FA002C2145 /* WorkingRangeSectionController.swift in Sources */,
 				A9603E091F4DABDC00BF57B1 /* PSKeyValueCoder.m in Sources */,
 				A9603E0A1F4DABDC00BF57B1 /* AdvancedSettingsController.swift in Sources */,
 				A9603E0B1F4DABDC00BF57B1 /* AddMoneyItem.swift in Sources */,
@@ -7024,7 +7036,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7067,7 +7079,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BH32JXCQWU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7296,7 +7308,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
-				DEVELOPMENT_TEAM = BH32JXCQWU;
+				DEVELOPMENT_TEAM = 3TAZ984YN3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7320,7 +7332,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100";
-				PRODUCT_BUNDLE_IDENTIFIER = org.toshi.development;
+				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.toshi.enterprise;
 				PRODUCT_NAME = Toshi;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -7340,7 +7352,7 @@
 				CODE_SIGN_ENTITLEMENTS = Toshi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = NO;
-				DEVELOPMENT_TEAM = BH32JXCQWU;
+				DEVELOPMENT_TEAM = 3TAZ984YN3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7364,7 +7376,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100";
-				PRODUCT_BUNDLE_IDENTIFIER = org.toshi.development;
+				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.toshi.enterprise;
 				PRODUCT_NAME = Toshi;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

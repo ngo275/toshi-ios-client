@@ -42,9 +42,9 @@ extension ActiveNetworkDisplaying where Self: UIViewController {
     }
 
     func defaultActiveNetworkView() -> ActiveNetworkView {
-        let activityIndicator = ActiveNetworkView(withAutoLayout: true)
+        let activeNetworkView = ActiveNetworkView(withAutoLayout: true)
 
-        return activityIndicator
+        return activeNetworkView
     }
 
     func showActiveNetworkViewIfNeeded() {

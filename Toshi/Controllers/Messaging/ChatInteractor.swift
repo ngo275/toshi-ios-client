@@ -16,7 +16,7 @@
 import Foundation
 
 protocol ChatInteractorOutput: class {
-    func didCatchError(_ error: Error)
+    func didCatchError(_ message: String)
 
     func didFinishRequest()
 }
@@ -52,16 +52,20 @@ final class ChatsInteractor: NSObject {
 
     fileprivate var messageSender: MessageSender?
 
-    func sendMessage(sofaWrapper: SofaWrapper, date: Date = Date(), completion: ((Bool) -> Void)? = nil) {
-        DispatchQueue.main.async {
-            let timestamp = NSDate.ows_millisecondsSince1970(for: date)
-            let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: sofaWrapper.content)
+    func sendMessage(sofaWrapper: SofaWrapper, date: Date = Date(), completion: @escaping ((Bool) -> Void) = { Bool in }) {
+        let timestamp = NSDate.ows_millisecondsSince1970(for: date)
+        let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: sofaWrapper.content)
 
-            self.messageSender?.send(outgoingMessage, success: {
-                completion?(true)
+        self.send(outgoingMessage, completion: completion)
+    }
+
+    func send(_ signalMessage: TSOutgoingMessage, completion: @escaping ((Bool) -> Void) = { Bool in }) {
+        DispatchQueue.main.async {
+            self.messageSender?.send(signalMessage, success: {
+                completion(true)
                 print("message sent")
             }, failure: { error in
-                completion?(false)
+                completion(false)
                 print(error)
             })
         }
@@ -130,7 +134,7 @@ final class ChatsInteractor: NSObject {
             guard let transaction = transaction as String? else {
                 if let error = error as Error? {
                     self?.output?.didFinishRequest()
-                    self?.output?.didCatchError(error)
+                    self?.output?.didCatchError(error.localizedDescription)
                     completion?(false)
                 }
 
@@ -139,27 +143,26 @@ final class ChatsInteractor: NSObject {
 
             let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction))"
 
-            self?.etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] json, error in
+            self?.etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] success, json, message in
 
                 self?.output?.didFinishRequest()
 
-                if let error = error as Error? {
-                    
+                guard success, let json = json?.dictionary else {
                     DispatchQueue.main.async {
-                        self?.output?.didCatchError(error)
+                        self?.output?.didCatchError(message ?? "Something went wrong")
                         completion?(false)
                     }
+                    return
+                }
 
-                } else if let json = json?.dictionary {
-                    guard let txHash = json["tx_hash"] as? String else { fatalError("Error recovering transaction hash.") }
-                    guard let value = parameters["value"] as? String else { return }
+                guard let txHash = json["tx_hash"] as? String else { fatalError("Error recovering transaction hash.") }
+                guard let value = parameters["value"] as? String else { return }
 
-                    let payment = SofaPayment(txHash: txHash, valueHex: value)
-                    self?.sendMessage(sofaWrapper: payment)
+                let payment = SofaPayment(txHash: txHash, valueHex: value)
+                self?.sendMessage(sofaWrapper: payment)
 
-                    DispatchQueue.main.async {
-                        completion?(true)
-                    }
+                DispatchQueue.main.async {
+                    completion?(true)
                 }
             }
         }

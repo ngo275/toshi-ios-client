@@ -25,8 +25,16 @@ class BalanceController: UIViewController {
 
     fileprivate let reuseIdentifier = "BalanceControllerCell"
 
+    private var isAccountSecured: Bool {
+        return TokenUser.current?.verified ?? false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if !isAccountSecured {
+            showSecurityAlert()
+        }
 
         view.backgroundColor = Theme.settingsBackgroundColor
 
@@ -37,6 +45,20 @@ class BalanceController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleBalanceUpdate(notification:)), name: .ethereumBalanceUpdateNotification, object: nil)
         fetchAndUpdateBalance()
+    }
+
+    private func showSecurityAlert() {
+        let alert = UIAlertController(title: Localized("settings_deposit_error_title"), message: Localized("settings_deposit_error_message"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Localized("settings_deposit_error_action_cancel"), style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: Localized("settings_deposit_error_action_backup"), style: .default, handler: { _ in
+            let passphraseEnableController = PassphraseEnableController()
+            let navigationController = UINavigationController(rootViewController: passphraseEnableController)
+            Navigator.presentModally(navigationController)
+        }))
+
+        Navigator.presentModally(alert)
     }
 
     @objc private func handleBalanceUpdate(notification: Notification) {

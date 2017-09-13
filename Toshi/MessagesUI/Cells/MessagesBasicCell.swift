@@ -9,6 +9,13 @@ enum MessagePositionType {
     case bottom
 }
 
+enum OutGoingMessageSentState {
+    case undefined
+    case sent
+    case sending
+    case failed
+}
+
 /* Messages Basic Cell:
  This UICollectionViewCell is the base cell for the different
  advanced cells used in messages. It provides the ground layout. */
@@ -19,6 +26,7 @@ class MessagesBasicCell: UICollectionViewCell {
     private let leftLayoutGuide = UILayoutGuide()
     private let centerLayoutGuide = UILayoutGuide()
     private let rightLayoutGuide = UILayoutGuide()
+    private let bottomLayoutGuide = UILayoutGuide()
 
     private(set) var leftWidthConstraint: NSLayoutConstraint?
     private(set) var rightWidthConstraint: NSLayoutConstraint?
@@ -41,6 +49,41 @@ class MessagesBasicCell: UICollectionViewCell {
         return view
     }()
 
+    private(set) lazy var errorView: MessagesErrorView = {
+        let view = MessagesErrorView()
+        view.alpha = 0
+
+        return view
+    }()
+
+    private(set) lazy var errorlabel: UILabel = {
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .right
+
+        let attributes: [String: Any] = [
+            NSFontAttributeName: Theme.regular(size: 13),
+            NSForegroundColorAttributeName: Theme.errorColor,
+            NSParagraphStyleAttributeName: paragraphStyle
+        ]
+
+        let boldAttributes: [String: Any] = [
+            NSFontAttributeName: Theme.semibold(size: 13),
+            NSForegroundColorAttributeName: Theme.errorColor,
+            NSParagraphStyleAttributeName: paragraphStyle
+        ]
+
+        let attributedString = NSMutableAttributedString(string: Localized("messages_sent_error"), attributes: attributes)
+        attributedString.addAttributes(boldAttributes, range: NSRange(location: 0, length: 13))
+
+        let view = UILabel()
+        view.alpha = 0
+        view.attributedText = attributedString
+        view.numberOfLines = 1
+
+        return view
+    }()
+
     private let margin: CGFloat = 10
     private let avatarRadius: CGFloat = 44
 
@@ -48,8 +91,8 @@ class MessagesBasicCell: UICollectionViewCell {
     private var bubbleRightConstraint: NSLayoutConstraint?
     private var bubbleLeftConstantConstraint: NSLayoutConstraint?
     private var bubbleRightConstantConstraint: NSLayoutConstraint?
-
     private var contentLayoutGuideTopConstraint: NSLayoutConstraint?
+    private var bottomLayoutGuideHeightConstraint: NSLayoutConstraint?
 
     var isOutGoing: Bool = false {
         didSet {
@@ -79,6 +122,17 @@ class MessagesBasicCell: UICollectionViewCell {
         }
     }
 
+    var sentState: OutGoingMessageSentState = .undefined {
+        didSet {
+            switch sentState {
+            case .undefined, .sent, .sending:
+                showSentError(false)
+            case .failed:
+                showSentError(true)
+            }
+        }
+    }
+
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,14 +148,12 @@ class MessagesBasicCell: UICollectionViewCell {
          The centerLayoutGuide defines the space for the message content.
          The rightLayoutGuide reserves space for an optional error indicator. */
 
-        contentView.addLayoutGuide(contentLayoutGuide)
-        contentView.addLayoutGuide(leftLayoutGuide)
-        contentView.addLayoutGuide(centerLayoutGuide)
-        contentView.addLayoutGuide(rightLayoutGuide)
+        [contentLayoutGuide, leftLayoutGuide, centerLayoutGuide, rightLayoutGuide, bottomLayoutGuide].forEach {
+            contentView.addLayoutGuide($0)
+        }
 
         contentLayoutGuideTopConstraint = contentLayoutGuide.top(to: contentView, offset: 2)
         contentLayoutGuide.left(to: contentView)
-        contentLayoutGuide.bottom(to: contentView)
         contentLayoutGuide.right(to: contentView)
         contentLayoutGuide.width(UIScreen.main.bounds.width)
 
@@ -120,6 +172,13 @@ class MessagesBasicCell: UICollectionViewCell {
 
         leftWidthConstraint = leftLayoutGuide.width(avatarRadius)
         rightWidthConstraint = rightLayoutGuide.width(0)
+
+        bottomLayoutGuide.topToBottom(of: contentLayoutGuide)
+        bottomLayoutGuide.left(to: contentView, offset: 10)
+        bottomLayoutGuide.bottom(to: contentView)
+        bottomLayoutGuide.right(to: contentView, offset: -10)
+
+        bottomLayoutGuideHeightConstraint = bottomLayoutGuide.height(0)
 
         /* Avatar Image View:
          A UIImageView for showing an optional avatar of the user. */
@@ -152,7 +211,41 @@ class MessagesBasicCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        /* Error State:
+         A red view that can animate in from the right to indicate that a
+         message has failed to sent and a label that informs the user. */
+
+        contentView.addSubview(errorView)
+        errorView.edges(to: rightLayoutGuide)
+
+        contentView.addSubview(errorlabel)
+        errorlabel.edges(to: bottomLayoutGuide)
+
         layer.setAffineTransform(CGAffineTransform(scaleX: 1, y: -1))
+    }
+
+    func showSentError(_ show: Bool, animated: Bool = false) {
+
+        rightWidthConstraint?.constant = show ? 30 : 0
+        bottomLayoutGuideHeightConstraint?.constant = show ? 30 : 0
+
+        if animated {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .easeOutFromCurrentStateWithUserInteraction, animations: {
+                self.errorView.alpha = show ? 1 : 0
+                self.errorlabel.alpha = show ? 1 : 0
+
+                if self.superview != nil {
+                    self.layoutIfNeeded()
+                }
+            }, completion: nil)
+        } else {
+            errorView.alpha = show ? 1 : 0
+            errorlabel.alpha = show ? 1 : 0
+
+            if superview != nil {
+                layoutIfNeeded()
+            }
+        }
     }
 
     override func prepareForReuse() {
@@ -160,5 +253,6 @@ class MessagesBasicCell: UICollectionViewCell {
 
         avatarImageView.image = nil
         messagesCornerView.image = nil
+        sentState = .undefined
     }
 }

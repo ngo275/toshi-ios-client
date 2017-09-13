@@ -63,10 +63,10 @@ public class EthereumAPIClient: NSObject {
         }
     }
 
-    public func sendSignedTransaction(originalTransaction: String, transactionSignature: String, completion: @escaping ((_ json: RequestParameter?, _ error: Error?) -> Void)) {
+    public func sendSignedTransaction(originalTransaction: String, transactionSignature: String, completion: @escaping ((_ success: Bool, _ json: RequestParameter?, _ message: String?) -> Void)) {
         timestamp(activeTeapot) { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(nil, error)
+                completion(false, nil, error?.localizedDescription ?? "error fetching timestamp")
                 return
             }
 
@@ -79,7 +79,7 @@ public class EthereumAPIClient: NSObject {
 
             guard let data = try? JSONSerialization.data(withJSONObject: params, options: []), let payloadString = String(data: data, encoding: .utf8) else {
                 print("Invalid payload, request could not be executed")
-                completion(nil, nil)
+                completion(false, nil, "Invalid payload, request could not be executed")
                 return
             }
 
@@ -98,16 +98,14 @@ public class EthereumAPIClient: NSObject {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let json, _):
-                        completion(json, nil)
-                    case .failure(let json, _, let error):
-                        print(error)
+                        completion(true, json, nil)
+                    case .failure(let json, let response, let error):
                         guard let jsonError = (json?.dictionary?["errors"] as? [[String: Any]])?.first else {
-                            completion(nil, error)
+                            completion(false, nil, error.localizedDescription)
                             return
                         }
 
-                        let json = RequestParameter(jsonError)
-                        completion(json, error)
+                        completion(false, nil, jsonError["message"] as? String)
                     }
                 }
             }

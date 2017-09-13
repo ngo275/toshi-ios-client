@@ -19,6 +19,10 @@
 /* Messages */
 "messages_payment_approve" = "Approve";
 "messages_payment_decline" = "Decline";
+"messages_sent_error" = "Not delivered Tap to retry";
+"messages_sent_error_action_delete" = "Delete";
+"messages_sent_error_action_resend" = "Resend";
+"messages_sent_error_action_cancel" = "Cancel";
 
 /* Balance */
 "balance-navigation-title" = "Balance";
@@ -113,8 +117,27 @@
 "request_generic_error" = "Something went wrong";
 
 /* Generic Alerts */
-
 "network-alert-title" = "Be aware!";
 "network-alert-text" = "Toshi is not an appropriate wallet for storage of large sums of ETH.";
 "alert-ok-action-title" = "OK";
 
+/* Block user Alerts */
+"cancel_action" = "Cancel";
+"error_title" = "Error";
+"block_action_title" = "Block";
+
+"block_alert_title" = "Block username";
+"block_alert_message" = "They won’t be able to find your profile, or message you on Token. Users won’t know that you’ve blocked them.";
+
+"block_feedback_alert_title" = "Username blocked";
+"block_feedback_alert_message" = "You can unblock them at any time from their profile";
+
+"unblock_action_title" = "Unblock";
+"unblock_user_title" = "Username unblocked";
+"unblock_user_message" = "You can block them at any time from their profile";
+
+/* Report user Alerts */
+"report_action_title" = "Report";
+
+"report_feedback_alert_title" = "Thanks";
+"report_feedback_alert_message" = "Your feedback is important in helping us keep the Token community safe.";
