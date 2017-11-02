@@ -159,6 +159,10 @@
 "sign-out-failure-message" = "Error attempting to unregister from chat service. Our engineers are looking into it.";
 "cancel_action_title" = "Cancel";
 
+"no_camera_access_title" = "Camera access";
+"no_camera_access_description" = "Toshi does not have access to the camera. Would you like to change this in settings?";
+"settings_action" = "Settings";
+
 /* Block user Alerts */
 "error_title" = "Error";
 "block_action_title" = "Block";

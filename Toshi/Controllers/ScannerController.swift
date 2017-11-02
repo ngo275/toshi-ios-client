@@ -15,6 +15,7 @@
 
 import UIKit
 import CameraScanner
+import AVKit
 
 class ScannerController: ScannerViewController {
 
@@ -36,6 +37,23 @@ class ScannerController: ScannerViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard AVCaptureDevice.authorizationStatus(for: .video) == .denied else { return }
+        
+        let alert = UIAlertController(title: Localized("no_camera_access_title"), message: Localized("no_camera_access_description"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Localized("cancel_action_title"), style: .cancel, handler: { _ in
+            self.dismiss(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: Localized("settings_action"), style: .default, handler: { _ in
+            guard let url = URL(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
+            UIApplication.shared.open(url)
+        }))
+        
+        Navigator.presentModally(alert)
     }
 
     fileprivate lazy var activityView: UIActivityIndicatorView = {
