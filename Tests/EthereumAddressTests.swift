@@ -6,7 +6,7 @@ class EthereumAddressTests: XCTestCase {
 
     func testHex() {
         var address = EthereumAddress(raw: canonicalAddress)?.normalized
-        XCTAssertEqual(address, nil)
+        XCTAssertEqual(address, canonicalAddress)
 
         address = EthereumAddress(raw: "0x"+"037be053f866be6ee6dda11f258bd871b701a8d7".uppercased())?.normalized
         XCTAssertEqual(address, canonicalAddress)
