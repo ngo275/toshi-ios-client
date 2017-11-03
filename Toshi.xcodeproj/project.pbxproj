@@ -2170,7 +2170,7 @@
 				TargetAttributes = {
 					14147EA01E8119F0006BD47B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BH32JXCQWU;
+						DevelopmentTeam = 29X3GG489T;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9F9238B01E24F1D2004BEEE0;
 					};
@@ -3309,7 +3309,7 @@
 			baseConfigurationReference = 3F0DBA781E2F9F3F471A6BAD /* Pods-CocoaPods-Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = BH32JXCQWU;
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3332,7 +3332,7 @@
 			baseConfigurationReference = F878FE03459983FE633C60EF /* Pods-CocoaPods-Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = BH32JXCQWU;
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
