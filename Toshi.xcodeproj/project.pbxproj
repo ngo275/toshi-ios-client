@@ -51,7 +51,6 @@
 		14A769E11E72EC70007B4C1A /* DistributionTokenURLPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4D8D11E72CB7500389DF9 /* DistributionTokenURLPaths.swift */; };
 		14E4D8D01E72CB6E00389DF9 /* DevelopmentTokenURLPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4D8CF1E72CB6E00389DF9 /* DevelopmentTokenURLPaths.swift */; };
 		14EE6B4D1E72E54A000B07DA /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F8D1C71E72B4AA003F5749 /* Checkbox.swift */; };
-		29CB20EAEF7C09779E570D1B /* libPods-CocoaPods-Distribution.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2446336EA68730ACD1CE100D /* libPods-CocoaPods-Distribution.a */; };
 		2B002D8F1F17BA1800D92240 /* NetworkSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B002D8E1F17BA1800D92240 /* NetworkSwitcher.swift */; };
 		2B002D901F17BA1800D92240 /* NetworkSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B002D8E1F17BA1800D92240 /* NetworkSwitcher.swift */; };
 		2B0EF8291F948931001A76CA /* CrashlyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EF8281F948931001A76CA /* CrashlyticsClient.swift */; };
@@ -315,7 +314,6 @@
 		9FF957951EEEB7BA00DDCBD8 /* HPGrowingTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8071EB36A7F002D0293 /* HPGrowingTextView.framework */; };
 		9FF957961EEEB7BA00DDCBD8 /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */; };
 		9FF957981EEEB7BA00DDCBD8 /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
-		9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		9FF9579B1EEEB7BA00DDCBD8 /* Formulaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8051EB36A7F002D0293 /* Formulaic.framework */; };
 		9FF9579E1EEEB7BA00DDCBD8 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */; };
 		9FF9579F1EEEB7BA00DDCBD8 /* SweetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80D1EB36A7F002D0293 /* SweetSwift.framework */; };
@@ -520,7 +518,6 @@
 		A9603F541F4DABDC00BF57B1 /* AwesomeCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8021EB36A7F002D0293 /* AwesomeCache.framework */; };
 		A9603F551F4DABDC00BF57B1 /* HPGrowingTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8071EB36A7F002D0293 /* HPGrowingTextView.framework */; };
 		A9603F561F4DABDC00BF57B1 /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */; };
-		A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
 		A9603F591F4DABDC00BF57B1 /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		A9603F5A1F4DABDC00BF57B1 /* Formulaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8051EB36A7F002D0293 /* Formulaic.framework */; };
 		A9603F5D1F4DABDC00BF57B1 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */; };
@@ -556,6 +553,8 @@
 		A97600301F8F738600D1C79E /* ChatMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976002F1F8F738600D1C79E /* ChatMenuTableViewCell.swift */; };
 		A97600311F8F738600D1C79E /* ChatMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976002F1F8F738600D1C79E /* ChatMenuTableViewCell.swift */; };
 		A97600321F8F738600D1C79E /* ChatMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976002F1F8F738600D1C79E /* ChatMenuTableViewCell.swift */; };
+		A97C99E41FB1D58D003AE3AC /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
+		A97C99E51FB1D58D003AE3AC /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		A997B0FE1EF94B4600A143FE /* DepositMoneyBulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA6B7C1EF7D746007C3206 /* DepositMoneyBulletPoint.swift */; };
 		A997B1011EF94B4F00A143FE /* DepositMoneyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA6B7E1EF7D864007C3206 /* DepositMoneyItem.swift */; };
 		A9A9F9A01F8B70760010F877 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D729A1F877FF90093420C /* RecentViewController.swift */; };
@@ -1164,7 +1163,7 @@
 				9FF9577A1EEEB7BA00DDCBD8 /* libstdc++.tbd in Frameworks */,
 				9FF9577B1EEEB7BA00DDCBD8 /* AssetsLibrary.framework in Frameworks */,
 				9FF9577C1EEEB7BA00DDCBD8 /* MobileCoreServices.framework in Frameworks */,
-				9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */,
+				A97C99E51FB1D58D003AE3AC /* Teapot.framework in Frameworks */,
 				9FF957841EEEB7BA00DDCBD8 /* Photos.framework in Frameworks */,
 				2B98552D1F824201009C347A /* Reachability.framework in Frameworks */,
 				9FF957871EEEB7BA00DDCBD8 /* CoreGraphics.framework in Frameworks */,
@@ -1181,13 +1180,11 @@
 				9FF957951EEEB7BA00DDCBD8 /* HPGrowingTextView.framework in Frameworks */,
 				9FF957961EEEB7BA00DDCBD8 /* TinyConstraints.framework in Frameworks */,
 				9FF957981EEEB7BA00DDCBD8 /* SweetUIKit.framework in Frameworks */,
-				9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */,
 				9FF9579B1EEEB7BA00DDCBD8 /* Formulaic.framework in Frameworks */,
 				9FF9579E1EEEB7BA00DDCBD8 /* PromiseKit.framework in Frameworks */,
 				9FF9579F1EEEB7BA00DDCBD8 /* SweetSwift.framework in Frameworks */,
 				9FF957A11EEEB7BA00DDCBD8 /* HDWallet.framework in Frameworks */,
 				C1128E2CDD482DB9BE1BF5A3 /* libPods-CocoaPods-Distribution.a in Frameworks */,
-				29CB20EAEF7C09779E570D1B /* libPods-CocoaPods-Distribution.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1235,7 +1232,7 @@
 				A9603F3B1F4DABDC00BF57B1 /* libstdc++.tbd in Frameworks */,
 				A9603F3C1F4DABDC00BF57B1 /* AssetsLibrary.framework in Frameworks */,
 				A9603F3D1F4DABDC00BF57B1 /* MobileCoreServices.framework in Frameworks */,
-				A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */,
+				A97C99E41FB1D58D003AE3AC /* SweetUIKit.framework in Frameworks */,
 				A9603F451F4DABDC00BF57B1 /* Photos.framework in Frameworks */,
 				2B98552C1F824201009C347A /* Reachability.framework in Frameworks */,
 				A9603F481F4DABDC00BF57B1 /* CoreGraphics.framework in Frameworks */,
@@ -1251,7 +1248,6 @@
 				A9603F541F4DABDC00BF57B1 /* AwesomeCache.framework in Frameworks */,
 				A9603F551F4DABDC00BF57B1 /* HPGrowingTextView.framework in Frameworks */,
 				A9603F561F4DABDC00BF57B1 /* TinyConstraints.framework in Frameworks */,
-				A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */,
 				A9603F591F4DABDC00BF57B1 /* Teapot.framework in Frameworks */,
 				A9603F5A1F4DABDC00BF57B1 /* Formulaic.framework in Frameworks */,
 				A9603F5D1F4DABDC00BF57B1 /* PromiseKit.framework in Frameworks */,
@@ -2165,7 +2161,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Bakken&Baeck";
 				TargetAttributes = {
 					14147EA01E8119F0006BD47B = {
