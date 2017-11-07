@@ -92,15 +92,6 @@
 		2BA888EC1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
 		2BA888ED1F600ED500B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
 		2BA888EE1F60156D00B03D8E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA888EA1F600ED500B03D8E /* Currency.swift */; };
-		2BAB90A91EC1194B005D98C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */; };
-		2BAB90AA1EC1194B005D98C6 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A31EC1194B005D98C6 /* CoreImage.framework */; };
-		2BAB90AB1EC1194B005D98C6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A41EC1194B005D98C6 /* ImageIO.framework */; };
-		2BAB90AF1EC11963005D98C6 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90AE1EC11963005D98C6 /* Photos.framework */; };
-		2BAB90C41EC1206B005D98C6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C31EC1206B005D98C6 /* MobileCoreServices.framework */; };
-		2BAB90C61EC12076005D98C6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C51EC12076005D98C6 /* AssetsLibrary.framework */; };
-		2BAB90C81EC12098005D98C6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C71EC12098005D98C6 /* libstdc++.tbd */; };
-		2BAB90CA1EC120A8005D98C6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C91EC120A8005D98C6 /* libc++.tbd */; };
-		2BAB90CB1EC120B0005D98C6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90B61EC119FC005D98C6 /* libz.tbd */; };
 		2BB842791EDD91F70044BDAB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB842781EDD91F70044BDAB /* SplashViewController.swift */; };
 		2BC4084E1EF186000044C242 /* PaymentPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4084D1EF186000044C242 /* PaymentPresentable.swift */; };
 		2BC4084F1EF186000044C242 /* PaymentPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4084D1EF186000044C242 /* PaymentPresentable.swift */; };
@@ -224,7 +215,6 @@
 		9F88EA061EE041A900267573 /* SettingsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F61F7E1E72E22900D892E5 /* SettingsSectionHeader.swift */; };
 		9F8C340D1E71530A005178F9 /* paymentSend.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9F8C340C1E71530A005178F9 /* paymentSend.m4a */; };
 		9F8C340F1E715C7A005178F9 /* menuButton.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9F8C340E1E715C7A005178F9 /* menuButton.m4a */; };
-		9F8DEC0D1E38A58900F12CDA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8DEC0C1E38A58900F12CDA /* AVFoundation.framework */; };
 		9F9238B61E24F1D2004BEEE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238B51E24F1D2004BEEE0 /* main.m */; };
 		9F9238B91E24F1D2004BEEE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238B81E24F1D2004BEEE0 /* AppDelegate.m */; };
 		9F9238C41E24F1D2004BEEE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9238C21E24F1D2004BEEE0 /* LaunchScreen.storyboard */; };
@@ -294,17 +284,6 @@
 		9FF6AF9F1E83DE04001B5907 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6AF9E1E83DE04001B5907 /* AvatarImageView.swift */; };
 		9FF6AFA01E83DE04001B5907 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6AF9E1E83DE04001B5907 /* AvatarImageView.swift */; };
 		9FF6AFA11E83E237001B5907 /* ConfirmationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94BDE141E800EF800B2F0CF /* ConfirmationButton.swift */; };
-		9FF957781EEEB7BA00DDCBD8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90B61EC119FC005D98C6 /* libz.tbd */; };
-		9FF957791EEEB7BA00DDCBD8 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C91EC120A8005D98C6 /* libc++.tbd */; };
-		9FF9577A1EEEB7BA00DDCBD8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C71EC12098005D98C6 /* libstdc++.tbd */; };
-		9FF9577B1EEEB7BA00DDCBD8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C51EC12076005D98C6 /* AssetsLibrary.framework */; };
-		9FF9577C1EEEB7BA00DDCBD8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C31EC1206B005D98C6 /* MobileCoreServices.framework */; };
-		9FF957841EEEB7BA00DDCBD8 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90AE1EC11963005D98C6 /* Photos.framework */; };
-		9FF957871EEEB7BA00DDCBD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */; };
-		9FF957881EEEB7BA00DDCBD8 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A31EC1194B005D98C6 /* CoreImage.framework */; };
-		9FF957891EEEB7BA00DDCBD8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A41EC1194B005D98C6 /* ImageIO.framework */; };
-		9FF9578C1EEEB7BA00DDCBD8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8DEC0C1E38A58900F12CDA /* AVFoundation.framework */; };
-		9FF9578D1EEEB7BA00DDCBD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7D05271E37961D00FF55B9 /* UIKit.framework */; };
 		9FF9578E1EEEB7BA00DDCBD8 /* CameraScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8031EB36A7F002D0293 /* CameraScanner.framework */; };
 		9FF957901EEEB7BA00DDCBD8 /* EtherealCereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8041EB36A7F002D0293 /* EtherealCereal.framework */; };
 		9FF957911EEEB7BA00DDCBD8 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8101EB36A7F002D0293 /* WebRTC.framework */; };
@@ -318,7 +297,6 @@
 		9FF9579E1EEEB7BA00DDCBD8 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */; };
 		9FF9579F1EEEB7BA00DDCBD8 /* SweetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80D1EB36A7F002D0293 /* SweetSwift.framework */; };
 		9FF957A11EEEB7BA00DDCBD8 /* HDWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8061EB36A7F002D0293 /* HDWallet.framework */; };
-		9FF957A21EEEB86800DDCBD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7D05271E37961D00FF55B9 /* UIKit.framework */; };
 		A90661D41F79083A00D408E1 /* passwords-library.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9207AF61F6A8088003B79BF /* passwords-library.txt */; };
 		A90661D51F79083A00D408E1 /* passwords-library.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9207AF61F6A8088003B79BF /* passwords-library.txt */; };
 		A916290D1F3B5828008A7F36 /* PaymentAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916290C1F3B5828008A7F36 /* PaymentAddressController.swift */; };
@@ -499,17 +477,6 @@
 		A9603F351F4DABDC00BF57B1 /* UINotificationName+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197B669EF87D9D6642E12BA /* UINotificationName+Additions.swift */; };
 		A9603F361F4DABDC00BF57B1 /* YapDatabaseViewConnection+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197B494213B9F6EC5413D88 /* YapDatabaseViewConnection+Additions.swift */; };
 		A9603F371F4DABDC00BF57B1 /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D197BD2C5E7FC428D7ADB559 /* TestAppDelegate.m */; };
-		A9603F391F4DABDC00BF57B1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90B61EC119FC005D98C6 /* libz.tbd */; };
-		A9603F3A1F4DABDC00BF57B1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C91EC120A8005D98C6 /* libc++.tbd */; };
-		A9603F3B1F4DABDC00BF57B1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C71EC12098005D98C6 /* libstdc++.tbd */; };
-		A9603F3C1F4DABDC00BF57B1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C51EC12076005D98C6 /* AssetsLibrary.framework */; };
-		A9603F3D1F4DABDC00BF57B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90C31EC1206B005D98C6 /* MobileCoreServices.framework */; };
-		A9603F451F4DABDC00BF57B1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90AE1EC11963005D98C6 /* Photos.framework */; };
-		A9603F481F4DABDC00BF57B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */; };
-		A9603F491F4DABDC00BF57B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A31EC1194B005D98C6 /* CoreImage.framework */; };
-		A9603F4A1F4DABDC00BF57B1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB90A41EC1194B005D98C6 /* ImageIO.framework */; };
-		A9603F4D1F4DABDC00BF57B1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8DEC0C1E38A58900F12CDA /* AVFoundation.framework */; };
-		A9603F4E1F4DABDC00BF57B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7D05271E37961D00FF55B9 /* UIKit.framework */; };
 		A9603F4F1F4DABDC00BF57B1 /* CameraScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8031EB36A7F002D0293 /* CameraScanner.framework */; };
 		A9603F501F4DABDC00BF57B1 /* EtherealCereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8041EB36A7F002D0293 /* EtherealCereal.framework */; };
 		A9603F511F4DABDC00BF57B1 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8101EB36A7F002D0293 /* WebRTC.framework */; };
@@ -865,15 +832,6 @@
 		2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistributionDevTokenURLPaths.swift; sourceTree = "<group>"; };
 		2BA0D88E1F75519F000B8500 /* NSLayoutConstraint+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Additions.swift"; sourceTree = "<group>"; };
 		2BA888EA1F600ED500B03D8E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2BAB90A31EC1194B005D98C6 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		2BAB90A41EC1194B005D98C6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		2BAB90AE1EC11963005D98C6 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		2BAB90B61EC119FC005D98C6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		2BAB90C31EC1206B005D98C6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		2BAB90C51EC12076005D98C6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		2BAB90C71EC12098005D98C6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
-		2BAB90C91EC120A8005D98C6 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2BB842781EDD91F70044BDAB /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		2BC4084D1EF186000044C242 /* PaymentPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentPresentable.swift; sourceTree = "<group>"; };
 		2BC4C07E1EF3ED4700F99CE2 /* ActivityIndicating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicating.swift; sourceTree = "<group>"; };
@@ -942,13 +900,11 @@
 		9F78D9D71EE93F36003A0B95 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		9F78D9DA1EE93F61003A0B95 /* PaymentRequestInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentRequestInfoView.swift; sourceTree = "<group>"; };
 		9F78D9DB1EE93F61003A0B95 /* PaymentRequestInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentRequestInfoView.xib; sourceTree = "<group>"; };
-		9F7D05271E37961D00FF55B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9F7E5DA11E4C982300543296 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9F844BD61E30D8DE001C5498 /* DateTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeFormatter.swift; sourceTree = "<group>"; };
 		9F844BD91E30DF48001C5498 /* ContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactController.swift; sourceTree = "<group>"; };
 		9F8C340C1E71530A005178F9 /* paymentSend.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = paymentSend.m4a; sourceTree = "<group>"; };
 		9F8C340E1E715C7A005178F9 /* menuButton.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = menuButton.m4a; sourceTree = "<group>"; };
-		9F8DEC0C1E38A58900F12CDA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9F9238B11E24F1D2004BEEE0 /* Toshi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toshi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9238B51E24F1D2004BEEE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F9238B71E24F1D2004BEEE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1158,19 +1114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FF957781EEEB7BA00DDCBD8 /* libz.tbd in Frameworks */,
-				9FF957791EEEB7BA00DDCBD8 /* libc++.tbd in Frameworks */,
-				9FF9577A1EEEB7BA00DDCBD8 /* libstdc++.tbd in Frameworks */,
-				9FF9577B1EEEB7BA00DDCBD8 /* AssetsLibrary.framework in Frameworks */,
-				9FF9577C1EEEB7BA00DDCBD8 /* MobileCoreServices.framework in Frameworks */,
 				A97C99E51FB1D58D003AE3AC /* Teapot.framework in Frameworks */,
-				9FF957841EEEB7BA00DDCBD8 /* Photos.framework in Frameworks */,
 				2B98552D1F824201009C347A /* Reachability.framework in Frameworks */,
-				9FF957871EEEB7BA00DDCBD8 /* CoreGraphics.framework in Frameworks */,
-				9FF957881EEEB7BA00DDCBD8 /* CoreImage.framework in Frameworks */,
-				9FF957891EEEB7BA00DDCBD8 /* ImageIO.framework in Frameworks */,
-				9FF9578C1EEEB7BA00DDCBD8 /* AVFoundation.framework in Frameworks */,
-				9FF9578D1EEEB7BA00DDCBD8 /* UIKit.framework in Frameworks */,
 				9FF9578E1EEEB7BA00DDCBD8 /* CameraScanner.framework in Frameworks */,
 				9FF957901EEEB7BA00DDCBD8 /* EtherealCereal.framework in Frameworks */,
 				9FF957911EEEB7BA00DDCBD8 /* WebRTC.framework in Frameworks */,
@@ -1192,18 +1137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BAB90CB1EC120B0005D98C6 /* libz.tbd in Frameworks */,
-				2BAB90CA1EC120A8005D98C6 /* libc++.tbd in Frameworks */,
-				2BAB90C81EC12098005D98C6 /* libstdc++.tbd in Frameworks */,
-				2BAB90C61EC12076005D98C6 /* AssetsLibrary.framework in Frameworks */,
-				2BAB90C41EC1206B005D98C6 /* MobileCoreServices.framework in Frameworks */,
-				2BAB90AF1EC11963005D98C6 /* Photos.framework in Frameworks */,
-				2BAB90A91EC1194B005D98C6 /* CoreGraphics.framework in Frameworks */,
 				2B98552B1F824200009C347A /* Reachability.framework in Frameworks */,
-				2BAB90AA1EC1194B005D98C6 /* CoreImage.framework in Frameworks */,
-				2BAB90AB1EC1194B005D98C6 /* ImageIO.framework in Frameworks */,
-				9F8DEC0D1E38A58900F12CDA /* AVFoundation.framework in Frameworks */,
-				9FF957A21EEEB86800DDCBD8 /* UIKit.framework in Frameworks */,
 				9F3FF8141EB36A7F002D0293 /* CameraScanner.framework in Frameworks */,
 				9FA12BE81E65A116003705F6 /* RevealServer.framework in Frameworks */,
 				9F3FF8161EB36A7F002D0293 /* EtherealCereal.framework in Frameworks */,
@@ -1227,19 +1161,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9603F391F4DABDC00BF57B1 /* libz.tbd in Frameworks */,
-				A9603F3A1F4DABDC00BF57B1 /* libc++.tbd in Frameworks */,
-				A9603F3B1F4DABDC00BF57B1 /* libstdc++.tbd in Frameworks */,
-				A9603F3C1F4DABDC00BF57B1 /* AssetsLibrary.framework in Frameworks */,
-				A9603F3D1F4DABDC00BF57B1 /* MobileCoreServices.framework in Frameworks */,
 				A97C99E41FB1D58D003AE3AC /* SweetUIKit.framework in Frameworks */,
-				A9603F451F4DABDC00BF57B1 /* Photos.framework in Frameworks */,
 				2B98552C1F824201009C347A /* Reachability.framework in Frameworks */,
-				A9603F481F4DABDC00BF57B1 /* CoreGraphics.framework in Frameworks */,
-				A9603F491F4DABDC00BF57B1 /* CoreImage.framework in Frameworks */,
-				A9603F4A1F4DABDC00BF57B1 /* ImageIO.framework in Frameworks */,
-				A9603F4D1F4DABDC00BF57B1 /* AVFoundation.framework in Frameworks */,
-				A9603F4E1F4DABDC00BF57B1 /* UIKit.framework in Frameworks */,
 				A9603F4F1F4DABDC00BF57B1 /* CameraScanner.framework in Frameworks */,
 				A9603F501F4DABDC00BF57B1 /* EtherealCereal.framework in Frameworks */,
 				A9603F511F4DABDC00BF57B1 /* WebRTC.framework in Frameworks */,
@@ -1309,19 +1232,6 @@
 		27842ECF00E36BC79A5918DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E67683581F44673E0014B2D4 /* Nimble.framework */,
-				2BF6343C1F7C3D0B00235C67 /* Reachability.framework */,
-				E67683551F4464980014B2D4 /* Quick.framework */,
-				2BAB90C91EC120A8005D98C6 /* libc++.tbd */,
-				2BAB90C71EC12098005D98C6 /* libstdc++.tbd */,
-				2BAB90C51EC12076005D98C6 /* AssetsLibrary.framework */,
-				2BAB90C31EC1206B005D98C6 /* MobileCoreServices.framework */,
-				2BAB90B61EC119FC005D98C6 /* libz.tbd */,
-				2BAB90AE1EC11963005D98C6 /* Photos.framework */,
-				2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */,
-				2BAB90A31EC1194B005D98C6 /* CoreImage.framework */,
-				2BAB90A41EC1194B005D98C6 /* ImageIO.framework */,
-				A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */,
 				9F3FF8021EB36A7F002D0293 /* AwesomeCache.framework */,
 				9F3FF8031EB36A7F002D0293 /* CameraScanner.framework */,
 				9F3FF8041EB36A7F002D0293 /* EtherealCereal.framework */,
@@ -1329,19 +1239,21 @@
 				9F3FF8061EB36A7F002D0293 /* HDWallet.framework */,
 				9F3FF8071EB36A7F002D0293 /* HPGrowingTextView.framework */,
 				9F3FF8091EB36A7F002D0293 /* KeychainSwift.framework */,
+				90223AE45539E9A291DD5E59 /* libPods-CocoaPods-Debug.a */,
+				30B89C992242CEAAB91C1B7C /* libPods-CocoaPods-Development.a */,
+				2446336EA68730ACD1CE100D /* libPods-CocoaPods-Distribution.a */,
+				24AC0CEAA51D7F8A19F246E9 /* libPods-CocoaPods-Tests.a */,
+				E67683581F44673E0014B2D4 /* Nimble.framework */,
 				9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */,
+				E67683551F4464980014B2D4 /* Quick.framework */,
+				2BF6343C1F7C3D0B00235C67 /* Reachability.framework */,
+				9FA12BE71E65A116003705F6 /* RevealServer.framework */,
 				9F3FF80C1EB36A7F002D0293 /* SweetFoundation.framework */,
 				9F3FF80D1EB36A7F002D0293 /* SweetSwift.framework */,
 				9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */,
 				9F3FF80F1EB36A7F002D0293 /* Teapot.framework */,
+				A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */,
 				9F3FF8101EB36A7F002D0293 /* WebRTC.framework */,
-				9FA12BE71E65A116003705F6 /* RevealServer.framework */,
-				9F8DEC0C1E38A58900F12CDA /* AVFoundation.framework */,
-				9F7D05271E37961D00FF55B9 /* UIKit.framework */,
-				2446336EA68730ACD1CE100D /* libPods-CocoaPods-Distribution.a */,
-				24AC0CEAA51D7F8A19F246E9 /* libPods-CocoaPods-Tests.a */,
-				30B89C992242CEAAB91C1B7C /* libPods-CocoaPods-Development.a */,
-				90223AE45539E9A291DD5E59 /* libPods-CocoaPods-Debug.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
