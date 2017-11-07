@@ -23,7 +23,7 @@ class PaymentManager {
                 
                 if let error = error {
                     DispatchQueue.main.async {
-                        self?.showPaymentFailedMessage(for: error.localizedDescription)
+                        self?.showPaymentFailedMessage(for: error.description)
                     }
                 }
                 

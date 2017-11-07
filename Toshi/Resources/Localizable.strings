@@ -21,7 +21,6 @@
 
 "browse-more-button" = "More";
 
-
 /* Messages */
 "messages_payment_approve" = "Approve";
 "messages_payment_decline" = "Decline";
@@ -44,6 +43,9 @@
 "payment_next_button" = "Next";
 "payment_qr_scanner_instructions" = "Scan QR Code";
 
+"payment_error_message" = "Error creating transaction";
+
+
 "payment_message_failure_title" = "Failed";
 "payment_message_success_title" = "Succeeded";
 "payment_message_success_message" = "Your Payment was successful.";
@@ -53,6 +55,7 @@
 "payment_request_confirmation_warning_message" = "Do you want to accept the %@ (%@) request from %@?";
 "payment_request_confirmation_warning_message_fallback" = "Do you want accept the payment request from %@?";
 "payment_request_confirmation_warning_action_confirm" = "Pay";
+
 
 /* Passphrase */
 "passphrase_copy_navigation_title" = "Your passphrase";

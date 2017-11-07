@@ -206,7 +206,7 @@ class BrowseViewController: SearchableCollectionController {
             return
         }
 
-        AvatarManager.shared.avatar(for: item.avatarPath, completion: { image, path in
+        AvatarManager.shared.avatar(for: item.avatarPath, completion: { image, _ in
             completion(image)
         })
     }
