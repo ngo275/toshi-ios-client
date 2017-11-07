@@ -2,8 +2,8 @@
   "commitish" : "9dc214e2cf6fe5702cff11c09db156e8aee523c9",
   "iOS" : [
     {
-      "hash" : "8f3aad35d6233fd4a93b6f061d11a406bab467f7617c43c1b1a2618c0c5502dd",
-      "name" : "HDWallet"
+      "name" : "HDWallet",
+      "hash" : "16e2a2a8a094edf6a570abd37935da4353e5a3017c16da5d9dca22f8326280fd"
     }
   ]
 }

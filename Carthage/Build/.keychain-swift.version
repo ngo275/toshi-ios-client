@@ -2,8 +2,8 @@
   "commitish" : "7.0.1",
   "iOS" : [
     {
-      "hash" : "a13d87c0e10542c0cd5393a19f9ae718437be6ccf8f9d09b266813cf41ad49da",
-      "name" : "KeychainSwift"
+      "name" : "KeychainSwift",
+      "hash" : "0e7a95c9d98bfe991444a91c35cb795f529325badefaa9a8289c944c74614011"
     }
   ]
 }

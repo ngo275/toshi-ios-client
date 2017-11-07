@@ -2,8 +2,8 @@
   "commitish" : "388d1e8e7ec47dd2f8c3635b158264918e05437b",
   "iOS" : [
     {
-      "hash" : "2f3c7e368a73c0959d5ee4d5fd42a6f922c761340411e6f7847d9c0a622af9da",
-      "name" : "SweetSwift"
+      "name" : "SweetSwift",
+      "hash" : "646504286cf0f84e6901e3f6a35622f918323c3024f27a5e7f23fc68db4d46ba"
     }
   ]
 }

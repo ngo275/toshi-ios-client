@@ -2,8 +2,8 @@
   "commitish" : "12d290e608d6da68d4956c265740621ce7d44f56",
   "iOS" : [
     {
-      "hash" : "cf9666b39781cbd1b19709e372ae76eb232858e921eb26998bf9788f197561f8",
-      "name" : "Formulaic"
+      "name" : "Formulaic",
+      "hash" : "8539dd75c9e1cedd843fbff02af0ce69e43360374c10d69bb95cd726f740d293"
     }
   ]
 }

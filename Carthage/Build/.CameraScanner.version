@@ -2,8 +2,8 @@
   "commitish" : "01708dc3f1b440177173b48377ca18f6748fa58e",
   "iOS" : [
     {
-      "hash" : "8306584a7b6674ceb609a2cbe4a21fedc8193fec23fe7ea08e1e836fb3363df2",
-      "name" : "CameraScanner"
+      "name" : "CameraScanner",
+      "hash" : "3d47223afce5ef8e58d69af614cfe85f52f1d5585e2a0d29e98720018913272e"
     }
   ]
 }

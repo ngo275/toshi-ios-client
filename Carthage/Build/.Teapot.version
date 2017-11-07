@@ -2,8 +2,8 @@
   "commitish" : "45453b5cedde394401120d732f367ec42844f5f4",
   "iOS" : [
     {
-      "hash" : "cd6091b6658ae7f2a0320c25049c9d7e774e973c2d361c41639f4f74dc894904",
-      "name" : "Teapot"
+      "name" : "Teapot",
+      "hash" : "327f687648e847099fbf31398a05658caccb861ea657ed58554f6abc8fc3a676"
     }
   ]
 }
