@@ -15,20 +15,20 @@ public struct ToshiError: LocalizedError {
         case missingImage
     }
 
-    let responseStatus: Int?
-    let underlyingError: Error?
-    let type: ErrorType
+    var responseStatus: Int?
+    var underlyingError: Error?
+    var type: ErrorType?
 
     public var description: String
 }
 
 extension ToshiError {
     init?(withTeapotError teapotError: TeapotError, errorDescription: String? = nil) {
-        guard let errorType = ErrorType(rawValue: teapotError.type.rawValue) else { return nil }
+//        guard let errorType = ErrorType(rawValue: teapotError.type.rawValue) else { return nil }
 
-        self.type = errorType
-        self.responseStatus = teapotError.responseStatus
-        self.underlyingError = teapotError.underlyingError
+//        self.type = errorType
+//        self.responseStatus = teapotError.responseStatus
+//        self.underlyingError = teapotError.underlyingError
         self.description = errorDescription ?? teapotError.errorDescription
     }
 }
