@@ -8,7 +8,7 @@ test:
     - xcodebuild
         -workspace Toshi.xcworkspace
         -scheme "All Tests"
-        -destination 'platform=iOS Simulator,name=iPhone 6'
+        -destination 'platform=iOS Simulator,name=iPhone 7'
         test |
       tee $CIRCLE_ARTIFACTS/xcode_raw.log |
       xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml && exit ${PIPESTATUS[0]}
