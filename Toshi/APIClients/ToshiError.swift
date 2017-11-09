@@ -15,11 +15,15 @@ public struct ToshiError: LocalizedError {
         case missingImage
     }
 
+    let type: ErrorType
+    public var description: String
     let responseStatus: Int?
     let underlyingError: Error?
-    let type: ErrorType
 
-    public var description: String
+//
+//    init(withType errorType: ErrorType, description: String, responseStatus: Int?, underlyingError: Error?) {
+//
+//    }
 }
 
 extension ToshiError {

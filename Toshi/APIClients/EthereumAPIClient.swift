@@ -82,7 +82,7 @@ public class EthereumAPIClient: NSObject {
         }
     }
 
-    public func sendSignedTransaction(originalTransaction: String, transactionSignature: String, completion: @escaping ((_ success: Bool, _ json: RequestParameter?, _ message: String?) -> Void)) {
+    public func sendSignedTransaction(originalTransaction: String, transactionSignature: String, completion: @escaping ((_ success: Bool, _ json: RequestParameter?, _ error: ToshiError?) -> Void)) {
         timestamp(activeTeapot) { timestamp, error in
             guard let timestamp = timestamp else {
                 completion(false, nil, error?.localizedDescription ?? "error fetching timestamp")
@@ -98,6 +98,7 @@ public class EthereumAPIClient: NSObject {
 
             guard let data = try? JSONSerialization.data(withJSONObject: params, options: []), let payloadString = String(data: data, encoding: .utf8) else {
                 print("Invalid payload, request could not be executed")
+                ToshiError(type: .invalidPayload, description: <#T##String##Swift.String#>, responseStatus: <#T##Int?##Swift.Int?#>, underlyingError: <#T##Error?##Swift.Error?#>)
                 completion(false, nil, "Invalid payload, request could not be executed")
                 return
             }
