@@ -98,8 +98,7 @@ public class EthereumAPIClient: NSObject {
 
             guard let data = try? JSONSerialization.data(withJSONObject: params, options: []), let payloadString = String(data: data, encoding: .utf8) else {
                 print("Invalid payload, request could not be executed")
-                ToshiError(type: .invalidPayload, description: <#T##String##Swift.String#>, responseStatus: <#T##Int?##Swift.Int?#>, underlyingError: <#T##Error?##Swift.Error?#>)
-                completion(false, nil, "Invalid payload, request could not be executed")
+                completion(false, nil, ToshiError.invalidPayload)
                 return
             }
 
