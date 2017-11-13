@@ -255,13 +255,13 @@ extension ProfileViewController: PaymentControllerDelegate {
 
             let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction))"
 
-            etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] success, json, message in
+            etherAPIClient.sendSignedTransaction(originalTransaction: transaction, transactionSignature: signedTransaction) { [weak self] success, json, error in
                 guard let strongSelf = self else { return }
 
                 strongSelf.hideActivityIndicator()
 
                 guard success else {
-                    let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: message ?? "Something went wrong")
+                    let alert = UIAlertController.dismissableAlert(title: "Error completing transaction", message: error?.description ?? Localized("request_generic_error"))
                     Navigator.presentModally(alert)
                     return
                 }

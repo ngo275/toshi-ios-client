@@ -90,6 +90,7 @@ class EthereumAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.createUnsignedTransaction(parameters: parameters) { transaction, error in
                             expect(error).toNot(beNil())
+                            expect(error!.description).to(equal("Error creating transaction"))
                             expect(transaction).to(beNil())
                             done()
                         }
@@ -104,10 +105,11 @@ class EthereumAPIClientTests: QuickSpec {
                     waitUntil(timeout: 3) { done in
                         let originalTransaction = "0xf085746f6b658d8504a817c800825208945c156634bc3aed611e71550fb8a54480b480cd3b8718972b8c63638a80748080"
                         let transactionSignature = "0x4f80931676670df5b7a919aeaa56ae1d0c2db1792e6e252ee66a30007022200e44f61e710dbd9b24bed46338bed73f21e3a1f28ac791452fde598913867ebbb701"
-                        subject.sendSignedTransaction(originalTransaction: originalTransaction, transactionSignature: transactionSignature) { success, json, message in
+                        subject.sendSignedTransaction(originalTransaction: originalTransaction, transactionSignature: transactionSignature) { success, json, error in
+                            expect(error).toNot(beNil())
+                            expect(error!.description).to(equal("An error occurred: request response status reported an issue. Status code: 401."))
                             expect(success).to(beFalse())
                             expect(json).to(beNil())
-                            expect(message).toNot(beNil())
                             done()
                         }
                     }

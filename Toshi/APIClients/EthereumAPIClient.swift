@@ -85,7 +85,7 @@ public class EthereumAPIClient: NSObject {
     public func sendSignedTransaction(originalTransaction: String, transactionSignature: String, completion: @escaping ((_ success: Bool, _ json: RequestParameter?, _ error: ToshiError?) -> Void)) {
         timestamp(activeTeapot) { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(false, nil, error?.localizedDescription ?? "error fetching timestamp")
+                completion(false, nil, error)
                 return
             }
 
@@ -120,11 +120,11 @@ public class EthereumAPIClient: NSObject {
                         completion(true, json, nil)
                     case .failure(let json, _, let error):
                         guard let jsonError = (json?.dictionary?["errors"] as? [[String: Any]])?.first else {
-                            completion(false, nil, error.localizedDescription)
+                            completion(false, nil, ToshiError(withTeapotError: error))
                             return
                         }
 
-                        completion(false, nil, jsonError["message"] as? String)
+                        completion(false, nil, ToshiError(withTeapotError: error, errorDescription: jsonError["message"] as? String ?? nil))
                     }
                 }
             }
@@ -200,7 +200,7 @@ public class EthereumAPIClient: NSObject {
         }
     }
 
-    fileprivate func timestamp(_ teapot: Teapot, _ completion: @escaping ((_ timestamp: String?, _ error: Error?) -> Void)) {
+    fileprivate func timestamp(_ teapot: Teapot, _ completion: @escaping ((_ timestamp: String?, _ error: ToshiError?) -> Void)) {
         teapot.get("/v1/timestamp") { (result: NetworkResult) in
             switch result {
             case .success(let json, _):
@@ -209,7 +209,7 @@ public class EthereumAPIClient: NSObject {
 
                 completion(String(timestamp), nil)
             case .failure(_, _, let error):
-                completion(nil, error)
+                completion(nil, ToshiError(withTeapotError: error))
                 print(error)
             }
         }
