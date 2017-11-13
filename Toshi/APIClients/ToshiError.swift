@@ -7,6 +7,8 @@ import Foundation
 import Teapot
 
 public struct ToshiError: LocalizedError {
+    static let invalidPayload = ToshiError(withType: .invalidPayload, description: Localized("toshi_error_invalid_payload"))
+
     enum ErrorType: Int {
         case dataTaskError
         case invalidPayload
@@ -20,19 +22,20 @@ public struct ToshiError: LocalizedError {
     let responseStatus: Int?
     let underlyingError: Error?
 
-//
-//    init(withType errorType: ErrorType, description: String, responseStatus: Int?, underlyingError: Error?) {
-//
-//    }
+
+    init(withType errorType: ErrorType, description: String, responseStatus: Int? = nil, underlyingError: Error? = nil) {
+        self.type = errorType
+        self.description = description
+        self.responseStatus = responseStatus
+        self.underlyingError = underlyingError
+    }
 }
 
 extension ToshiError {
     init?(withTeapotError teapotError: TeapotError, errorDescription: String? = nil) {
         guard let errorType = ErrorType(rawValue: teapotError.type.rawValue) else { return nil }
 
-        self.type = errorType
-        self.responseStatus = teapotError.responseStatus
-        self.underlyingError = teapotError.underlyingError
-        self.description = errorDescription ?? teapotError.errorDescription
+        self.init(withType: errorType, description: errorDescription ?? teapotError.errorDescription, responseStatus: teapotError.responseStatus, underlyingError: teapotError.underlyingError)
+
     }
 }
