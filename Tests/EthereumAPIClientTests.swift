@@ -122,6 +122,8 @@ class EthereumAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getBalance(address: "0x1ad0bb2d14595fa6ad885e53eaaa6c82339f9b98") { number, error in
                             expect(error).toNot(beNil())
+                            expect(error!.description).to(equal("An error occurred: request response status reported an issue. Status code: 401."))
+                            expect(error).toNot(beNil())
                             expect(number).to(equal(0))
                             done()
                         }

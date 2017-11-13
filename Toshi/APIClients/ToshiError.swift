@@ -14,11 +14,20 @@ public struct ToshiError: LocalizedError {
     }
 
     static let invalidPayload = ToshiError(withType: .invalidPayload, description: Localized("toshi_error_invalid_payload"))
+    static let invalidResponseJSON = ToshiError(withType: .invalidPayload, description: Localized("toshi_error_invalid_response_json"))
+
+    static func invalidResponseStatus(_ status: Int) -> ToshiError {
+        let errorDescription = String(format: NSLocalizedString("teapot_invalid_response_status", bundle: Teapot.localizationBundle, comment: ""), status)
+
+        return ToshiError(withType: .invalidResponseStatus, description: errorDescription, responseStatus: status)
+    }
+
 
     enum ErrorType: Int {
         case dataTaskError
         case invalidPayload
         case invalidRequestPath
+        case invalidResponseJSON
         case invalidResponseStatus
         case missingImage
     }

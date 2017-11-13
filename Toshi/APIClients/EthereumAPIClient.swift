@@ -17,7 +17,7 @@ import Foundation
 import Teapot
 import AwesomeCache
 
-public typealias BalanceCompletion = ((_ balance: NSDecimalNumber, _ error: Error?) -> Void)
+public typealias BalanceCompletion = ((_ balance: NSDecimalNumber, _ error: ToshiError?) -> Void)
 
 public class EthereumAPIClient: NSObject {
 
@@ -138,13 +138,12 @@ public class EthereumAPIClient: NSObject {
 
         self.activeTeapot.get("/v1/balance/\(address)") { [weak self] (result: NetworkResult) in
             var balance: NSDecimalNumber = .zero
-            var resultError: Error?
+            var resultError: ToshiError?
 
             switch result {
             case .success(let json, let response):
-                let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey: "Could not fetch balance."])
-                guard response.statusCode == 200 else { fetchedBalanceCompletion(0, error); return }
-                guard let json = json?.dictionary else { fetchedBalanceCompletion(0, error); return }
+                guard response.statusCode == 200 else { fetchedBalanceCompletion(0, ToshiError.invalidResponseStatus(response.statusCode)); return }
+                guard let json = json?.dictionary else { fetchedBalanceCompletion(0, ToshiError.invalidResponseJSON); return }
 
                 let unconfirmedBalanceString = json["unconfirmed_balance"] as? String ?? "0"
                 let unconfirmedBalance = NSDecimalNumber(hexadecimalString: unconfirmedBalanceString)
@@ -153,7 +152,7 @@ public class EthereumAPIClient: NSObject {
                 balance = unconfirmedBalance
 
             case .failure(_, _, let error):
-                resultError = error
+                resultError = ToshiError(withTeapotError: error)
                 print(error)
             }
 
