@@ -411,7 +411,7 @@ import Teapot
 
         self.teapot.get("/v1/search/user?public=true&top=true&recent=false&limit=\(limit)") { [weak self] (result: NetworkResult) in
             var results: [TokenUser] = []
-            var resultError: Error?
+            var resultError: ToshiError?
 
             switch result {
             case .success(let json, _):
@@ -432,7 +432,7 @@ import Teapot
                 results = contacts
             case .failure(_, _, let error):
                 print(error.localizedDescription)
-                resultError = error
+                resultError = ToshiError(withTeapotError: error)
             }
 
             DispatchQueue.main.async {
@@ -449,7 +449,7 @@ import Teapot
 
         self.teapot.get("/v1/search/user?public=true&top=false&recent=true&limit=\(limit)") { [weak self] (result: NetworkResult) in
             var results: [TokenUser] = []
-            var resultError: Error?
+            var resultError: ToshiError?
 
             switch result {
             case .success(let json, _):
@@ -470,7 +470,7 @@ import Teapot
                 results = contacts
             case .failure(_, _, let error):
                 print(error.localizedDescription)
-                resultError = error
+                resultError = ToshiError(withTeapotError: error)
             }
 
             DispatchQueue.main.async {

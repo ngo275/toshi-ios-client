@@ -27,9 +27,9 @@ public struct ToshiError: LocalizedError {
         case dataTaskError
         case invalidPayload
         case invalidRequestPath
-        case invalidResponseJSON
         case invalidResponseStatus
         case missingImage
+        case invalidResponseJSON
     }
 
     let type: ErrorType
