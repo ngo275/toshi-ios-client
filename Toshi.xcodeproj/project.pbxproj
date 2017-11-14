@@ -234,6 +234,8 @@
 		9F9238FB1E24F9BF004BEEE0 /* Cereal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238FA1E24F9BF004BEEE0 /* Cereal.swift */; };
 		9F9B25551ECB1BC0007B435A /* ContactActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9B25541ECB1BC0007B435A /* ContactActionView.swift */; };
 		9F9B25561ECB1BC0007B435A /* ContactActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9B25541ECB1BC0007B435A /* ContactActionView.swift */; };
+		9F9CDCF21FBB24E200D042BA /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
+		9F9CDCF31FBB24E200D042BA /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		9FA12BE81E65A116003705F6 /* RevealServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA12BE71E65A116003705F6 /* RevealServer.framework */; };
 		9FA12BE91E65A151003705F6 /* RevealServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA12BE71E65A116003705F6 /* RevealServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FA12BEC1E65CF73003705F6 /* PN.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9FA12BEB1E65CF61003705F6 /* PN.m4a */; };
@@ -313,7 +315,6 @@
 		9FF957951EEEB7BA00DDCBD8 /* HPGrowingTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8071EB36A7F002D0293 /* HPGrowingTextView.framework */; };
 		9FF957961EEEB7BA00DDCBD8 /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */; };
 		9FF957981EEEB7BA00DDCBD8 /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
-		9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		9FF9579B1EEEB7BA00DDCBD8 /* Formulaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8051EB36A7F002D0293 /* Formulaic.framework */; };
 		9FF9579E1EEEB7BA00DDCBD8 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */; };
 		9FF9579F1EEEB7BA00DDCBD8 /* SweetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80D1EB36A7F002D0293 /* SweetSwift.framework */; };
@@ -514,7 +515,6 @@
 		A9603F541F4DABDC00BF57B1 /* AwesomeCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8021EB36A7F002D0293 /* AwesomeCache.framework */; };
 		A9603F551F4DABDC00BF57B1 /* HPGrowingTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8071EB36A7F002D0293 /* HPGrowingTextView.framework */; };
 		A9603F561F4DABDC00BF57B1 /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9202E371ED82AAD0036E9B7 /* TinyConstraints.framework */; };
-		A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
 		A9603F591F4DABDC00BF57B1 /* Teapot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80F1EB36A7F002D0293 /* Teapot.framework */; };
 		A9603F5A1F4DABDC00BF57B1 /* Formulaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF8051EB36A7F002D0293 /* Formulaic.framework */; };
 		A9603F5D1F4DABDC00BF57B1 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80B1EB36A7F002D0293 /* PromiseKit.framework */; };
@@ -1174,7 +1174,7 @@
 				9FF9577A1EEEB7BA00DDCBD8 /* libstdc++.tbd in Frameworks */,
 				9FF9577B1EEEB7BA00DDCBD8 /* AssetsLibrary.framework in Frameworks */,
 				9FF9577C1EEEB7BA00DDCBD8 /* MobileCoreServices.framework in Frameworks */,
-				9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */,
+				9F9CDCF31FBB24E200D042BA /* Teapot.framework in Frameworks */,
 				9FF957841EEEB7BA00DDCBD8 /* Photos.framework in Frameworks */,
 				2B98552D1F824201009C347A /* Reachability.framework in Frameworks */,
 				9FF957871EEEB7BA00DDCBD8 /* CoreGraphics.framework in Frameworks */,
@@ -1191,7 +1191,6 @@
 				9FF957951EEEB7BA00DDCBD8 /* HPGrowingTextView.framework in Frameworks */,
 				9FF957961EEEB7BA00DDCBD8 /* TinyConstraints.framework in Frameworks */,
 				9FF957981EEEB7BA00DDCBD8 /* SweetUIKit.framework in Frameworks */,
-				9FF9579A1EEEB7BA00DDCBD8 /* Teapot.framework in Frameworks */,
 				9FF9579B1EEEB7BA00DDCBD8 /* Formulaic.framework in Frameworks */,
 				9FF9579E1EEEB7BA00DDCBD8 /* PromiseKit.framework in Frameworks */,
 				9FF9579F1EEEB7BA00DDCBD8 /* SweetSwift.framework in Frameworks */,
@@ -1245,7 +1244,7 @@
 				A9603F3B1F4DABDC00BF57B1 /* libstdc++.tbd in Frameworks */,
 				A9603F3C1F4DABDC00BF57B1 /* AssetsLibrary.framework in Frameworks */,
 				A9603F3D1F4DABDC00BF57B1 /* MobileCoreServices.framework in Frameworks */,
-				A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */,
+				9F9CDCF21FBB24E200D042BA /* SweetUIKit.framework in Frameworks */,
 				A9603F451F4DABDC00BF57B1 /* Photos.framework in Frameworks */,
 				2B98552C1F824201009C347A /* Reachability.framework in Frameworks */,
 				A9603F481F4DABDC00BF57B1 /* CoreGraphics.framework in Frameworks */,
@@ -1261,7 +1260,6 @@
 				A9603F541F4DABDC00BF57B1 /* AwesomeCache.framework in Frameworks */,
 				A9603F551F4DABDC00BF57B1 /* HPGrowingTextView.framework in Frameworks */,
 				A9603F561F4DABDC00BF57B1 /* TinyConstraints.framework in Frameworks */,
-				A9603F571F4DABDC00BF57B1 /* SweetUIKit.framework in Frameworks */,
 				A9603F591F4DABDC00BF57B1 /* Teapot.framework in Frameworks */,
 				A9603F5A1F4DABDC00BF57B1 /* Formulaic.framework in Frameworks */,
 				A9603F5D1F4DABDC00BF57B1 /* PromiseKit.framework in Frameworks */,
@@ -2180,7 +2178,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Bakken&Baeck";
 				TargetAttributes = {
 					14147EA01E8119F0006BD47B = {
