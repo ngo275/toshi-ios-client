@@ -1,9 +1,0 @@
-{
-  "commitish" : "8cb970f88b3d4d5c3e8ecfabbdbcc89bd4f5d5ff",
-  "iOS" : [
-    {
-      "hash" : "e9d69fe5f9252b12b5457ed5508cb455cbdf011bf87b9b7886a6195556b48ea7",
-      "name" : "ImagePicker"
-    }
-  ]
-}

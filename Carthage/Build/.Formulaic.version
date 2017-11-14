@@ -1,9 +1,0 @@
-{
-  "commitish" : "12d290e608d6da68d4956c265740621ce7d44f56",
-  "iOS" : [
-    {
-      "hash" : "5d4bd627aa43aa89d8afdae1a339644296e430a638014e83ddd3165765d7eb2b",
-      "name" : "Formulaic"
-    }
-  ]
-}

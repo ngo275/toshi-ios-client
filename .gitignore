@@ -32,6 +32,7 @@ Checkouts
 Carthage/Build/Mac
 Carthage/Build/tvOS
 Carthage/Build/watchOS
+Carthage/Build/.*.version
 
 #AppCode
 /.idea

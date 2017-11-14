@@ -1,9 +1,0 @@
-{
-  "commitish" : "0.0.3",
-  "iOS" : [
-    {
-      "hash" : "2daa9423d55c3b7f75a6ba3aa63d81ac88efa49fa9969e018f07bbe926f63daa",
-      "name" : "EtherealCereal"
-    }
-  ]
-}

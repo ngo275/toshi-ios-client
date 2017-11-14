@@ -1,9 +1,0 @@
-{
-  "commitish" : "3178252704d169844ab8203ade6ca7b7f2e9503b",
-  "iOS" : [
-    {
-      "hash" : "fd9b6de3ddc57a120201d45f81fddf42d0397655c08d9cb5c349a1bcc409ba03",
-      "name" : "AwesomeCache"
-    }
-  ]
-}

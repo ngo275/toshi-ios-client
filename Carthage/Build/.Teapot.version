@@ -1,9 +1,0 @@
-{
-  "commitish" : "8f096c71dd10403077850e1b4f8e7fed0a61a1f5",
-  "iOS" : [
-    {
-      "hash" : "23414ea001e8f64bc0228f266ef1cece99b8a7eb6b79fd7e175520a31c9f0103",
-      "name" : "Teapot"
-    }
-  ]
-}
