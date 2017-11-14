@@ -28,7 +28,6 @@ public struct ToshiError: LocalizedError {
         case invalidPayload
         case invalidRequestPath
         case invalidResponseStatus
-        case missingImage
         case invalidResponseJSON
     }
 
@@ -47,8 +46,23 @@ public struct ToshiError: LocalizedError {
 }
 
 extension ToshiError {
+    static func teapotErrorTypeToToshiErrorType(teapotErrorType: TeapotError.ErrorType) -> ErrorType? {
+        switch teapotErrorType {
+        case .invalidResponseStatus:
+            return .invalidResponseStatus
+        case .dataTaskError:
+            return .dataTaskError
+        case .invalidPayload:
+            return .invalidPayload
+        case .invalidRequestPath:
+            return .invalidRequestPath
+        default: return nil
+
+        }
+    }
+
     init?(withTeapotError teapotError: TeapotError, errorDescription: String? = nil) {
-        guard let errorType = ErrorType(rawValue: teapotError.type.rawValue) else { return nil }
+        guard let errorType = ToshiError.teapotErrorTypeToToshiErrorType(teapotErrorType: teapotError.type) else { return nil }
 
         self.init(withType: errorType, description: errorDescription ?? teapotError.errorDescription, responseStatus: teapotError.responseStatus, underlyingError: teapotError.underlyingError)
 
