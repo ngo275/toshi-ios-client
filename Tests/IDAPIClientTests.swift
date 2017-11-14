@@ -355,6 +355,7 @@ class IDAPIClientTests: QuickSpec {
                 }
 
                 it("logs in") {
+                    XCTAssertTrue(false)
                     let mockTeapot = MockTeapot(bundle: Bundle(for: IDAPIClientTests.self), mockFilename: "", statusCode: .unauthorized)
                     mockTeapot.overrideEndPoint("timestamp", withFilename: "timestamp")
                     subject = IDAPIClient(teapot: mockTeapot)
