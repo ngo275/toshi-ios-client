@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSIdentityManager.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSIdentityManager.h

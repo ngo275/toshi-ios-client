@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Account/TSPreKeyManager.h
+../../../SignalServiceKit/SignalServiceKit/src/Account/TSPreKeyManager.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Contacts/OWSDisappearingMessagesConfiguration.h
+../../../SignalServiceKit/SignalServiceKit/src/Contacts/OWSDisappearingMessagesConfiguration.h

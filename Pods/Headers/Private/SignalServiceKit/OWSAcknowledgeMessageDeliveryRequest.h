@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/OWSAcknowledgeMessageDeliveryRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/OWSAcknowledgeMessageDeliveryRequest.h

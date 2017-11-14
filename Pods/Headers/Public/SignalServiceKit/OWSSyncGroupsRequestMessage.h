@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/DeviceSyncing/OWSSyncGroupsRequestMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/DeviceSyncing/OWSSyncGroupsRequestMessage.h

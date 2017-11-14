@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSNotifyRemoteOfUpdatedDisappearingConfigurationJob.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSNotifyRemoteOfUpdatedDisappearingConfigurationJob.h

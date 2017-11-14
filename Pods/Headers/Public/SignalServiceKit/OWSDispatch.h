@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/OWSDispatch.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/OWSDispatch.h

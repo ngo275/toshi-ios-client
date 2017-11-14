@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Attachments/OWSAttachmentsProcessor.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Attachments/OWSAttachmentsProcessor.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/OWSRecipientIdentity.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/OWSRecipientIdentity.h

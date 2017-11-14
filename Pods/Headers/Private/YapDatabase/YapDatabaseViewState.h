@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/Views/Internal/YapDatabaseViewState.h
+../../../YapDatabase/YapDatabase/Extensions/View/Internal/YapDatabaseViewState.h

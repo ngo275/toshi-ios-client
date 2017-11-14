@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSVerifyCodeRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSVerifyCodeRequest.h

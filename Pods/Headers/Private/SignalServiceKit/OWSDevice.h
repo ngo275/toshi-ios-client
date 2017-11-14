@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSDevice.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSDevice.h

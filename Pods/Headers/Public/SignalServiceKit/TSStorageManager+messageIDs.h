@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Storage/TSStorageManager+messageIDs.h
+../../../SignalServiceKit/SignalServiceKit/src/Storage/TSStorageManager+messageIDs.h

@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/Views/Internal/YapDatabaseViewPageMetadata.h
+../../../YapDatabase/YapDatabase/Extensions/View/Internal/YapDatabaseViewPageMetadata.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSSignalServiceProtos.pb.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSSignalServiceProtos.pb.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/TSConstants.h
+../../../SignalServiceKit/SignalServiceKit/src/TSConstants.h

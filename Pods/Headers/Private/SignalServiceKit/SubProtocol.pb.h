@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/WebSockets/SubProtocol.pb.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/WebSockets/SubProtocol.pb.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSRecordTranscriptJob.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSRecordTranscriptJob.h

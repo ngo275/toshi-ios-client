@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSContactsIntersectionRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSContactsIntersectionRequest.h

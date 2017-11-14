@@ -47,9 +47,13 @@ public final class ExchangeRateAPIClient {
         }
     }
 
-    convenience init(teapot: Teapot) {
+    convenience init(teapot: Teapot, cacheEnabled: Bool = true) {
         self.init()
         self.teapot = teapot
+
+        if !cacheEnabled {
+            self.cache.removeAllObjects()
+        }
     }
 
     init() {
@@ -105,14 +109,16 @@ public final class ExchangeRateAPIClient {
 
             switch result {
             case .success(let json, _):
-                guard let strongSelf = self, let json = json?.dictionary, let currencies = json["currencies"] as? [[String : String]] else {
+                guard let strongSelf = self, let json = json?.dictionary, let currencies = json["currencies"] as? [[String: String]] else {
                     completion([])
                     return
                 }
 
                 var validResults: [Currency] = []
                 for currency in currencies {
-                    guard let code = currency["code"], let name = currency["name"] else { continue }
+                    guard let code = currency["code"], let name = currency["name"] else {
+                        continue
+                    }
 
                     validResults.append(Currency(code, name))
                 }

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/AppVersion.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/AppVersion.h

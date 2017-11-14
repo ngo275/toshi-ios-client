@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Storage/TSDatabaseView.h
+../../../SignalServiceKit/SignalServiceKit/src/Storage/TSDatabaseView.h

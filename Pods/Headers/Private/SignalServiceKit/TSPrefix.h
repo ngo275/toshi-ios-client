@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/TSPrefix.h
+../../../SignalServiceKit/SignalServiceKit/src/TSPrefix.h

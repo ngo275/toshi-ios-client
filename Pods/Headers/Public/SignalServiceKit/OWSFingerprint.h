@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/OWSFingerprint.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/OWSFingerprint.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSGroupsOutputStream.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSGroupsOutputStream.h

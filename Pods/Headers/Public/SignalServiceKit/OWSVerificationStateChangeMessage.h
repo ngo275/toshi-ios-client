@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/OWSVerificationStateChangeMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/OWSVerificationStateChangeMessage.h

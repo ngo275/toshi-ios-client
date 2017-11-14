@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSCallOfferMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSCallOfferMessage.h

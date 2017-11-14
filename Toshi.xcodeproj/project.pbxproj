@@ -12,7 +12,6 @@
 		145666061E30D31A00E52027 /* EthereumAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145666051E30D31A00E52027 /* EthereumAPIClient.swift */; };
 		149F9A631E72E29A00FB74AA /* SignalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2433D31E5F46F6003D95A1 /* SignalNotificationHandler.swift */; };
 		149F9A641E72E29A00FB74AA /* BackgroundNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2162611E5EF76000292B14 /* BackgroundNotificationHandler.swift */; };
-		149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */; };
 		149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAACCD61E310C1100FB871D /* SettingsNavigationController.swift */; };
 		149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4A6D1E4CC04300126217 /* BaseConverter.swift */; };
 		149F9A6F1E72E29A00FB74AA /* Yap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAD31E27DE8800A70E07 /* Yap.swift */; };
@@ -79,6 +78,12 @@
 		2B4BCD5A1F59954E00F9E609 /* DistributionDevTokenURLPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */; };
 		2B4BCD5B1F599BEA00F9E609 /* token.cer in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0AC8B1F278677000D2A58 /* token.cer */; };
 		2B695CBA1EF9B9A80025119B /* KeyboardAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE66A0B1EF910B6007A7130 /* KeyboardAdjustable.swift */; };
+		2B953AC51FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC41FAC9E1A005A5BF3 /* NSString+OWS.m */; };
+		2B953AC61FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC41FAC9E1A005A5BF3 /* NSString+OWS.m */; };
+		2B953AC71FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC41FAC9E1A005A5BF3 /* NSString+OWS.m */; };
+		2B953ACA1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC91FAC9EF0005A5BF3 /* ProfileManager.m */; };
+		2B953ACB1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC91FAC9EF0005A5BF3 /* ProfileManager.m */; };
+		2B953ACC1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B953AC91FAC9EF0005A5BF3 /* ProfileManager.m */; };
 		2B98552B1F824200009C347A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF6343C1F7C3D0B00235C67 /* Reachability.framework */; };
 		2B98552C1F824201009C347A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF6343C1F7C3D0B00235C67 /* Reachability.framework */; };
 		2B98552D1F824201009C347A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF6343C1F7C3D0B00235C67 /* Reachability.framework */; };
@@ -278,7 +283,6 @@
 		9FE86E021F0BC0AB00A7F71E /* SweetSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80D1EB36A7F002D0293 /* SweetSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FE86E031F0BC14F00A7F71E /* SweetUIKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FE86E041F0BC15900A7F71E /* SweetUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FF80E1EB36A7F002D0293 /* SweetUIKit.framework */; };
-		9FEB8C881E682FD80088D5A6 /* MessageFetcherJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */; };
 		9FEB8C8B1E6832120088D5A6 /* NSData+ows_StripToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C8A1E6832120088D5A6 /* NSData+ows_StripToken.m */; };
 		9FEB8C8F1E684FC40088D5A6 /* SignalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C8E1E684FC40088D5A6 /* SignalNotificationManager.swift */; };
 		9FEFEF621E66CD6C00948277 /* requestPayment.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9FEFEF611E66CD6C00948277 /* requestPayment.m4a */; };
@@ -385,7 +389,6 @@
 		A9603D8C1F4DABDC00BF57B1 /* BackgroundNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2162611E5EF76000292B14 /* BackgroundNotificationHandler.swift */; };
 		A9603D8F1F4DABDC00BF57B1 /* MessagesBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E1DCCD1F1E1989001A4ABE /* MessagesBasicCell.swift */; };
 		A9603D911F4DABDC00BF57B1 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F54AB0C1ECC8D390008489F /* ScannerController.swift */; };
-		A9603D921F4DABDC00BF57B1 /* MessageFetcherJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */; };
 		A9603D941F4DABDC00BF57B1 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9202E4C1ED84F6A0036E9B7 /* ImagesViewController.swift */; };
 		A9603D991F4DABDC00BF57B1 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAACCD61E310C1100FB871D /* SettingsNavigationController.swift */; };
 		A9603D9E1F4DABDC00BF57B1 /* BaseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4A6D1E4CC04300126217 /* BaseConverter.swift */; };
@@ -865,6 +868,10 @@
 		2B44A1391F4AEBFF00B9C760 /* ExchangeRateAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIClient.swift; sourceTree = "<group>"; };
 		2B4794191F1E06BB00AC3EB4 /* ProfileEditItem .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileEditItem .swift"; sourceTree = "<group>"; };
 		2B4BCD591F59954E00F9E609 /* DistributionDevTokenURLPaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistributionDevTokenURLPaths.swift; sourceTree = "<group>"; };
+		2B953AC31FAC9E19005A5BF3 /* NSString+OWS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OWS.h"; sourceTree = "<group>"; };
+		2B953AC41FAC9E1A005A5BF3 /* NSString+OWS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OWS.m"; sourceTree = "<group>"; };
+		2B953AC81FAC9EEF005A5BF3 /* ProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileManager.h; sourceTree = "<group>"; };
+		2B953AC91FAC9EF0005A5BF3 /* ProfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileManager.m; sourceTree = "<group>"; };
 		2BA0D88E1F75519F000B8500 /* NSLayoutConstraint+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Additions.swift"; sourceTree = "<group>"; };
 		2BA888EA1F600ED500B03D8E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		2BAB90A21EC1194B005D98C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -994,7 +1001,6 @@
 		9FD25D3B1E813C3F0011F164 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		9FE18B271E2D135F00940DC8 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		9FE398401E2E225600386FAF /* ProfileItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileItemCell.swift; sourceTree = "<group>"; };
-		9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFetcherJob.swift; sourceTree = "<group>"; };
 		9FEB8C891E6832120088D5A6 /* NSData+ows_StripToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ows_StripToken.h"; sourceTree = "<group>"; };
 		9FEB8C8A1E6832120088D5A6 /* NSData+ows_StripToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ows_StripToken.m"; sourceTree = "<group>"; };
 		9FEB8C8E1E684FC40088D5A6 /* SignalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalNotificationManager.swift; sourceTree = "<group>"; };
@@ -1659,6 +1665,8 @@
 				2BD6FB3F1F02927F00F1E2BF /* IndexPath+Additions.swift */,
 				9FEB8C891E6832120088D5A6 /* NSData+ows_StripToken.h */,
 				9FEB8C8A1E6832120088D5A6 /* NSData+ows_StripToken.m */,
+				2B953AC31FAC9E19005A5BF3 /* NSString+OWS.h */,
+				2B953AC41FAC9E1A005A5BF3 /* NSString+OWS.m */,
 				9FAE4A6A1E4CBFC400126217 /* NSDecimalNumber+Additions.swift */,
 				84AED6FA1F42EBCB003C38E8 /* String+Regex.swift */,
 				9FD247821ED3037F00A38C40 /* String+isURL.swift */,
@@ -1683,6 +1691,8 @@
 			children = (
 				9FB228841EEEA45B00CCAA1D /* PropertyListPreferences.h */,
 				9FB228851EEEA45B00CCAA1D /* PropertyListPreferences.m */,
+				2B953AC81FAC9EEF005A5BF3 /* ProfileManager.h */,
+				2B953AC91FAC9EF0005A5BF3 /* ProfileManager.m */,
 			);
 			path = SignaServiceKit;
 			sourceTree = "<group>";
@@ -1708,7 +1718,6 @@
 			children = (
 				9F2162611E5EF76000292B14 /* BackgroundNotificationHandler.swift */,
 				9F21625E1E5EF39B00292B14 /* EthereumNotificationHandler.swift */,
-				9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */,
 				9F2433D31E5F46F6003D95A1 /* SignalNotificationHandler.swift */,
 				9FEB8C8E1E684FC40088D5A6 /* SignalNotificationManager.swift */,
 			);
@@ -2099,7 +2108,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149F9AEB1E72E29A00FB74AA /* Build configuration list for PBXNativeTarget "Distribution" */;
 			buildPhases = (
-				92CB683C9EC2100FF8F99E33 /* [CP] Check Pods Manifest.lock */,
+				E147D8495A4C37821230EADE /* [CP] Check Pods Manifest.lock */,
 				149F9A5F1E72E29A00FB74AA /* Sources */,
 				149F9AB01E72E29A00FB74AA /* Frameworks */,
 				149F9AC31E72E29A00FB74AA /* Bump build number */,
@@ -2502,21 +2511,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CocoaPods-Distribution/Pods-CocoaPods-Distribution-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92CB683C9EC2100FF8F99E33 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		A411A820DB838EA1AA408B87 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2661,6 +2655,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CocoaPods-Tests/Pods-CocoaPods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E147D8495A4C37821230EADE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		FE3765C422E2769912445358 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2760,7 +2769,6 @@
 				A9E1DCDC1F1E2765001A4ABE /* MessagesBasicCell.swift in Sources */,
 				9F54AB0E1ECC8D390008489F /* ScannerController.swift in Sources */,
 				A91D72AD1F8785E10093420C /* ChatButtonsCollectionViewLayout.swift in Sources */,
-				149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */,
 				A9202E6E1ED850220036E9B7 /* ImagesViewController.swift in Sources */,
 				149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */,
 				149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */,
@@ -2798,6 +2806,7 @@
 				848D82231F23D50A00BBFA66 /* NetworkSettingsController.swift in Sources */,
 				84AED6FC1F42EBCB003C38E8 /* String+Regex.swift in Sources */,
 				149F9A7A1E72E29A00FB74AA /* FavoritesController.swift in Sources */,
+				2B953ACC1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */,
 				A95D315D1F8289C900B0FED1 /* TextEditingOptionsViewController.swift in Sources */,
 				8446632C1F41CD5700892DB8 /* PaymentRequestMetadata.swift in Sources */,
 				A9E691CD1F7A49AB00317DB1 /* SignInFooterView.swift in Sources */,
@@ -2876,6 +2885,7 @@
 				9F88EA061EE041A900267573 /* SettingsSectionHeader.swift in Sources */,
 				149F9AA41E72E29A00FB74AA /* EthereumNotificationHandler.swift in Sources */,
 				149F9AA51E72E29A00FB74AA /* TabBarController.swift in Sources */,
+				2B953AC71FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */,
 				A9E1DCE01F1E2777001A4ABE /* IconLabelButton.swift in Sources */,
 				2BC6925E1EE937E800285070 /* Emptiable.swift in Sources */,
 				A9ED6CCE1E82B57E00160637 /* InputField.swift in Sources */,
@@ -2938,7 +2948,6 @@
 				A9CADC1C1F94AF2D0096D017 /* BrowseEntityCollectionViewCell.swift in Sources */,
 				9F54AB0D1ECC8D390008489F /* ScannerController.swift in Sources */,
 				9F2162621E5EF76000292B14 /* BackgroundNotificationHandler.swift in Sources */,
-				9FEB8C881E682FD80088D5A6 /* MessageFetcherJob.swift in Sources */,
 				A9CADC211F94AF2D0096D017 /* BrowseCollectionViewCell.swift in Sources */,
 				9FAACCD71E310C1100FB871D /* SettingsNavigationController.swift in Sources */,
 				9FAE4A6E1E4CC04300126217 /* BaseConverter.swift in Sources */,
@@ -2984,6 +2993,7 @@
 				A95D315B1F8289C900B0FED1 /* TextEditingOptionsViewController.swift in Sources */,
 				A9E691C41F7A496800317DB1 /* SignInExplanation.swift in Sources */,
 				84FFE1EB1F3C8FAF008CEEF2 /* QRCodeIntent.swift in Sources */,
+				2B953ACA1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */,
 				A9E691C51F7A496800317DB1 /* SignInLayout.swift in Sources */,
 				9FEB8C8B1E6832120088D5A6 /* NSData+ows_StripToken.m in Sources */,
 				A9BA6B7F1EF7D864007C3206 /* DepositMoneyItem.swift in Sources */,
@@ -3062,6 +3072,7 @@
 				A916290F1F3C3A02008A7F36 /* PaymentAddressInputView.swift in Sources */,
 				9FCF13281E52FC2A0078FF7F /* TSThread+Additions.m in Sources */,
 				2BE6FB0F1EFC0C1600B0B848 /* AvatarManager.swift in Sources */,
+				2B953AC51FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */,
 				9F9238B61E24F1D2004BEEE0 /* main.m in Sources */,
 				A91D72AB1F8785E10093420C /* ChatButtonsCollectionViewLayout.swift in Sources */,
 				A9191DD01F2220C100498A4F /* BalanceController.swift in Sources */,
@@ -3130,7 +3141,6 @@
 				A9603D8F1F4DABDC00BF57B1 /* MessagesBasicCell.swift in Sources */,
 				A9603D911F4DABDC00BF57B1 /* ScannerController.swift in Sources */,
 				A91D72AC1F8785E10093420C /* ChatButtonsCollectionViewLayout.swift in Sources */,
-				A9603D921F4DABDC00BF57B1 /* MessageFetcherJob.swift in Sources */,
 				A9603D941F4DABDC00BF57B1 /* ImagesViewController.swift in Sources */,
 				A9603D991F4DABDC00BF57B1 /* SettingsNavigationController.swift in Sources */,
 				A9603D9E1F4DABDC00BF57B1 /* BaseConverter.swift in Sources */,
@@ -3170,6 +3180,7 @@
 				A9603E101F4DABDC00BF57B1 /* FavoritesController.swift in Sources */,
 				A95D315C1F8289C900B0FED1 /* TextEditingOptionsViewController.swift in Sources */,
 				A9603E1A1F4DABDC00BF57B1 /* PaymentRequestMetadata.swift in Sources */,
+				2B953ACB1FAC9EF0005A5BF3 /* ProfileManager.m in Sources */,
 				A9E691CC1F7A49AB00317DB1 /* SignInFooterView.swift in Sources */,
 				A9CADC231F94B1C50096D017 /* BrowseViewController.swift in Sources */,
 				A9CADC2B1F94B1D30096D017 /* SearchResultCell.swift in Sources */,
@@ -3248,6 +3259,7 @@
 				2B4BCD5A1F59954E00F9E609 /* DistributionDevTokenURLPaths.swift in Sources */,
 				A9603EFB1F4DABDC00BF57B1 /* EthereumNotificationHandler.swift in Sources */,
 				A9603F041F4DABDC00BF57B1 /* TabBarController.swift in Sources */,
+				2B953AC61FAC9E1A005A5BF3 /* NSString+OWS.m in Sources */,
 				A9603F061F4DABDC00BF57B1 /* IconLabelButton.swift in Sources */,
 				A9603F091F4DABDC00BF57B1 /* Emptiable.swift in Sources */,
 				A9603F0A1F4DABDC00BF57B1 /* InputField.swift in Sources */,

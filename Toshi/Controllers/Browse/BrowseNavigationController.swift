@@ -22,38 +22,32 @@ public class BrowseNavigationController: UINavigationController {
     public override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
-
+    
     public override init(rootViewController: UIViewController) {
-        super.init(rootViewController: rootViewController)
+        
+        if let profileData = UserDefaults.standard.data(forKey: BrowseNavigationController.selectedAppKey) {
+            super.init(nibName: nil, bundle: nil)
+            guard let json = (try? JSONSerialization.jsonObject(with: profileData, options: [])) as? [String: Any] else { return }
+            
+            viewControllers = [rootViewController, ProfileViewController(contact: TokenUser(json: json))]
+            configureTabBarItem()
+        } else {
+            super.init(rootViewController: rootViewController)
+        }
     }
-
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
+        configureTabBarItem()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureTabBarItem() {
         tabBarItem = UITabBarItem(title: Localized("tab_bar_title_browse"), image: #imageLiteral(resourceName: "tab1"), tag: 0)
         tabBarItem.titlePositionAdjustment.vertical = TabBarItemTitleOffset
-    }
-
-    public required init?(coder _: NSCoder) {
-        fatalError("")
-    }
-
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // TODO: move restoration to the tabbar controller, so we only restore the currently selected.
-        if let appData = UserDefaults.standard.data(forKey: BrowseNavigationController.selectedAppKey) {
-            // we delay by one cycle and it's enough for UIKit to set the children viewcontrollers
-            // for the navigation controller. Otherwise `viewcontrollers` will be nil and it wont restore.
-            // Downside: it blinks the previous view for no.
-            // TODO: move all of this the the navigator so we can restore the hiararchy straight from the app delegate.
-            DispatchQueue.main.asyncAfter(seconds: 0.0) {
-                guard let json = try? JSONSerialization.jsonObject(with: appData, options: []), let appJson = json as? [String: Any] else { return }
-                let appController = ProfileViewController(contact: TokenUser(json: appJson))
-
-                self.pushViewController(appController, animated: false)
-            }
-        }
     }
 
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {

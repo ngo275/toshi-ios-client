@@ -41,7 +41,7 @@ class ExchangeRateAPIClientTests: QuickSpec {
 
                 it("gets the currencies") {
                     let mockTeapot = MockTeapot(bundle: Bundle(for: ExchangeRateAPIClientTests.self), mockFilename: "getCurrencies")
-                    subject = ExchangeRateAPIClient(teapot: mockTeapot)
+                    subject = ExchangeRateAPIClient(teapot: mockTeapot, cacheEnabled: false)
 
                     waitUntil { done in
                         subject.getCurrencies { currencies in
@@ -67,7 +67,7 @@ class ExchangeRateAPIClientTests: QuickSpec {
 
                 it("gets the currencies") {
                     let mockTeapot = MockTeapot(bundle: Bundle(for: ExchangeRateAPIClientTests.self), mockFilename: "getCurrencies", statusCode: .notFound)
-                    subject = ExchangeRateAPIClient(teapot: mockTeapot)
+                    subject = ExchangeRateAPIClient(teapot: mockTeapot, cacheEnabled: false)
 
                     waitUntil { done in
                         subject.getCurrencies { currencies in

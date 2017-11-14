@@ -24,7 +24,7 @@
 
 extern NSString * _Nonnull const RequiresSignIn;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, PKPushRegistryDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (nullable, strong, nonatomic) UIWindow *window;
 

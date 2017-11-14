@@ -225,9 +225,11 @@ final class ChatViewModel {
 
                 guard let dbExtension = transaction.ext(TSMessageDatabaseViewExtensionName) as? YapDatabaseViewTransaction else { return }
 
+                guard let newIndexPath = change.newIndexPath else { continue }
+
                 switch change.type {
                 case .insert:
-                    guard let signalMessage = dbExtension.object(at: change.newIndexPath, with: strongSelf.mappings) as? TSMessage else { return }
+                    guard let signalMessage = dbExtension.object(at: newIndexPath, with: strongSelf.mappings) as? TSMessage else { return }
 
                     DispatchQueue.main.async {
                         let result = strongSelf.interactor.handleSignalMessage(signalMessage, shouldProcessCommands: true)
@@ -241,14 +243,10 @@ final class ChatViewModel {
                         }
 
                         strongSelf.interactor.playSound(for: result)
-
-                        if let incoming = signalMessage as? TSIncomingMessage, !incoming.wasRead {
-                            incoming.markAsReadLocally()
-                        }
                     }
 
                 case .update:
-                    let indexPath = change.indexPath
+                    guard let indexPath = change.indexPath else { continue }
 
                     guard let signalMessage = dbExtension.object(at: indexPath, with: strongSelf.mappings) as? TSMessage else { return }
                     guard let message = strongSelf.messages.first(where: { $0.signalMessage.uniqueId == signalMessage.uniqueId }) else { return }
@@ -369,12 +367,18 @@ final class ChatViewModel {
             }
         }
     }
+
+    func markAllMessagesAsRead() {
+        TSStorageManager.shared().dbReadWriteConnection?.asyncReadWrite { [weak self] transaction in
+            self?.thread.markAllAsRead(with: transaction)
+        }
+    }
     
     func deleteItemAt(_ indexPath: IndexPath) {
         
         if let message = messageModels.element(at: indexPath.item)?.signalMessage {
             
-            TSStorageManager.shared().dbConnection?.asyncReadWrite { [weak self] transaction in
+            TSStorageManager.shared().dbReadWriteConnection?.asyncReadWrite { [weak self] transaction in
                 
                 message.remove(with: transaction)
                 

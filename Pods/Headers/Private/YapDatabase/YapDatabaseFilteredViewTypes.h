@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/FilteredViews/YapDatabaseFilteredViewTypes.h
+../../../YapDatabase/YapDatabase/Extensions/FilteredView/YapDatabaseFilteredViewTypes.h

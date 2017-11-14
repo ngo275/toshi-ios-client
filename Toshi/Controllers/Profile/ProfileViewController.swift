@@ -57,7 +57,11 @@ public class ProfileViewController: UIViewController {
     }
 
     open override func loadView() {
-        view = ProfileView(viewType: .profile)
+        if contact.isCurrentUser {
+            view = ProfileView(viewType: .personalProfileReadOnly)
+        } else {
+            view = ProfileView(viewType: .profile)
+        }
     }
 
     open override func viewDidLoad() {
@@ -67,7 +71,10 @@ public class ProfileViewController: UIViewController {
 
         profileView?.profileDelegate = self
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(didSelectMoreButton))
+        if !contact.isCurrentUser {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(didSelectMoreButton))
+        }
+
         view.backgroundColor = Theme.lightGrayBackgroundColor
 
         updateReputation()

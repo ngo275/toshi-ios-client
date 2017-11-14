@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/OWSFingerprintProtos.pb.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/OWSFingerprintProtos.pb.h

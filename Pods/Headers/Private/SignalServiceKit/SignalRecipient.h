@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Contacts/SignalRecipient.h
+../../../SignalServiceKit/SignalServiceKit/src/Contacts/SignalRecipient.h

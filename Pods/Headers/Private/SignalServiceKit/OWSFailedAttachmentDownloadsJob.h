@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSFailedAttachmentDownloadsJob.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSFailedAttachmentDownloadsJob.h

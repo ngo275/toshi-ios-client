@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSContactsOutputStream.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSContactsOutputStream.h

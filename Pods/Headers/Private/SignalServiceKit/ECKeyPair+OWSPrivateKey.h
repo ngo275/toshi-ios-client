@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/ECKeyPair+OWSPrivateKey.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/ECKeyPair+OWSPrivateKey.h

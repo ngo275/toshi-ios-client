@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/TSIncomingMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/TSIncomingMessage.h

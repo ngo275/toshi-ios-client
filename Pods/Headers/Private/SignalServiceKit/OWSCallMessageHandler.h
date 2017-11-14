@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Protocols/OWSCallMessageHandler.h
+../../../SignalServiceKit/SignalServiceKit/src/Protocols/OWSCallMessageHandler.h

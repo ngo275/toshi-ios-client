@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/OWSDeviceProvisioningService.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/OWSDeviceProvisioningService.h

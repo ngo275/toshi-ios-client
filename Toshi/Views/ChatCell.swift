@@ -47,7 +47,7 @@ class ChatCell: UITableViewCell {
 
             // unread badge
             if let thread = self.thread {
-                let unreadMessagesCount = TSMessagesManager.shared().unreadMessages(in: thread)
+                let unreadMessagesCount = OWSMessageManager.shared().unreadMessages(in: thread)
                 if unreadMessagesCount > 0 {
                     unreadLabel.text = "\(unreadMessagesCount)"
                     unreadView.isHidden = false

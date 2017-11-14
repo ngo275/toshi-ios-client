@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSUpdateAttributesRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSUpdateAttributesRequest.h

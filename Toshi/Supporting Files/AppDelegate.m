@@ -11,14 +11,13 @@
 #import <SignalServiceKit/OWSSignalService.h>
 #import <SignalServiceKit/TSOutgoingMessage.h>
 #import <SignalServiceKit/TSStorageManager.h>
-#import <SignalServiceKit/TSStorageManager+keyingMaterial.h>
 #import <SignalServiceKit/OWSSyncContactsMessage.h>
-#import <SignalServiceKit/NSDate+millisecondTimeStamp.h>
+#import <SignalServiceKit/NSDate+OWS.h>
 #import <SignalServiceKit/TextSecureKitEnv.h>
-#import <SignalServiceKit/OWSIncomingMessageReadObserver.h>
 #import <SignalServiceKit/TSSocketManager.h>
 #import <SignalServiceKit/OWSDispatch.h>
-#import <SignalServiceKit/TSPreferences.h>
+#import <SignalServiceKit/ProfileManagerProtocol.h>
+#import "ProfileManager.h"
 
 #import <AxolotlKit/SessionCipher.h>
 
@@ -27,11 +26,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
 @import WebRTC;
 
-@interface AppDelegate () <TSPreferences>
-
-@property (nonatomic) OWSIncomingMessageReadObserver *incomingMessageReadObserver;
-
-@property (nonatomic) OWSMessageFetcherJob *messageFetcherJob;
+@interface AppDelegate ()
 
 @property (nonatomic) UIWindow *screenProtectionWindow;
 
@@ -42,7 +37,6 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
 @implementation AppDelegate
 @synthesize token = _token;
-@synthesize voipToken = _voipToken;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -115,7 +109,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
                       else
                           path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
                   });
-    
+
     return path;
 }
 
@@ -162,7 +156,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
         [[EthereumAPIClient shared] deregisterFromMainNetworkPushNotifications];
-        [[TSStorageManager sharedManager] resetSignalStorage];
+        [[TSStorageManager sharedManager] resetSignalStorageWithBackup:TokenUser.current.verified];
         [[Yap sharedInstance] wipeStorage];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:RequiresSignIn];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -183,7 +177,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 - (void)createNewUser
 {
     [[Navigator tabbarController] setupControllers];
-    
+
     __weak typeof(self)weakSelf = self;
     [[IDAPIClient shared] registerUserIfNeeded:^(UserRegisterStatus status, NSString *message){
 
@@ -191,14 +185,14 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
             typeof(self)strongSelf = weakSelf;
 
+            [strongSelf didCreateUser];
+            [strongSelf setupDB];
+
             [[ChatAPIClient shared] registerUserWithCompletion:^(BOOL success, NSString *message) {
                 if (status == UserRegisterStatusRegistered) {
                     [ChatInteractor triggerBotGreeting];
                 }
             }];
-
-            [strongSelf didCreateUser];
-            [strongSelf setupDB];
         }
     }];
 }
@@ -224,7 +218,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RequiresSignIn];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     [Navigator presentAddressChangeAlertIfNeeded];
 }
 
@@ -246,20 +240,17 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
     [SessionCipher setSessionCipherDispatchQueue:[OWSDispatch sessionStoreQueue]];
 
     [CrashlyticsClient setupForUserWith:[[Cereal shared] address]];
-    [[TSStorageManager sharedManager] storePhoneNumber:[[Cereal shared] address]];
 
     __weak typeof(self)weakSelf = self;
-    [[TSAccountManager sharedInstance] ifRegistered:YES runAsync:^{
 
-        [TSSocketManager requestSocketOpen];
-        RTCInitializeSSL();
+    [TSSocketManager requestSocketOpen];
+    RTCInitializeSSL();
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-            typeof(self)strongSelf = weakSelf;
-            [strongSelf registerForRemoteNotifications];
-        });
-    }];
+        typeof(self)strongSelf = weakSelf;
+        [strongSelf registerForRemoteNotifications];
+    });
 }
 
 - (BOOL)isFirstLaunch
@@ -277,11 +268,13 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
     self.networkManager = [TSNetworkManager sharedManager];
     self.contactsManager = [[ContactsManager alloc] init];
-    
+
     self.contactsUpdater = [ContactsUpdater sharedUpdater];
 
     TSStorageManager *storageManager = [TSStorageManager sharedManager];
     [storageManager setupForAccountName:TokenUser.current.address isFirstLaunch:[self isFirstLaunch]];
+
+    [[TSAccountManager sharedInstance] storeLocalNumber:[Cereal shared].address];
 
     if (![storageManager database]) {
         [CrashlyticsLogger log:@"Failed to create chat databse for the suer" attributes:nil];
@@ -289,12 +282,9 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 
     self.messageSender = [[OWSMessageSender alloc] initWithNetworkManager:self.networkManager storageManager:storageManager contactsManager:self.contactsManager contactsUpdater:self.contactsUpdater];
 
-    TextSecureKitEnv *sharedEnv = [[TextSecureKitEnv alloc] initWithCallMessageHandler:[[EmptyCallHandler alloc] init] contactsManager:self.contactsManager messageSender:self.messageSender notificationsManager:[[SignalNotificationManager alloc] init] preferences:self];
+    TextSecureKitEnv *sharedEnv = [[TextSecureKitEnv alloc] initWithCallMessageHandler:[EmptyCallHandler new] contactsManager:self.contactsManager messageSender:self.messageSender notificationsManager:[SignalNotificationManager new] profileManager:ProfileManager.sharedManager];
 
     [TextSecureKitEnv setSharedEnv:sharedEnv];
-
-    self.incomingMessageReadObserver = [[OWSIncomingMessageReadObserver alloc] initWithStorageManager:storageManager messageSender:self.messageSender];
-    [self.incomingMessageReadObserver startObserving];
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LaunchedBefore];
 }
@@ -331,18 +321,15 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 
-    [[TSAccountManager sharedInstance] ifRegistered:YES runAsync:^{
-        // We're double checking that the app is active, to be sure since we
-        // can't verify in production env due to code
-        // signing.
+    if ([TSAccountManager isRegistered]) {
         [TSSocketManager requestSocketOpen];
-    }];
+    }
 
     // Send screen protection deactivation to the same queue as when resigning
     // to avoid some weird UIKit issue where app is going inactive during the launch process
     // and back to active again. Due to the queue difference, some racing conditions may apply
     // leaving the app with a protection screen when it shouldn't have any.
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self deactivateScreenProtection];
     });
@@ -351,7 +338,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 }
 
 - (void)activateScreenProtection {
-    
+
     if (self.screenProtectionWindow == nil) {
         UIWindow *window = [[UIWindow alloc] init];
         window.hidden = YES;
@@ -368,10 +355,10 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
         [[effectView.leftAnchor constraintEqualToAnchor:window.leftAnchor] setActive:YES];
         [[effectView.bottomAnchor constraintEqualToAnchor:window.bottomAnchor] setActive:YES];
         [[effectView.rightAnchor constraintEqualToAnchor:window.rightAnchor] setActive:YES];
-        
+
         self.screenProtectionWindow = window;
     }
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         self.screenProtectionWindow.alpha = 1;
     }];
@@ -419,22 +406,8 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
     return _token;
 }
 
-- (NSString *)voipToken {
-    if (!_voipToken) {
-        _voipToken = @"";
-    }
-
-    return _voipToken;
-}
-
 - (void)setToken:(NSString *)token {
     _token = token;
-
-    [self updateRemoteNotificationCredentials];
-}
-
-- (void)setVoipToken:(NSString *)voipToken {
-    _voipToken = voipToken;
 
     [self updateRemoteNotificationCredentials];
 }
@@ -456,8 +429,6 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
         }
     }];
 
-    OWSSignalService *signalService = [OWSSignalService sharedInstance];
-    self.messageFetcherJob = [[OWSMessageFetcherJob alloc] initWithMessagesManager:[TSMessagesManager sharedManager] messageSender:self.messageSender networkManager:self.networkManager signalService:signalService];
 
     PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
     voipRegistry.delegate = self;
@@ -467,7 +438,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 - (void)updateRemoteNotificationCredentials {
     NSLog(@"\n||--------------------\n||\n|| --- Account is registered: %@ \n||\n||--------------------\n\n", @([TSAccountManager isRegistered]));
 
-    [[TSAccountManager sharedInstance] registerForPushNotificationsWithPushToken:self.token voipToken:self.voipToken success:^{
+    [[TSAccountManager sharedInstance] registerForPushNotificationsWithPushToken:self.token voipToken:nil success:^{
         NSLog(@"\n\n||------- \n||\n|| - TOKEN: chat PN register - SUCCESS: token: %@,\n|| - voip: %@\n||\n||------- \n", self.token, self.voipToken);
 
         [[EthereumAPIClient shared] registerForMainNetworkPushNotifications];
@@ -478,18 +449,6 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
         NSLog(@"\n\n||------- \n|| - TOKEN: chat PN register - FAILURE: %@\n||------- \n", error.localizedDescription);
         [CrashlyticsLogger log:@"Failed to register for PNs" attributes:@{@"error": error.localizedDescription}];
     }];
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type {
-    [self.messageFetcherJob runAsync];
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(PKPushType)type {
-
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(PKPushType)type {
-    self.voipToken = [credentials.token ows_tripToken];
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
@@ -505,26 +464,6 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
     completionHandler();
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    __weak typeof(self)weakSelf = self;
-
-    [SignalNotificationHandler handleMessage:userInfo completion:^(UIBackgroundFetchResult result) {
-
-        typeof(self)strongSelf = weakSelf;
-
-        if (result == UIBackgroundFetchResultNewData) {
-            [strongSelf.messageFetcherJob runAsync];
-        }
-
-        completionHandler(result);
-    }];
-
-    [EthereumNotificationHandler handlePayment:userInfo completion:^(UIBackgroundFetchResult result) {
-        completionHandler(result);
-    }];
-}
-
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     self.token = [deviceToken hexadecimalString];
 }
@@ -534,3 +473,4 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
 }
 
 @end
+

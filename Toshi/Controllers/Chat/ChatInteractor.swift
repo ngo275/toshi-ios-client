@@ -48,7 +48,7 @@ final class ChatInteractor: NSObject {
     fileprivate var messageSender: MessageSender?
 
     func sendMessage(sofaWrapper: SofaWrapper, date: Date = Date(), completion: @escaping ((Bool) -> Void) = { Bool in }) {
-        let timestamp = NSDate.ows_millisecondsSince1970(for: date)
+        let timestamp = NSDate.ows_millisecondTimeStamp()
 
         sofaWrapper.removeFiatValueString()
         let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: sofaWrapper.content)
@@ -74,7 +74,10 @@ final class ChatInteractor: NSObject {
         let wrapper = SofaMessage(body: "")
         let timestamp = NSDate.ows_millisecondsSince1970(for: Date())
         let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: thread, messageBody: wrapper.content)
-        messageSender?.sendAttachmentData(imageData, contentType: "image/jpeg", sourceFilename: "image.jpeg", in: outgoingMessage, success: {
+
+        guard let datasource = DataSourceValue.dataSource(with: imageData, fileExtension: "png") else { return }
+
+        messageSender?.sendAttachmentData(datasource, contentType: "image/jpeg", sourceFilename: "image.jpeg", in: outgoingMessage, success: {
             print("Success")
         }, failure: { error in
             print("Failure: \(error)")
@@ -88,7 +91,9 @@ final class ChatInteractor: NSObject {
         let timestamp = NSDate.ows_millisecondsSince1970(for: Date())
         let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: thread, messageBody: wrapper.content)
 
-        messageSender?.sendAttachmentData(videoData, contentType: "video/mp4", sourceFilename: "video.mp4", in: outgoingMessage, success: {
+        guard let datasource = DataSourceValue.dataSource(with: videoData, fileExtension: "mov") else { return }
+
+        messageSender?.sendAttachmentData(datasource, contentType: "video/mp4", sourceFilename: "video.mp4", in: outgoingMessage, success: {
             self.output?.didFinishRequest()
             print("Success")
         }, failure: { error in
@@ -279,7 +284,7 @@ final class ChatInteractor: NSObject {
     @discardableResult static func getOrCreateThread(for address: String) -> TSThread {
         var thread: TSThread?
 
-        TSStorageManager.shared().dbConnection?.readWrite { transaction in
+        TSStorageManager.shared().dbReadWriteConnection?.readWrite { transaction in
             var recipient = SignalRecipient(textSecureIdentifier: address, with: transaction)
 
             var shouldRequestContactsRefresh = false
@@ -333,7 +338,10 @@ final class ChatInteractor: NSObject {
         }
 
         let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: wrapper.content)
-        self.messageSender?.sendAttachmentData(data, contentType: "image/jpeg", sourceFilename: "File.jpeg", in: outgoingMessage, success: {
+
+        guard let datasource = DataSourceValue.dataSource(with: data, fileExtension: "jpeg") else { return }
+
+        self.messageSender?.sendAttachmentData(datasource, contentType: "image/jpeg", sourceFilename: "File.jpeg", in: outgoingMessage, success: {
             print("Success")
         }, failure: { error in
             print("Failure: \(error)")

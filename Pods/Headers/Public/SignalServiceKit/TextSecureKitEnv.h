@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/TextSecureKitEnv.h
+../../../SignalServiceKit/SignalServiceKit/src/TextSecureKitEnv.h

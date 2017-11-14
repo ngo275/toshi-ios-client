@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/OWSWebsocketSecurityPolicy.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/OWSWebsocketSecurityPolicy.h

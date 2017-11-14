@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/Asserts.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/Asserts.h

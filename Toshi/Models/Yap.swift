@@ -113,6 +113,7 @@ public final class Yap: NSObject, Singleton {
     @objc public func wipeStorage() {
         if TokenUser.current?.verified == false {
             CrashlyticsLogger.log("Deleting database files for signed out user")
+
             removeDatabaseFileAndPassword()
 
             return

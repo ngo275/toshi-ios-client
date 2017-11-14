@@ -81,15 +81,13 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "SAMKeychain/Support/SAMKeychain.bundle"
-  install_resource "SignalServiceKit/src/Security/PinningCertificate/textsecure.cer"
-  install_resource "SignalServiceKit/src/Security/PinningCertificate/GIAG2.crt"
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/SignalServiceKit/SignalServiceKit.bundle"
+  install_resource "SignalServiceKit/SignalServiceKit/src/Security/PinningCertificate/textsecure.cer"
+  install_resource "SignalServiceKit/SignalServiceKit/src/Security/PinningCertificate/GIAG2.crt"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "SAMKeychain/Support/SAMKeychain.bundle"
-  install_resource "SignalServiceKit/src/Security/PinningCertificate/textsecure.cer"
-  install_resource "SignalServiceKit/src/Security/PinningCertificate/GIAG2.crt"
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/SignalServiceKit/SignalServiceKit.bundle"
+  install_resource "SignalServiceKit/SignalServiceKit/src/Security/PinningCertificate/textsecure.cer"
+  install_resource "SignalServiceKit/SignalServiceKit/src/Security/PinningCertificate/GIAG2.crt"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

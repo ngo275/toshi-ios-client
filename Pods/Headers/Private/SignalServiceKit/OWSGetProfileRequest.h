@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/OWSGetProfileRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/OWSGetProfileRequest.h

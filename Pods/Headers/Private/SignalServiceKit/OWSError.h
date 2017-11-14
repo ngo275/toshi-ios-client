@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/OWSError.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/OWSError.h

@@ -100,7 +100,7 @@ public class TokenUser: NSObject, NSCoding {
         return userSettings[Constants.localCurrency] as? String ?? TokenUser.defaultCurrency
     }
 
-    var verified: Bool {
+    @objc var verified: Bool {
         return userSettings[Constants.verified] as? Bool ?? false
     }
 
@@ -126,7 +126,9 @@ public class TokenUser: NSObject, NSCoding {
             }
 
             _current = newValue
-            NotificationCenter.default.post(name: .currentUserUpdated, object: nil)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .currentUserUpdated, object: nil)
+            }
         }
     }
     

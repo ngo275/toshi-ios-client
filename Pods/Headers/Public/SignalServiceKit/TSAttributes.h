@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Account/TSAttributes.h
+../../../SignalServiceKit/SignalServiceKit/src/Account/TSAttributes.h

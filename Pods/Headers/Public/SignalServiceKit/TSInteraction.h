@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/TSInteraction.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/TSInteraction.h

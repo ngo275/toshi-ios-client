@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/Views/Utilities/YapDatabaseViewMappings.h
+../../../YapDatabase/YapDatabase/Extensions/View/Utilities/YapDatabaseViewMappings.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/OWSCensorshipConfiguration.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/OWSCensorshipConfiguration.h

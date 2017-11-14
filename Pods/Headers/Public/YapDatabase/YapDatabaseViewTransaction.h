@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/Views/YapDatabaseViewTransaction.h
+../../../YapDatabase/YapDatabase/Extensions/View/YapDatabaseViewTransaction.h

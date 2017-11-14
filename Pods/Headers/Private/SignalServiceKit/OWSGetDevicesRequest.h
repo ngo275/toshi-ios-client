@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/OWSGetDevicesRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/OWSGetDevicesRequest.h

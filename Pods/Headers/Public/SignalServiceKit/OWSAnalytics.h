@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/OWSAnalytics.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/OWSAnalytics.h

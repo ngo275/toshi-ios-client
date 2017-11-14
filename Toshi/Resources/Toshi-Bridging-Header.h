@@ -33,6 +33,7 @@
 #import <YapDatabase/YapDatabaseFilteredView.h>
 #import <YapDatabase/YapDatabaseFilteredViewConnection.h>
 #import <YapDatabase/YapDatabaseFilteredViewTransaction.h>
+#import <YapDatabase/YapDatabaseAutoView.h>
 
 #import <SignalServiceKit/NotificationsProtocol.h>
 #import <SignalServiceKit/OWSGetMessagesRequest.h>
@@ -41,7 +42,6 @@
 #import <SignalServiceKit/TSPreKeyManager.h>
 #import <SignalServiceKit/TSSocketManager.h>
 #import <SignalServiceKit/TSAccountManager.h>
-#import <SignalServiceKit/TSMessagesManager.h>
 #import <SignalServiceKit/OWSError.h>
 #import <SignalServiceKit/TSDatabaseView.h>
 #import <SignalServiceKit/OWSMessageSender.h>
@@ -62,13 +62,15 @@
 #import <SignalServiceKit/TSInfoMessage.h>
 #import <SignalServiceKit/TSErrorMessage.h>
 #import <SignalServiceKit/TSInvalidIdentityKeySendingErrorMessage.h>
-#import <SignalServiceKit/NSDate+millisecondTimeStamp.h>
+#import <SignalServiceKit/NSDate+OWS.h>
+#import <SignalServiceKit/DataSource.h>
 
 #import <SignalServiceKit/SignalAccount.h>
 #import <SignalServiceKit/TSStorageManager.h>
 #import <SignalServiceKit/OWSIdentityManager.h>
+#import <SignalServiceKit/OWSMessageManager.h>
 #import <SignalServiceKit/TSStorageManager+SessionStore.h>
-#import <SignalServiceKit/TSStorageManager+keyingMaterial.h>
+#import <SignalServiceKit/TSAccountManager.h>
 #import <SignalServiceKit/TSStorageManager+PreKeyStore.h>
 #import <SignalServiceKit/TSStorageManager+SignedPreKeyStore.h>
 #import <SignalServiceKit/TSThread.h>

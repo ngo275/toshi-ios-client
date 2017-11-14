@@ -20,24 +20,24 @@ PODS:
     - CocoaLumberjack
     - HKDFKit (~> 0.0.3)
     - ProtocolBuffers (~> 1.9.8)
-  - CocoaLumberjack (2.4.0):
-    - CocoaLumberjack/Default (= 2.4.0)
-    - CocoaLumberjack/Extensions (= 2.4.0)
-  - CocoaLumberjack/Core (2.4.0)
-  - CocoaLumberjack/Default (2.4.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.4.0):
+  - CocoaLumberjack (3.3.0):
+    - CocoaLumberjack/Default (= 3.3.0)
+    - CocoaLumberjack/Extensions (= 3.3.0)
+  - CocoaLumberjack/Default (3.3.0)
+  - CocoaLumberjack/Extensions (3.3.0):
     - CocoaLumberjack/Default
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - HKDFKit (0.0.3)
-  - libPhoneNumber-iOS (0.9.10)
+  - libPhoneNumber-iOS (0.9.12)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
+  - OpenSSL (1.0.210)
   - ProtocolBuffers (1.9.11)
-  - SAMKeychain (1.5.2)
+  - Reachability (3.2)
+  - SAMKeychain (1.5.3)
   - SignalServiceKit (0.9.0):
     - '25519'
     - AFNetworking
@@ -45,72 +45,88 @@ PODS:
     - CocoaLumberjack
     - libPhoneNumber-iOS
     - Mantle
+    - OpenSSL
+    - Reachability
     - SAMKeychain
     - SocketRocket
     - TwistedOakCollapsingFutures
-    - YapDatabase/SQLCipher (~> 2.9.3)
+    - YapDatabase/SQLCipher (~> 3.0.2)
   - SocketRocket (0.5.1)
+  - SQLCipher (3.4.1):
+    - SQLCipher/standard (= 3.4.1)
   - SQLCipher/common (3.4.1)
-  - SQLCipher/fts (3.4.1):
+  - SQLCipher/standard (3.4.1):
     - SQLCipher/common
   - SwiftLint (0.20.1)
   - TwistedOakCollapsingFutures (1.0.0):
     - UnionFind (~> 1.0)
   - UnionFind (1.0.1)
-  - YapDatabase/SQLCipher (2.9.3):
-    - YapDatabase/SQLCipher/Core (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions (= 2.9.3)
-  - YapDatabase/SQLCipher/Core (2.9.3):
-    - CocoaLumberjack (~> 2)
-    - SQLCipher/fts
-  - YapDatabase/SQLCipher/Extensions (2.9.3):
+  - YapDatabase/SQLCipher (3.0.2):
+    - YapDatabase/SQLCipher/Core (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions (= 3.0.2)
+  - YapDatabase/SQLCipher/Core (3.0.2):
+    - CocoaLumberjack
+    - SQLCipher (>= 3.4.0)
+  - YapDatabase/SQLCipher/Extensions (3.0.2):
     - YapDatabase/SQLCipher/Core
-    - YapDatabase/SQLCipher/Extensions/ActionManager (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/CloudKit (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/ConnectionProxy (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/CrossProcessNotification (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/FilteredViews (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/FullTextSearch (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/Hooks (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/Relationships (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/RTreeIndex (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/SearchResults (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/SecondaryIndex (= 2.9.3)
-    - YapDatabase/SQLCipher/Extensions/Views (= 2.9.3)
-  - YapDatabase/SQLCipher/Extensions/ActionManager (2.9.3):
+    - YapDatabase/SQLCipher/Extensions/ActionManager (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/AutoView (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/CloudCore (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/CloudKit (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/ConnectionProxy (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/CrossProcessNotification (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/FilteredView (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/FullTextSearch (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/Hooks (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/ManualView (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/Relationships (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/RTreeIndex (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/SearchResultsView (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/SecondaryIndex (= 3.0.2)
+    - YapDatabase/SQLCipher/Extensions/View (= 3.0.2)
+  - YapDatabase/SQLCipher/Extensions/ActionManager (3.0.2):
     - YapDatabase/SQLCipher/Core
-    - YapDatabase/SQLCipher/Extensions/Views
-  - YapDatabase/SQLCipher/Extensions/CloudKit (2.9.3):
+    - YapDatabase/SQLCipher/Extensions/AutoView
+  - YapDatabase/SQLCipher/Extensions/AutoView (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/ConnectionProxy (2.9.3):
+    - YapDatabase/SQLCipher/Extensions/View
+  - YapDatabase/SQLCipher/Extensions/CloudCore (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/CrossProcessNotification (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/CloudKit (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/FilteredViews (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/ConnectionProxy (3.0.2):
     - YapDatabase/SQLCipher/Core
-    - YapDatabase/SQLCipher/Extensions/Views
-  - YapDatabase/SQLCipher/Extensions/FullTextSearch (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/CrossProcessNotification (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/Hooks (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/FilteredView (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/Relationships (2.9.3):
+    - YapDatabase/SQLCipher/Extensions/View
+  - YapDatabase/SQLCipher/Extensions/FullTextSearch (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/RTreeIndex (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/Hooks (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/SearchResults (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/ManualView (3.0.2):
     - YapDatabase/SQLCipher/Core
+    - YapDatabase/SQLCipher/Extensions/View
+  - YapDatabase/SQLCipher/Extensions/Relationships (3.0.2):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/RTreeIndex (3.0.2):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/SearchResultsView (3.0.2):
+    - YapDatabase/SQLCipher/Core
+    - YapDatabase/SQLCipher/Extensions/AutoView
     - YapDatabase/SQLCipher/Extensions/FullTextSearch
-    - YapDatabase/SQLCipher/Extensions/Views
-  - YapDatabase/SQLCipher/Extensions/SecondaryIndex (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/SecondaryIndex (3.0.2):
     - YapDatabase/SQLCipher/Core
-  - YapDatabase/SQLCipher/Extensions/Views (2.9.3):
+  - YapDatabase/SQLCipher/Extensions/View (3.0.2):
     - YapDatabase/SQLCipher/Core
 
 DEPENDENCIES:
   - AxolotlKit (from `https://github.com/WhisperSystems/SignalProtocolKit.git`)
+  - CocoaLumberjack (~> 3.3.0)
   - Crashlytics
   - Fabric
-  - SignalServiceKit (from `https://github.com/toshiapp/SignalServiceKit.git`)
+  - SignalServiceKit (from `https://github.com/toshiapp/Signal-iOS.git`, commit `e094330cd383b906db799ee4f4ab999bf00d232c`)
   - SocketRocket (from `https://github.com/facebook/SocketRocket.git`)
   - SwiftLint
 
@@ -118,7 +134,8 @@ EXTERNAL SOURCES:
   AxolotlKit:
     :git: https://github.com/WhisperSystems/SignalProtocolKit.git
   SignalServiceKit:
-    :git: https://github.com/toshiapp/SignalServiceKit.git
+    :commit: e094330cd383b906db799ee4f4ab999bf00d232c
+    :git: https://github.com/toshiapp/Signal-iOS.git
   SocketRocket:
     :git: https://github.com/facebook/SocketRocket.git
 
@@ -127,8 +144,8 @@ CHECKOUT OPTIONS:
     :commit: f8f44d143bffd38e8470fdca0db7adf73a844956
     :git: https://github.com/WhisperSystems/SignalProtocolKit.git
   SignalServiceKit:
-    :commit: 8bb4cba28f2a4e8778628064cd5c0ab0ebf15e39
-    :git: https://github.com/toshiapp/SignalServiceKit.git
+    :commit: e094330cd383b906db799ee4f4ab999bf00d232c
+    :git: https://github.com/toshiapp/Signal-iOS.git
   SocketRocket:
     :commit: 877ac7438be3ad0b45ef5ca3969574e4b97112bf
     :git: https://github.com/facebook/SocketRocket.git
@@ -137,22 +154,24 @@ SPEC CHECKSUMS:
   '25519': dc4bad7e2dbcbf1efa121068a705a44cd98c80fc
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AxolotlKit: a9530d6835baae0f204b1f6b9dd79b7901176f0d
-  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  CocoaLumberjack: 3c8c74683302f9012bb168e1c4b7ae3c0b558431
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   HKDFKit: c058305d6f64b84f28c50bd7aa89574625bcb62a
-  libPhoneNumber-iOS: f721ae4d5854bce60934f9fb9b0b28e8e68913cb
+  libPhoneNumber-iOS: b8a1038a101c78616c4df87815ac1556349faf98
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
+  OpenSSL: 246ffb948e9d56466727fd318134af35f5aa764e
   ProtocolBuffers: d509225eb2ea43d9582a59e94348fcf86e2abd65
-  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
-  SignalServiceKit: 1bb0d177acbb3678701e1704abed6bc260ec8ac0
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  SignalServiceKit: f7a52969f5bde1fefbd1aa9c84be1a022f76191a
   SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
   SQLCipher: 43d12c0eb9c57fb438749618fc3ce0065509a559
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
   TwistedOakCollapsingFutures: f359b90f203e9ab13dfb92c9ff41842a7fe1cd0c
   UnionFind: c33be5adb12983981d6e827ea94fc7f9e370f52d
-  YapDatabase: cd911121580ff16675f65ad742a9eb0ab4d9e266
+  YapDatabase: 299a32de9d350d37a9ac5b0532609d87d5d2a5de
 
-PODFILE CHECKSUM: ee19c8632d45f3a9dc3c58b31b080559a395c4b8
+PODFILE CHECKSUM: b881dd1a07f496f34d3a447a16a14a37a9fcc500
 
 COCOAPODS: 1.2.1

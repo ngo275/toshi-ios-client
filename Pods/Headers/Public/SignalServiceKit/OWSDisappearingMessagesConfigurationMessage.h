@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/OWSDisappearingMessagesConfigurationMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/OWSDisappearingMessagesConfigurationMessage.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Attachments/TSAttachmentPointer.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Attachments/TSAttachmentPointer.h

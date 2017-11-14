@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/FilteredViews/YapDatabaseFilteredViewConnection.h
+../../../YapDatabase/YapDatabase/Extensions/FilteredView/YapDatabaseFilteredViewConnection.h

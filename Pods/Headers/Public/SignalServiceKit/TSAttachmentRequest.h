@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSAttachmentRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSAttachmentRequest.h

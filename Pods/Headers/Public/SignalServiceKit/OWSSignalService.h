@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/OWSSignalService.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/OWSSignalService.h

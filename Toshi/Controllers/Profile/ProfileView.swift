@@ -31,8 +31,9 @@ protocol ProfileViewDelegate: class {
 class ProfileView: UIView {
 
     enum ViewType {
-        case personalProfile
         case profile
+        case personalProfile
+        case personalProfileReadOnly
     }
 
     weak var personalProfileDelegate: PersonalProfileViewDelegate?
@@ -225,6 +226,12 @@ class ProfileView: UIView {
             case .personalProfile:
                 editProfileButtonHeight = 50.0
                 actionSeparatorMargin = 0.0
+                actionView.alpha = 0.0
+                rateThisUserButtonHeight = 0.0
+            case .personalProfileReadOnly:
+                editProfileButtonHeight = 0.0
+                actionSeparatorMargin = 0.0
+                actionsSeparatorView.alpha = 0.0
                 actionView.alpha = 0.0
                 rateThisUserButtonHeight = 0.0
         }

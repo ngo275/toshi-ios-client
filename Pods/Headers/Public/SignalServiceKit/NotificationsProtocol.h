@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Protocols/NotificationsProtocol.h
+../../../SignalServiceKit/SignalServiceKit/src/Protocols/NotificationsProtocol.h

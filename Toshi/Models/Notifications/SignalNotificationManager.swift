@@ -23,7 +23,7 @@ public class SignalNotificationManager: NSObject, NotificationsProtocol {
         return window.rootViewController as? TabBarController
     }
 
-    public func notifyUser(for incomingMessage: TSIncomingMessage!, in thread: TSThread!, contactsManager _: ContactsManagerProtocol!) {
+    public func notifyUser(for incomingMessage: TSIncomingMessage, in thread: TSThread, contactsManager: ContactsManagerProtocol, transaction: YapDatabaseReadTransaction) {
 
         guard UIApplication.shared.applicationState == .background || SignalNotificationManager.tabbarController?.selectedViewController != SignalNotificationManager.tabbarController?.messagingController else {
             return
@@ -55,7 +55,7 @@ public class SignalNotificationManager: NSObject, NotificationsProtocol {
     }
 
     @objc public static func updateUnreadMessagesNumber() {
-        let unreadMessagesCount = Int(TSMessagesManager.shared().unreadMessagesCount())
+        let unreadMessagesCount = Int(OWSMessageManager.shared().unreadMessagesCount())
 
         if unreadMessagesCount > 0 {
             tabbarController?.messagingController.tabBarItem.badgeValue = "\(unreadMessagesCount)"

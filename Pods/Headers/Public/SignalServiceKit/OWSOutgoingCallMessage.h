@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSOutgoingCallMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSOutgoingCallMessage.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Contacts/Threads/TSContactThread.h
+../../../SignalServiceKit/SignalServiceKit/src/Contacts/Threads/TSContactThread.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/WebSockets/TSSocketManager.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/WebSockets/TSSocketManager.h

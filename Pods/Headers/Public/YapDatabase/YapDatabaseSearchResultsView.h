@@ -1,1 +1,1 @@
-../../../YapDatabase/YapDatabase/Extensions/SearchResults/YapDatabaseSearchResultsView.h
+../../../YapDatabase/YapDatabase/Extensions/SearchResultsView/YapDatabaseSearchResultsView.h

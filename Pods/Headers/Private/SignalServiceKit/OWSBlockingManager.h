@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSBlockingManager.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSBlockingManager.h

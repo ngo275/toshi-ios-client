@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Storage/TSYapDatabaseObject.h
+../../../SignalServiceKit/SignalServiceKit/src/Storage/TSYapDatabaseObject.h

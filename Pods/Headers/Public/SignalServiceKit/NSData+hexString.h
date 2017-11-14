@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/NSData+hexString.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/NSData+hexString.h

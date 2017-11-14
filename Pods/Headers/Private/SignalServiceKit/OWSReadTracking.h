@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSReadTracking.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSReadTracking.h

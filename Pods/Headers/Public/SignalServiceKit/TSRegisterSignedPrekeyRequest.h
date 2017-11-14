@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSRegisterSignedPrekeyRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSRegisterSignedPrekeyRequest.h

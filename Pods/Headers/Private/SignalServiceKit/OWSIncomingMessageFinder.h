@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Storage/OWSIncomingMessageFinder.h
+../../../SignalServiceKit/SignalServiceKit/src/Storage/OWSIncomingMessageFinder.h

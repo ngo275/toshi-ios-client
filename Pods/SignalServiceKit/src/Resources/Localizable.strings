@@ -1,7 +1,0 @@
-
-/* Payment states */
-"payment-state-failed" = "Failed";
-"payment-state-requested" = "Pending confirmation";
-"payment-state-approved" = "Approved";
-"payment-state-rejected" = "Rejected";
-

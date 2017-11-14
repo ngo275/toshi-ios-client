@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/NSData+OWSConstantTimeCompare.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/NSData+OWSConstantTimeCompare.h

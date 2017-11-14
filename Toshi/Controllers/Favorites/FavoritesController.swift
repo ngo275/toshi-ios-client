@@ -292,7 +292,7 @@ open class FavoritesController: SweetTableController, KeyboardAdjustable, Emptia
         let options = YapDatabaseViewOptions()
         options.allowedCollections = YapWhitelistBlacklist(whitelist: Set([TokenUser.favoritesCollectionKey]))
 
-        let databaseView = YapDatabaseView(grouping: viewGrouping, sorting: viewSorting, versionTag: "1", options: options)
+        let databaseView = YapDatabaseAutoView(grouping: viewGrouping, sorting: viewSorting, versionTag: "1", options: options)
 
         let mainViewIsRegistered: Bool = database.register(databaseView, withName: TokenUser.viewExtensionName)
         let filteredViewIsRegistered = database.register(filteredView, withName: filteredDatabaseViewName)
@@ -342,15 +342,23 @@ open class FavoritesController: SweetTableController, KeyboardAdjustable, Emptia
 
             switch rowChange.type {
             case .delete:
-                tableView.deleteRows(at: [rowChange.indexPath], with: .none)
+                guard let indexPath = rowChange.indexPath else { continue }
+
+                tableView.deleteRows(at: [indexPath], with: .none)
             case .insert:
-                updateContactIfNeeded(at: rowChange.newIndexPath)
-                tableView.insertRows(at: [rowChange.newIndexPath], with: .none)
+                guard let newIndexPath = rowChange.newIndexPath else { continue }
+
+                updateContactIfNeeded(at: newIndexPath)
+                tableView.insertRows(at: [newIndexPath], with: .none)
             case .move:
-                tableView.deleteRows(at: [rowChange.indexPath], with: .none)
-                tableView.insertRows(at: [rowChange.newIndexPath], with: .none)
+                guard let newIndexPath = rowChange.newIndexPath, let indexPath = rowChange.indexPath else { continue }
+
+                tableView.deleteRows(at: [indexPath], with: .none)
+                tableView.insertRows(at: [newIndexPath], with: .none)
             case .update:
-                tableView.reloadRows(at: [rowChange.indexPath], with: .none)
+                guard let indexPath = rowChange.indexPath else { continue }
+
+                tableView.reloadRows(at: [indexPath], with: .none)
             }
         }
 

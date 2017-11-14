@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSMessageServiceParams.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSMessageServiceParams.h

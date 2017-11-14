@@ -3,7 +3,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SignalServiceKit/TSPreferences.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
 #ifdef DEBUG
@@ -28,7 +27,7 @@ typedef NS_ENUM(NSUInteger, NotificationType) {
 extern NSString *const PropertyListPreferencesSignalDatabaseCollection;
 extern NSString *const PropertyListPreferencesKeyEnableDebugLog;
 
-@interface PropertyListPreferences : NSObject <TSPreferences>
+@interface PropertyListPreferences : NSObject
 
 #pragma mark - Helpers
 

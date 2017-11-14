@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSChunkedOutputStream.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSChunkedOutputStream.h

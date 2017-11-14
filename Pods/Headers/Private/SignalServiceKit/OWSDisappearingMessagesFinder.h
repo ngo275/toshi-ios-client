@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSDisappearingMessagesFinder.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSDisappearingMessagesFinder.h

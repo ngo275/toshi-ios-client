@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/InvalidKeyMessages/TSInvalidIdentityKeyReceivingErrorMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/InvalidKeyMessages/TSInvalidIdentityKeyReceivingErrorMessage.h

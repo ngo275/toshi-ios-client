@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/OWSUploadingService.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/OWSUploadingService.h

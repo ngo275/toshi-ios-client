@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSProvisioningProtos.pb.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSProvisioningProtos.pb.h

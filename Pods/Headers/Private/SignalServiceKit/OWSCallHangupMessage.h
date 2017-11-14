@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSCallHangupMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSCallHangupMessage.h

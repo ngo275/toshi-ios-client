@@ -149,8 +149,11 @@ open class RecentViewController: SweetTableController, Emptiable {
         guard isDatabaseChanged else { return }
 
         if let insertedRow = yapDatabaseChanges.rowChanges.first(where: { $0.type == .insert }) {
-            if let thread = self.thread(at: insertedRow.newIndexPath), let contactIdentifier = thread.contactIdentifier() {
-                IDAPIClient.shared.updateContact(with: contactIdentifier)
+
+            if let newIndexPath = insertedRow.newIndexPath {
+                if let thread = self.thread(at: newIndexPath), let contactIdentifier = thread.contactIdentifier() {
+                    IDAPIClient.shared.updateContact(with: contactIdentifier)
+                }
             }
         }
 
@@ -161,17 +164,25 @@ open class RecentViewController: SweetTableController, Emptiable {
             tableView.beginUpdates()
 
             for rowChange in yapDatabaseChanges.rowChanges {
+
                 switch rowChange.type {
                 case .delete:
-                    tableView.deleteRows(at: [rowChange.indexPath], with: .left)
+                    guard let indexPath = rowChange.indexPath else { continue }
+                    tableView.deleteRows(at: [indexPath], with: .left)
                 case .insert:
-                    updateContactIfNeeded(at: rowChange.newIndexPath)
-                    tableView.insertRows(at: [rowChange.newIndexPath], with: .right)
+                    guard let newIndexPath = rowChange.newIndexPath else { continue }
+
+                    updateContactIfNeeded(at: newIndexPath)
+                    tableView.insertRows(at: [newIndexPath], with: .right)
                 case .move:
-                    tableView.deleteRows(at: [rowChange.indexPath], with: .left)
-                    tableView.insertRows(at: [rowChange.newIndexPath], with: .right)
+                    guard let indexPath = rowChange.indexPath, let newIndexPath = rowChange.newIndexPath else { continue }
+
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                    tableView.insertRows(at: [newIndexPath], with: .right)
                 case .update:
-                    tableView.reloadRows(at: [rowChange.indexPath], with: .automatic)
+                    guard let indexPath = rowChange.indexPath else { continue }
+
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
             }
 
@@ -266,7 +277,7 @@ extension RecentViewController: UITableViewDelegate {
         let action = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
             if let thread = self.thread(at: indexPath) {
 
-                TSStorageManager.shared().dbConnection?.asyncReadWrite { transaction in
+                TSStorageManager.shared().dbReadWriteConnection?.asyncReadWrite { transaction in
                     thread.remove(with: transaction)
                 }
             }

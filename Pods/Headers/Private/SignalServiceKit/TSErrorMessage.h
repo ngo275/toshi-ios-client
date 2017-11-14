@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/TSErrorMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/TSErrorMessage.h

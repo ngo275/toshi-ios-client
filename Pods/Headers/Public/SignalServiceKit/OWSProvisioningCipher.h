@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSProvisioningCipher.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSProvisioningCipher.h

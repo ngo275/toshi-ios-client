@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/OWSHTTPSecurityPolicy.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/OWSHTTPSecurityPolicy.h

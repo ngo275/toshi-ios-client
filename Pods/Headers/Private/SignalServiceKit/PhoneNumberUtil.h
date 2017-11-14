@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Contacts/PhoneNumberUtil.h
+../../../SignalServiceKit/SignalServiceKit/src/Contacts/PhoneNumberUtil.h

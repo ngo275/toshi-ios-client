@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSBlockedPhoneNumbersMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSBlockedPhoneNumbersMessage.h

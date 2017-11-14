@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/constraints/SecurityFailure.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/constraints/SecurityFailure.h

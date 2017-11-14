@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/DeviceSyncing/OWSIncomingSentMessageTranscript.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/DeviceSyncing/OWSIncomingSentMessageTranscript.h

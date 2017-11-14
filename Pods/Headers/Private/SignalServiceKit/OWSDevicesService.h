@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/OWSDevicesService.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/OWSDevicesService.h

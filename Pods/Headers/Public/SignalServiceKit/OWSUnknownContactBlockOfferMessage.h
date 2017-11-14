@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSUnknownContactBlockOfferMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSUnknownContactBlockOfferMessage.h

@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSDisappearingMessagesJob.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSDisappearingMessagesJob.h

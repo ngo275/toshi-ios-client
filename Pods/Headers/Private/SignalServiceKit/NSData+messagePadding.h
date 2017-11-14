@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/NSData+messagePadding.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/NSData+messagePadding.h

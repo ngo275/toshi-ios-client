@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSCallIceUpdateMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSCallIceUpdateMessage.h

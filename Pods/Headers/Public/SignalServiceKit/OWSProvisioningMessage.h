@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Devices/OWSProvisioningMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Devices/OWSProvisioningMessage.h

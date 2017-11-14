@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/Cryptography.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/Cryptography.h

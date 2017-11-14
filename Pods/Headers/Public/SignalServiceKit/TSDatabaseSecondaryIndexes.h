@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Storage/TSDatabaseSecondaryIndexes.h
+../../../SignalServiceKit/SignalServiceKit/src/Storage/TSDatabaseSecondaryIndexes.h

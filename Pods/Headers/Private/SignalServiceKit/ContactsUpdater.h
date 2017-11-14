@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Contacts/ContactsUpdater.h
+../../../SignalServiceKit/SignalServiceKit/src/Contacts/ContactsUpdater.h

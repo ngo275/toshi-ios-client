@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/OWSAddToContactsOfferMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/OWSAddToContactsOfferMessage.h

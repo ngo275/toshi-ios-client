@@ -1,1 +1,0 @@
-../../../SignalServiceKit/src/Messages/OWSIncomingMessageReadObserver.h

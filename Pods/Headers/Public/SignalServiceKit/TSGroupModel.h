@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/TSGroupModel.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/TSGroupModel.h

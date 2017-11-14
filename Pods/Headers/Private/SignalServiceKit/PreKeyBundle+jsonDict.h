@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/PreKeyBundle+jsonDict.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/PreKeyBundle+jsonDict.h

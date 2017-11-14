@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/MIMETypeUtil.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/MIMETypeUtil.h

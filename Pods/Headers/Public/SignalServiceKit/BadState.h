@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/constraints/BadState.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/constraints/BadState.h

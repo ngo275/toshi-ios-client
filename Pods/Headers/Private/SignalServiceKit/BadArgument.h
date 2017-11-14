@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Util/constraints/BadArgument.h
+../../../SignalServiceKit/SignalServiceKit/src/Util/constraints/BadArgument.h

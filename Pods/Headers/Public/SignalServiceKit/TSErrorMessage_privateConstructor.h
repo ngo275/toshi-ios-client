@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/TSErrorMessage_privateConstructor.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/TSErrorMessage_privateConstructor.h

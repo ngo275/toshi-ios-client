@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Security/SecurityUtils.h
+../../../SignalServiceKit/SignalServiceKit/src/Security/SecurityUtils.h

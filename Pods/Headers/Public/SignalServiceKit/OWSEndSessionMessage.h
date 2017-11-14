@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Messages/Interactions/OWSEndSessionMessage.h
+../../../SignalServiceKit/SignalServiceKit/src/Messages/Interactions/OWSEndSessionMessage.h

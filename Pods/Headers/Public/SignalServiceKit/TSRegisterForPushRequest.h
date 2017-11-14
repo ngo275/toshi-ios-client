@@ -1,1 +1,1 @@
-../../../SignalServiceKit/src/Network/API/Requests/TSRegisterForPushRequest.h
+../../../SignalServiceKit/SignalServiceKit/src/Network/API/Requests/TSRegisterForPushRequest.h
