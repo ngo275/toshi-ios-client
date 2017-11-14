@@ -20,7 +20,6 @@ import SweetUIKit
 protocol BrowseCollectionViewCellSelectionDelegate: class {
     func seeAll(for contentSection: BrowseContentSection)
     func didSelectItem(at indexPath: IndexPath, collectionView: SectionedCollectionView)
-    func willDisplayCell(_ cell: UICollectionViewCell, at indexPath: IndexPath, _ collectionView: UICollectionView)
 }
 
 class SectionedCollectionView: UICollectionView {
@@ -162,9 +161,5 @@ extension BrowseCollectionViewCell: UICollectionViewDelegate {
         if let collectionView = collectionView as? SectionedCollectionView {
             collectionViewDelegate?.didSelectItem(at: indexPath, collectionView: collectionView)
         }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        collectionViewDelegate?.willDisplayCell(cell, at: indexPath, collectionView)
     }
 }

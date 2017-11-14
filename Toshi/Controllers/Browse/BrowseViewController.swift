@@ -363,22 +363,4 @@ extension BrowseViewController: BrowseCollectionViewCellSelectionDelegate {
             Navigator.push(ProfileViewController(contact: item))
         }
     }
-    
-    func willDisplayCell(_ cell: UICollectionViewCell, at indexPath: IndexPath, _ collectionView: UICollectionView) {
-        
-        if let sectionedCollectionView = collectionView as? SectionedCollectionView, let cell = cell as? BrowseEntityCollectionViewCell {
-            
-            avatar(for: indexPath, in: sectionedCollectionView.section, completion: { [weak self] image in
-                guard let strongSelf = self else { return }
-                
-                let visibleEntities = sectionedCollectionView.indexPathsForVisibleItems.map { $0.item }
-                let visibleCategories = strongSelf.collectionView.indexPathsForVisibleItems.map { $0.item }
-                
-                if visibleEntities.contains(indexPath.item) && visibleCategories.contains(sectionedCollectionView.section) {
-                    cell.avatarImageView.image = image
-                }
-            })
-        }
-    }
 }
-
