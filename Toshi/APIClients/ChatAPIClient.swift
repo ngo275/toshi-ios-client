@@ -54,7 +54,7 @@ public class ChatAPIClient: NSObject {
         }
     }
 
-    @objc public func registerUser(completion: @escaping ((_ success: Bool, _ message: String?) -> Void) = { (Bool, String) in }) {
+    @objc public func registerUser(completion: @escaping ((_ success: Bool) -> Void) = { (Bool) in }) {
         fetchTimestamp { timestamp in
             let cereal = Cereal.shared
             let parameters = UserBootstrapParameter()
@@ -62,7 +62,7 @@ public class ChatAPIClient: NSObject {
             let payload = parameters.payload
 
             guard let data = try? JSONSerialization.data(withJSONObject: payload, options: []), let payloadString = String(data: data, encoding: .utf8) else {
-                completion(false, "Invalid payload, request could not be executed")
+                completion(false)
                 return
             }
             
@@ -75,13 +75,12 @@ public class ChatAPIClient: NSObject {
 
             self.teapot.put(path, parameters: requestParameter, headerFields: fields) { result in
                 var succeeded = false
-                var errorMessage: String?
 
                 switch result {
                 case .success(_, let response):
                     guard response.statusCode == 204 else {
                         print("Could not register user. Status code \(response.statusCode)")
-                        completion(false, "Could not register user. Status code \(response.statusCode)")
+                        completion(false)
                         return
                     }
 
@@ -90,11 +89,11 @@ public class ChatAPIClient: NSObject {
                     succeeded = true
                 case .failure(_, let response, let error):
                     print(error)
-                    errorMessage = "response: \(response), error: \(error)"
+                    succeeded = false
                 }
 
                 DispatchQueue.main.async {
-                    completion(succeeded, errorMessage)
+                    completion(succeeded)
                 }
             }
         }

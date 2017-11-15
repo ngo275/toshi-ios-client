@@ -218,9 +218,9 @@ extension ProfileViewController: ActivityIndicating {
 extension ProfileViewController: RateUserControllerDelegate {
     func didRate(_ user: TokenUser, rating: Int, review: String) {
         dismiss(animated: true) {
-            RatingsClient.shared.submit(userId: user.address, rating: rating, review: review) { [weak self] success, message in
+            RatingsClient.shared.submit(userId: user.address, rating: rating, review: review) { [weak self] success, error in
                 guard success == true else {
-                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default))
 
                     Navigator.presentModally(alert)

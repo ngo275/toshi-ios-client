@@ -95,42 +95,43 @@ class RatingsClient: NSObject {
         super.init()
     }
 
-    private func fetchTimestamp(_ completion: @escaping ((_ timestamp: Int?, _ message: String?) -> Void)) {
+    private func fetchTimestamp(_ completion: @escaping ((_ timestamp: Int?, _ error: ToshiError?) -> Void)) {
         self.teapot.get("/v1/timestamp") { (result: NetworkResult) in
             switch result {
             case .success(let json, _):
 
                 guard let json = json?.dictionary, let timestamp = json["timestamp"] as? Int else {
                     print("Invalid response - Fetch timestamp")
-                    completion(nil, "Invalid response - Fetch timestamp")
+                    completion(nil, .invalidPayload)
                     return
                 }
 
                 completion(timestamp, nil)
             case .failure(_, _, let error):
-                completion(nil, "Error fetching timestamp: \(error)")
+                completion(nil, ToshiError(withTeapotError: error, errorDescription: "Error fetching timestamp"))
                 
             }
         }
     }
 
-    public func submit(userId: String, rating: Int, review: String, completion: @escaping ((_ success: Bool, _ message: String) -> Void)) {
-        fetchTimestamp { timestamp, message in
+    public func submit(userId: String, rating: Int, review: String, completion: @escaping ((_ success: Bool, _ error: ToshiError?) -> Void)) {
+        fetchTimestamp { timestamp, error in
 
             guard let timestamp = timestamp else {
-                completion(false, message ?? "")
+                completion(false, error)
                 return
             }
             let cereal = Cereal.shared
             let path = "/v1/review/submit"
             let payload: [String: Any] = [
                 "rating": rating,
+                "rating": rating,
                 "reviewee": userId,
                 "review": review
             ]
 
             guard let data = try? JSONSerialization.data(withJSONObject: payload, options: []), let payloadString = String(data: data, encoding: .utf8) else {
-                completion(false, "Invalid payload, request could not be executed")
+                completion(false, .invalidPayload)
 
                 return
             }
@@ -145,14 +146,14 @@ class RatingsClient: NSObject {
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        completion(true, "")
-                    case .failure(let json, _, _):
+                        completion(true, nil)
+                    case .failure(let json, _, let teapotError):
                         guard let json = json?.dictionary, let errors = json["errors"] as? [Any], let error = errors.first as? [String: Any], let message = error["message"] as? String else {
-                            completion(false, "Unknown error")
+                            completion(false, ToshiError(withTeapotError: teapotError))
                             return
                         }
 
-                        completion(false, message)
+                        completion(false, ToshiError(withTeapotError: teapotError, errorDescription: message))
                     }
                 }
             }
