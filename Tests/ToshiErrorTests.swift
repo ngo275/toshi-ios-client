@@ -33,7 +33,7 @@ class ToshiErrorTests: QuickSpec {
                     expect(toshiError).toNot(beNil())
 
                     expect(toshiError?.responseStatus).to(equal(400))
-                    expect(toshiError?.type).to(equal(ToshiError.ErrorType.invalidResponseStatus))
+                    expect(toshiError?.type).to(equal(.ErrorType.invalidResponseStatus))
                     expect(toshiError?.description).to(equal("Teapot error description"))
                 }
 

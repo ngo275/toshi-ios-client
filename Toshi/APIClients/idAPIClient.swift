@@ -277,7 +277,7 @@ import Teapot
             let path = "/v1/user"
 
             guard let payload = try? JSONSerialization.data(withJSONObject: userDict, options: []), let payloadString = String(data: payload, encoding: .utf8) else {
-                completion(false, ToshiError.invalidPayload)
+                completion(false, .invalidPayload)
                 return
             }
 

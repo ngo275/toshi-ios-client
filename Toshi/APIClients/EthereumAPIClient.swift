@@ -98,7 +98,7 @@ public class EthereumAPIClient: NSObject {
 
             guard let data = try? JSONSerialization.data(withJSONObject: params, options: []), let payloadString = String(data: data, encoding: .utf8) else {
                 print("Invalid payload, request could not be executed")
-                completion(false, nil, ToshiError.invalidPayload)
+                completion(false, nil, .invalidPayload)
                 return
             }
 
@@ -142,8 +142,8 @@ public class EthereumAPIClient: NSObject {
 
             switch result {
             case .success(let json, let response):
-                guard response.statusCode == 200 else { fetchedBalanceCompletion(0, ToshiError.invalidResponseStatus(response.statusCode)); return }
-                guard let json = json?.dictionary else { fetchedBalanceCompletion(0, ToshiError.invalidResponseJSON); return }
+                guard response.statusCode == 200 else { fetchedBalanceCompletion(0, .invalidResponseStatus(response.statusCode)); return }
+                guard let json = json?.dictionary else { fetchedBalanceCompletion(0, .invalidResponseJSON); return }
 
                 let unconfirmedBalanceString = json["unconfirmed_balance"] as? String ?? "0"
                 let unconfirmedBalance = NSDecimalNumber(hexadecimalString: unconfirmedBalanceString)
