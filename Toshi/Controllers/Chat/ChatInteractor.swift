@@ -241,6 +241,9 @@ final class ChatInteractor: NSObject {
         } else if let interaction = signalMessage as? TSIncomingMessage {
             let sofaWrapper = SofaWrapper.wrapper(content: interaction.body ?? "")
 
+            let senderId = interaction.authorId
+            AvatarManager.shared.downloadAvatarForUserId(senderId)
+
             if interaction.body != sofaWrapper.content {
                 interaction.body = sofaWrapper.content
                 interaction.save()

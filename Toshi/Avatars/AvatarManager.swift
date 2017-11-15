@@ -39,21 +39,6 @@ final class AvatarManager: NSObject {
         return queue
     }()
 
-    func avatar(for path: String, completion: @escaping ((UIImage?, String?) -> Void)) {
-        guard let avatar = imageCache.object(forKey: path) else {
-            downloadAvatar(path: path) { image in
-                completion(image, path)
-            }
-            return
-        }
-
-        completion(avatar, path)
-    }
-
-    @objc func cachedAvatar(for path: String) -> UIImage? {
-        return imageCache.object(forKey: path)
-    }
-
     func refreshAvatar(at path: String) {
         imageCache.removeObject(forKey: path)
     }
@@ -75,19 +60,19 @@ final class AvatarManager: NSObject {
             }
 
             if let currentUserAvatarPath = TokenUser.current?.avatarPath {
-                self?.downloadAvatar(for: currentUserAvatarPath)
+                self?.downloadAvatarForPath(currentUserAvatarPath)
             }
 
             for path in avatarPaths {
                 if operation.isCancelled { return }
-                self?.downloadAvatar(for: path)
+                self?.downloadAvatarForPath(path)
             }
         }
 
         downloadOperationQueue.addOperation(operation)
     }
 
-    func downloadAvatar(for path: String) {
+    func downloadAvatarForPath(_ path: String) {
         guard imageCache.object(forKey: path) == nil else { return }
 
         downloadAvatar(path: path) { _ in }
@@ -112,16 +97,42 @@ final class AvatarManager: NSObject {
         return teapots[base]
     }
 
-    func downloadAvatar(path: String, completion: @escaping (_ image: UIImage?) -> Void) {
+    private var userIdToAvatarPathMap: [String: String] = [:]
+
+    func downloadAvatarForUserId(_ userId: String, completion: ((_ image: UIImage?) -> Void)? = nil) {
+        if let avatar = cachedAvatar(forUserId: userId) {
+            completion?(avatar)
+            return
+        }
+
+        IDAPIClient.shared.retrieveUser(username: userId) { [weak self] user in
+
+            guard let retrievedUser = user else {
+                completion?(nil)
+                return
+            }
+
+            self?.userIdToAvatarPathMap[userId] = retrievedUser.avatarPath
+            self?.downloadAvatar(path: retrievedUser.avatarPath, completion: completion)
+        }
+    }
+
+    func downloadAvatar(path: String, completion: ((_ image: UIImage?) -> Void)? = nil) {
         DispatchQueue.global().async {
+
+            if let cachedAvatar = self.cachedAvatar(for: path) {
+                completion?(cachedAvatar)
+                return
+            }
+
             guard let url = URL(string: path), let teapot = self.teapot(for: url) else {
-                completion(nil)
+                completion?(nil)
                 return
             }
 
             teapot.get(url.relativePath) { [weak self] (result: NetworkImageResult) in
                 guard let strongSelf = self else {
-                    completion(nil)
+                    completion?(nil)
                     return
                 }
 
@@ -136,9 +147,39 @@ final class AvatarManager: NSObject {
                 }
 
                 DispatchQueue.main.async {
-                    completion(resultImage)
+                    completion?(resultImage)
                 }
             }
         }
+    }
+
+    func avatar(for path: String, completion: @escaping ((UIImage?, String?) -> Void)) {
+        guard let avatar = imageCache.object(forKey: path) else {
+            downloadAvatar(path: path) { image in
+                completion(image, path)
+            }
+            return
+        }
+
+        completion(avatar, path)
+    }
+
+    @objc func cachedAvatar(for path: String) -> UIImage? {
+        return imageCache.object(forKey: path)
+    }
+
+    func cachedAvatar(forUserId userId: String) -> UIImage? {
+        guard let avatarPath = userIdToAvatarPathMap[userId] else { return nil }
+
+        return cachedAvatar(for: avatarPath)
+    }
+
+    func avatar(forUserId userId: String, completion: @escaping ((UIImage?, String?) -> Void)) {
+        guard let avatarPath = userIdToAvatarPathMap[userId] else {
+            completion(nil, nil)
+            return
+        }
+
+        avatar(for: avatarPath, completion: completion)
     }
 }

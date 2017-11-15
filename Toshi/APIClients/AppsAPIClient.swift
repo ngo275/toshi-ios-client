@@ -71,7 +71,7 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
                     TokenUser(json: json)
                 }
 
-                apps.forEach { AvatarManager.shared.downloadAvatar(for: $0.avatarPath) }
+                apps.forEach { AvatarManager.shared.downloadAvatarForPath($0.avatarPath) }
 
                 strongSelf.topRatedAppsCachedData.objects = apps
                 strongSelf.cache.setObject(strongSelf.topRatedAppsCachedData, forKey: strongSelf.topRatedAppsCachedDataKey)
@@ -108,7 +108,7 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
                     TokenUser(json: json)
                 }
 
-                apps.forEach { AvatarManager.shared.downloadAvatar(for: $0.avatarPath) }
+                apps.forEach { AvatarManager.shared.downloadAvatarForPath($0.avatarPath) }
 
                 strongSelf.featuredAppsCachedData.objects = apps
                 strongSelf.cache.setObject(strongSelf.featuredAppsCachedData, forKey: strongSelf.featuredAppsCachedDataKey)

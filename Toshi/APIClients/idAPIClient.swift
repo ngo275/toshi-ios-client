@@ -424,7 +424,7 @@ import Teapot
                     TokenUser(json: userJSON)
                 }
 
-                contacts.forEach { AvatarManager.shared.downloadAvatar(for: $0.avatarPath) }
+                contacts.forEach { AvatarManager.shared.downloadAvatarForPath($0.avatarPath) }
 
                 strongSelf.topRatedUsersCachedData.objects = contacts
                 strongSelf.cache.setObject(strongSelf.topRatedUsersCachedData, forKey: strongSelf.topRatedUsersCachedDataKey)
@@ -462,7 +462,7 @@ import Teapot
                     TokenUser(json: userJSON)
                 }
 
-                contacts.forEach { AvatarManager.shared.downloadAvatar(for: $0.avatarPath) }
+                contacts.forEach { AvatarManager.shared.downloadAvatarForPath($0.avatarPath) }
 
                 strongSelf.latestUsersCachedData.objects = contacts
                 strongSelf.cache.setObject(strongSelf.latestUsersCachedData, forKey: strongSelf.latestUsersCachedDataKey)

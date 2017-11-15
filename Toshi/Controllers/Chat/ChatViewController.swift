@@ -439,8 +439,8 @@ extension ChatViewController: UITableViewDataSource {
         
         if let cell = cell as? MessagesBasicCell {
 
-            if !message.isOutgoing, let avatarPath = self.viewModel.contact?.avatarPath {
-                AvatarManager.shared.avatar(for: avatarPath, completion: { image, _ in
+            if !messageModel.isOutgoing, let incomingSignalMessage = messageModel.signalMessage as? TSIncomingMessage, let userId = incomingSignalMessage.authorId as String? {
+                AvatarManager.shared.avatar(forUserId: userId, completion: { image, _ in
                     cell.avatarImageView.image = image
                 })
             }
