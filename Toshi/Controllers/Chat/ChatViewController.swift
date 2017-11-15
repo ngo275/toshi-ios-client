@@ -434,8 +434,8 @@ extension ChatViewController: UITableViewDataSource {
 
     public func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let message = viewModel.messageModels[indexPath.item]
-        let cell = tableView.dequeueReusableCell(withIdentifier: message.reuseIdentifier, for: indexPath)
+        let messageModel = viewModel.messageModels[indexPath.item]
+        let cell = tableView.dequeueReusableCell(withIdentifier: messageModel.reuseIdentifier, for: indexPath)
         
         if let cell = cell as? MessagesBasicCell {
 
@@ -445,30 +445,30 @@ extension ChatViewController: UITableViewDataSource {
                 })
             }
 
-            cell.isOutGoing = message.isOutgoing
+            cell.isOutGoing = messageModel.isOutgoing
             cell.positionType = positionType(for: indexPath)
 
-            updateMessageState(message, in: cell)
+            updateMessageState(messageModel, in: cell)
         }
 
-        if let cell = cell as? MessagesImageCell, message.type == .image {
-            cell.messageImage = message.image
-        } else if let cell = cell as? MessagesPaymentCell, (message.type == .payment) || (message.type == .paymentRequest), let signalMessage = message.signalMessage {
-            cell.titleLabel.text = message.title
-            cell.subtitleLabel.text = message.subtitle
-            cell.setPaymentState(signalMessage.paymentState, paymentStateText: signalMessage.paymentStateText(), for: message.type)
+        if let cell = cell as? MessagesImageCell, messageModel.type == .image {
+            cell.messageImage = messageModel.image
+        } else if let cell = cell as? MessagesPaymentCell, (messageModel.type == .payment) || (messageModel.type == .paymentRequest), let signalMessage = messageModel.signalMessage {
+            cell.titleLabel.text = messageModel.title
+            cell.subtitleLabel.text = messageModel.subtitle
+            cell.setPaymentState(signalMessage.paymentState, paymentStateText: signalMessage.paymentStateText(), for: messageModel.type)
             cell.selectionDelegate = self
 
-            let isPaymentOpen = (message.signalMessage?.paymentState ?? .none) == .none
-            let isMessageActionable = message.isActionable
+            let isPaymentOpen = (messageModel.signalMessage?.paymentState ?? .none) == .none
+            let isMessageActionable = messageModel.isActionable
 
             let isOpenPaymentRequest = isMessageActionable && isPaymentOpen
             if isOpenPaymentRequest {
                 showActiveNetworkViewIfNeeded()
             }
 
-        } else if let cell = cell as? MessagesTextCell, message.type == .simple {
-            cell.messageText = message.text
+        } else if let cell = cell as? MessagesTextCell, messageModel.type == .simple {
+            cell.messageText = messageModel.text
         }
 
         cell.transform = self.tableView.transform
