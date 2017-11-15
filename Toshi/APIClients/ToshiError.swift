@@ -6,7 +6,7 @@
 import Foundation
 import Teapot
 
-public struct ToshiError: LocalizedError {
+public struct ToshiError: Error, CustomStringConvertible {
     static func dataTaskError(withUnderLyingError error: Error) -> TeapotError {
         let errorDescription = String(format: NSLocalizedString("toshi_error_data_task_error", bundle: Teapot.localizationBundle, comment: ""), error.localizedDescription)
 
@@ -21,7 +21,6 @@ public struct ToshiError: LocalizedError {
 
         return ToshiError(withType: .invalidResponseStatus, description: errorDescription, responseStatus: status)
     }
-
 
     enum ErrorType: Int {
         case dataTaskError

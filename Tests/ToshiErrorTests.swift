@@ -32,11 +32,9 @@ class ToshiErrorTests: QuickSpec {
                     let toshiError = ToshiError(withTeapotError: teapotError)
                     expect(toshiError).toNot(beNil())
 
-                    expect(toshiError!.responseStatus).to(equal(400))
-                    expect(toshiError!.type).to(equal(ToshiError.ErrorType.invalidResponseStatus))
-
-                    //for some reason Nimble's string comparison does not work here
-                    XCTAssertEqual(toshiError!.description, "Teapot error description")
+                    expect(toshiError?.responseStatus).to(equal(400))
+                    expect(toshiError?.type).to(equal(ToshiError.ErrorType.invalidResponseStatus))
+                    expect(toshiError?.description).to(equal("Teapot error description"))
                 }
 
                 it("doesn't initialise from an invalid teapot error type") {
