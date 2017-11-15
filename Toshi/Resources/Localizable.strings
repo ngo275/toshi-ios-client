@@ -237,3 +237,4 @@
 /* Toshi error messages*/
 "toshi_error_invalid_payload" = "Invalid payload, request could not be executed";
 "toshi_error_invalid_response_json" = "We received invalid json from the server";
+"toshi_error_data_task_error" = "Data task error, request could not be completed";

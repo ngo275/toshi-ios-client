@@ -61,8 +61,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getTopRatedApps { users, error in
                             expect(users?.count).to(equal(0))
-                            expect(error?.description).to(equal("An error occurred: request response status reported an issue. Status code: 401."))
-
+                            expect(error?.type).to(equal(.invalidResponseStatus))
                             done()
                         }
                     }
@@ -75,7 +74,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getFeaturedApps { users, error in
                             expect(users?.count).to(equal(0))
-                            expect(error?.description).to(equal("An error occurred: request response status reported an issue. Status code: 401."))
+                            expect(error?.type).to(equal(.invalidResponseStatus))
                             done()
                         }
                     }
@@ -91,8 +90,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getTopRatedApps { users, error in
                             expect(users?.count).to(equal(0))
-                            expect(error?.description).to(equal("An error occurred: request response status reported an issue. Status code: 404."))
-
+                            expect(error?.type).to(equal(.invalidResponseStatus))
                             done()
                         }
                     }
@@ -105,7 +103,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getFeaturedApps { users, error in
                             expect(users?.count).to(equal(0))
-                            expect(error?.description).to(equal("An error occurred: request response status reported an issue. Status code: 404."))
+                            expect(error?.type).to(equal(.invalidResponseStatus))
                             done()
                         }
                     }
@@ -121,7 +119,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getTopRatedApps { users, error in
                             expect(users?.count).to(beNil())
-                            expect(error?.description).to(equal("We received invalid json from the server"))
+                            expect(error?.type).to(equal(.invalidResponseJSON))
 
                             done()
                         }
@@ -135,7 +133,7 @@ class AppsAPIClientTests: QuickSpec {
                     waitUntil { done in
                         subject.getFeaturedApps { users, error in
                             expect(users?.count).to(beNil())
-                            expect(error?.description).to(equal("We received invalid json from the server"))
+                            expect(error?.type).to(equal(.invalidResponseJSON))
                             done()
                         }
                     }

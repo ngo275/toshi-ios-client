@@ -1,7 +1,17 @@
+// Copyright (c) 2017 Token Browser, Inc
 //
-// Created by Marijn Schilling on 01/11/2017.
-// Copyright (c) 2017 Bakken&Baeck. All rights reserved.
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
 import Teapot
@@ -14,7 +24,7 @@ public struct ToshiError: Error, CustomStringConvertible {
     }
 
     static let invalidPayload = ToshiError(withType: .invalidPayload, description: Localized("toshi_error_invalid_payload"))
-    static let invalidResponseJSON = ToshiError(withType: .invalidPayload, description: Localized("toshi_error_invalid_response_json"))
+    static let invalidResponseJSON = ToshiError(withType: .invalidResponseJSON, description: Localized("toshi_error_invalid_response_json"))
 
     static func invalidResponseStatus(_ status: Int) -> ToshiError {
         let errorDescription = String(format: NSLocalizedString("teapot_invalid_response_status", bundle: Teapot.localizationBundle, comment: ""), status)
@@ -22,7 +32,7 @@ public struct ToshiError: Error, CustomStringConvertible {
         return ToshiError(withType: .invalidResponseStatus, description: errorDescription, responseStatus: status)
     }
 
-    enum ErrorType: Int {
+    public enum ErrorType: Int {
         case dataTaskError
         case invalidPayload
         case invalidRequestPath
@@ -30,10 +40,10 @@ public struct ToshiError: Error, CustomStringConvertible {
         case invalidResponseJSON
     }
 
-    let type: ErrorType
-    public var description: String
-    let responseStatus: Int?
-    let underlyingError: Error?
+    public let type: ErrorType
+    public let description: String
+    public let responseStatus: Int?
+    public let underlyingError: Error?
 
 
     init(withType errorType: ErrorType, description: String, responseStatus: Int? = nil, underlyingError: Error? = nil) {
@@ -45,7 +55,7 @@ public struct ToshiError: Error, CustomStringConvertible {
 }
 
 extension ToshiError {
-    static func teapotErrorTypeToToshiErrorType(teapotErrorType: TeapotError.ErrorType) -> ErrorType? {
+    static func teapotErrorTypeToToshiErrorType(_ teapotErrorType: TeapotError.ErrorType) -> ErrorType? {
         switch teapotErrorType {
         case .invalidResponseStatus:
             return .invalidResponseStatus
@@ -56,12 +66,11 @@ extension ToshiError {
         case .invalidRequestPath:
             return .invalidRequestPath
         default: return nil
-
         }
     }
 
     init?(withTeapotError teapotError: TeapotError, errorDescription: String? = nil) {
-        guard let errorType = ToshiError.teapotErrorTypeToToshiErrorType(teapotErrorType: teapotError.type) else { return nil }
+        guard let errorType = ToshiError.teapotErrorTypeToToshiErrorType(teapotError.type) else { return nil }
 
         self.init(withType: errorType, description: errorDescription ?? teapotError.errorDescription, responseStatus: teapotError.responseStatus, underlyingError: teapotError.underlyingError)
 
