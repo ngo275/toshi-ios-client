@@ -179,7 +179,7 @@ NSString *const RequiresSignIn = @"RequiresSignIn";
     [[Navigator tabbarController] setupControllers];
 
     __weak typeof(self)weakSelf = self;
-    [[IDAPIClient shared] registerUserIfNeeded:^(UserRegisterStatus status, NSString *message){
+    [[IDAPIClient shared] registerUserIfNeeded:^(UserRegisterStatus status){
 
         if (status != UserRegisterStatusFailed) {
 

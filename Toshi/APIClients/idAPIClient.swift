@@ -134,19 +134,20 @@ import Teapot
         
     }
 
-    func fetchTimestamp(_ completion: @escaping ((_ timestamp: Int?, _ error: Error?) -> Void)) {
+    func fetchTimestamp(_ completion: @escaping ((_ timestamp: Int?, _ error: ToshiError?) -> Void)) {
 
         self.teapot.get("/v1/timestamp") { (result: NetworkResult) in
             switch result {
             case .success(let json, _):
                 guard let json = json?.dictionary, let timestamp = json["timestamp"] as? Int else {
                     print("No response json - Fetch timestamp")
+                    completion(nil, .invalidResponseJSON)
                     return
                 }
 
                 completion(timestamp, nil)
             case .failure(_, _, let error):
-                completion(nil, error)
+                completion(nil, ToshiError(withTeapotError: error))
             }
         }
     }
@@ -162,17 +163,17 @@ import Teapot
         updateUser(userDict) { _, _ in }
     }
 
-    @objc public func registerUserIfNeeded(_ success: @escaping ((_ userRegisterStatus: UserRegisterStatus, _ message: String?) -> Void)) {
+    @objc public func registerUserIfNeeded(_ success: @escaping ((_ userRegisterStatus: UserRegisterStatus) -> Void)) {
         retrieveUser(username: Cereal.shared.address) { user in
 
             guard user == nil else {
-                success(.existing, nil)
+                success(.existing)
                 return
             }
 
             self.fetchTimestamp { timestamp, error in
                 guard let timestamp = timestamp else {
-                    success(.failed, "Unable to fetch timestamp \(String(describing: error))")
+                    success(.failed)
                     return
                 }
                 
@@ -183,7 +184,7 @@ import Teapot
                 ]
 
                 guard let data = try? JSONSerialization.data(withJSONObject: parameters, options: []), let parametersString = String(data: data, encoding: .utf8) else {
-                    success(.failed, "Invalid payload, request could not be executed")
+                    success(.failed)
                     return
                 }
 
@@ -210,7 +211,7 @@ import Teapot
                     }
 
                     DispatchQueue.main.async {
-                        success(status, nil)
+                        success(status)
                     }
                 }
                 
@@ -218,10 +219,10 @@ import Teapot
         }
     }
 
-    public func updateAvatar(_ avatar: UIImage, completion: @escaping ((_ success: Bool) -> Void)) {
+    public func updateAvatar(_ avatar: UIImage, completion: @escaping ((_ success: Bool, _ error: ToshiError?) -> Void)) {
         fetchTimestamp { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(false)
+                completion(false, error)
                 return
             }
 
@@ -237,11 +238,12 @@ import Teapot
 
             self.teapot.put(path, parameters: json, headerFields: fields) { result in
                 var succeeded = false
+                var toshiError: ToshiError?
 
                 switch result {
                 case .success(let json, _):
                     guard let userDict = json?.dictionary else {
-                        completion(false)
+                        completion(false, .invalidResponseJSON)
                         return
                     }
 
@@ -253,20 +255,21 @@ import Teapot
                     succeeded = true
                 case .failure(_, _, let error):
                     print(error)
+                    toshiError = ToshiError(withTeapotError: error)
                 }
 
                 DispatchQueue.main.async {
-                    completion(succeeded)
+                    completion(succeeded, toshiError)
                 }
             }
             
         }
     }
 
-    public func updateUser(_ userDict: [String: Any], completion: @escaping ((_ success: Bool, _ message: String?) -> Void)) {
+    public func updateUser(_ userDict: [String: Any], completion: @escaping ((_ success: Bool, _ error: ToshiError?) -> Void)) {
         fetchTimestamp { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(false, "Unable to fetch timestamp \(String(describing: error))")
+                completion(false, error)
                 return
             }
 
@@ -274,7 +277,7 @@ import Teapot
             let path = "/v1/user"
 
             guard let payload = try? JSONSerialization.data(withJSONObject: userDict, options: []), let payloadString = String(data: payload, encoding: .utf8) else {
-                completion(false, "Invalid payload, request could not be executed")
+                completion(false, ToshiError.invalidPayload)
                 return
             }
 
@@ -286,25 +289,30 @@ import Teapot
 
             self.teapot.put("/v1/user", parameters: json, headerFields: fields) { result in
                 var succeeded = false
-                var errorMessage: String?
+                var toshiError: ToshiError?
 
                 switch result {
                 case .success(let json, let response):
                     guard response.statusCode == 200, let json = json?.dictionary else {
                         print("Invalid response - Update user")
-                        completion(false, "Something went wrong")
+                        completion(false, ToshiError(withType: .invalidResponseStatus, description: "User could not be updated", responseStatus: response.statusCode))
                         return
                     }
 
                     TokenUser.current?.update(json: json)
                     succeeded = true
                 case .failure(let json, _, let error):
-                    let errors = json?.dictionary?["errors"] as? [[String: Any]]
-                    errorMessage = (errors?.first?["message"] as? String) ?? error.localizedDescription
+
+                    if let errors = json?.dictionary?["errors"] as? [[String: Any]], let errorMessage = (errors.first?["message"] as? String) {
+                        toshiError = ToshiError(withTeapotError: error, errorDescription: errorMessage)
+                    } else {
+                        toshiError = ToshiError(withTeapotError: error)
+                    }
+
                 }
 
                 DispatchQueue.main.async {
-                    completion(succeeded, errorMessage)
+                    completion(succeeded, toshiError)
                 }
             }
         }
@@ -479,10 +487,10 @@ import Teapot
         }
     }
 
-    public func reportUser(address: String, reason: String = "", completion: @escaping ((_ success: Bool, _ message: String) -> Void) = { (Bool, String) in }) {
+    public func reportUser(address: String, reason: String = "", completion: @escaping ((_ success: Bool, _ error: ToshiError?) -> Void) = { (Bool, String) in }) {
         fetchTimestamp { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(false, "Unable to fetch timestamp \(String(describing: error))")
+                completion(false, error)
                 return
             }
 
@@ -495,7 +503,7 @@ import Teapot
             ]
 
             guard let payloadData = try? JSONSerialization.data(withJSONObject: payload, options: []), let payloadString = String(data: payloadData, encoding: .utf8) else {
-                completion(false, "Invalid payload, request could not be executed")
+                completion(false, .invalidPayload)
                 return
             }
 
@@ -507,33 +515,36 @@ import Teapot
 
             self.teapot.post(path, parameters: json, headerFields: fields) { result in
                 var succeeded = false
-                var errorMessage = ""
+                var toshiError: ToshiError?
 
                 switch result {
                 case .success(_, let response):
                     guard response.statusCode == 204 else {
                         print("Invalid response - Report user")
-                        completion(false, "Something went wrong")
+                        completion(false, ToshiError(withType: .invalidResponseStatus, description: "Request to report user could not be completed", responseStatus: response.statusCode))
                         return
                     }
 
                     succeeded = true
-                case .failure(let json, _, _):
-                    let errors = json?.dictionary?["errors"] as? [[String: Any]]
-                    errorMessage = (errors?.first?["message"] as? String) ?? Localized("request_generic_error")
+                case .failure(let json, _, let error):
+                    if let errors = json?.dictionary?["errors"] as? [[String: Any]], let errorMessage = errors.first?["message"] as? String {
+                        toshiError = ToshiError(withTeapotError: error, errorDescription: errorMessage)
+                    } else {
+                        toshiError = ToshiError(withTeapotError: error)
+                    }
                 }
 
                 DispatchQueue.main.async {
-                    completion(succeeded, errorMessage)
+                    completion(succeeded, toshiError)
                 }
             }
         }
     }
 
-    public func adminLogin(loginToken: String, completion: @escaping ((_ success: Bool, _ message: String) -> Void) = { (Bool, String) in }) {
+    public func adminLogin(loginToken: String, completion: @escaping ((_ success: Bool, _ error: ToshiError?) -> Void) = { (Bool, String) in }) {
         fetchTimestamp { timestamp, error in
             guard let timestamp = timestamp else {
-                completion(false, "Unable to fetch timestamp \(String(describing: error))")
+                completion(false, error)
                 return
             }
 
@@ -546,24 +557,27 @@ import Teapot
 
             self.teapot.get(path, headerFields: fields) { result in
                 var succeeded = false
-                var errorMessage = ""
+                var toshiError: ToshiError?
 
                 switch result {
                 case .success(_, let response):
                     guard response.statusCode == 204 else {
                         print("Invalid response - Login")
-                        completion(false, Localized("request_generic_error"))
+                        completion(false, ToshiError(withType: .invalidResponseStatus, description: "Request to login as admin could not be completed", responseStatus: response.statusCode))
                         return
                     }
 
                     succeeded = true
-                case .failure(let json, _, _):
-                    let errors = json?.dictionary?["errors"] as? [[String: Any]]
-                    errorMessage = (errors?.first?["message"] as? String) ?? Localized("request_generic_error")
+                case .failure(let json, _, let error):
+                    if let errors = json?.dictionary?["errors"] as? [[String: Any]], let errorMessage = (errors.first?["message"] as? String) {
+                        toshiError = ToshiError(withTeapotError: error, errorDescription: errorMessage)
+                    } else {
+                        toshiError = ToshiError(withTeapotError: error)
+                    }
                 }
 
                 DispatchQueue.main.async {
-                    completion(succeeded, errorMessage)
+                    completion(succeeded, toshiError)
                 }
             }
         }

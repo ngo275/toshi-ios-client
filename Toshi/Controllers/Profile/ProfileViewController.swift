@@ -164,8 +164,8 @@ public class ProfileViewController: UIViewController {
         }
 
         let reportAction = UIAlertAction(title: Localized("report_action_title"), style: .destructive) { _ in
-            self.idAPIClient.reportUser(address: address) { success, errorMessage in
-                self.showReportUserFeedbackAlert(success, message: errorMessage)
+            self.idAPIClient.reportUser(address: address) { success, error in
+                self.showReportUserFeedbackAlert(success, message: error?.description)
             }
         }
 
@@ -175,7 +175,7 @@ public class ProfileViewController: UIViewController {
         Navigator.presentModally(actions)
     }
 
-    private func showReportUserFeedbackAlert(_ success: Bool, message: String) {
+    private func showReportUserFeedbackAlert(_ success: Bool, message: String?) {
         guard success else {
             let alert = UIAlertController.dismissableAlert(title: Localized("error_title"), message: message)
             Navigator.presentModally(alert)

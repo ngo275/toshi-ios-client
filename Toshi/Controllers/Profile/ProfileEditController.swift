@@ -283,19 +283,20 @@ open class ProfileEditController: UIViewController, KeyboardAdjustable, UINaviga
             TokenUser.Constants.verified: user.verified
         ]
 
-        idAPIClient.updateUser(userDict) { [weak self] userUpdated, message in
+        idAPIClient.updateUser(userDict) { [weak self] userUpdated, error in
 
             let cachedAvatar = AvatarManager.shared.cachedAvatar(for: user.avatarPath)
 
+
             if let image = self?.avatarImageView.image, image != cachedAvatar {
 
-                self?.idAPIClient.updateAvatar(image) { [weak self] avatarUpdated in
+                self?.idAPIClient.updateAvatar(image) { [weak self] avatarUpdated, error in
                     let success = userUpdated == true && avatarUpdated == true
 
-                    self?.completeEdit(success: success, message: message)
+                    self?.completeEdit(success: success, message: error?.description)
                 }
             } else {
-                self?.completeEdit(success: userUpdated, message: message)
+                self?.completeEdit(success: userUpdated, message: error?.description)
             }
         }
     }

@@ -73,6 +73,5 @@ extension ToshiError {
         guard let errorType = ToshiError.teapotErrorTypeToToshiErrorType(teapotError.type) else { return nil }
 
         self.init(withType: errorType, description: errorDescription ?? teapotError.errorDescription, responseStatus: teapotError.responseStatus, underlyingError: teapotError.underlyingError)
-
     }
 }
