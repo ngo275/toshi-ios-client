@@ -97,8 +97,6 @@ final class AvatarManager: NSObject {
         return teapots[base]
     }
 
-    private var userIdToAvatarPathMap: [String: String] = [:]
-
     func downloadAvatarForUserId(_ userId: String, completion: ((_ image: UIImage?) -> Void)? = nil) {
         if let avatar = cachedAvatar(forUserId: userId) {
             completion?(avatar)
@@ -112,7 +110,7 @@ final class AvatarManager: NSObject {
                 return
             }
 
-            self?.userIdToAvatarPathMap[userId] = retrievedUser.avatarPath
+            UserDefaults.standard.set(retrievedUser.avatarPath, forKey: userId)
             self?.downloadAvatar(path: retrievedUser.avatarPath, completion: completion)
         }
     }
@@ -169,17 +167,21 @@ final class AvatarManager: NSObject {
     }
 
     func cachedAvatar(forUserId userId: String) -> UIImage? {
-        guard let avatarPath = userIdToAvatarPathMap[userId] else { return nil }
+        guard let avatarPath = UserDefaults.standard.object(forKey: userId) as? String else { return nil }
 
         return cachedAvatar(for: avatarPath)
     }
 
     func avatar(forUserId userId: String, completion: @escaping ((UIImage?, String?) -> Void)) {
-        guard let avatarPath = userIdToAvatarPathMap[userId] else {
-            completion(nil, nil)
+        guard let avatarPath = UserDefaults.standard.object(forKey: userId) as? String else {
+            downloadAvatarForUserId(userId, completion: { image in
+                completion(image, userId)
+            })
+
             return
         }
 
         avatar(for: avatarPath, completion: completion)
     }
 }
+
