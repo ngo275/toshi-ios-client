@@ -161,6 +161,8 @@ final class ChatViewController: UIViewController, UINavigationControllerDelegate
             AvatarManager.shared.avatar(for: avatarPath, completion: { [weak self] image, _ in
                 self?.avatarImageView.image = image
             })
+        } else if thread.isGroupThread() {
+            avatarImageView.image = (thread as? TSGroupThread)?.groupModel.groupImage
         }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatarImageView)
@@ -173,7 +175,6 @@ final class ChatViewController: UIViewController, UINavigationControllerDelegate
         super.viewDidAppear(animated)
 
         viewModel.markAllMessagesAsRead()
-        SignalNotificationManager.updateUnreadMessagesNumber()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -185,7 +186,6 @@ final class ChatViewController: UIViewController, UINavigationControllerDelegate
         viewModel.saveDraftIfNeeded(inputViewText: textInputView.text)
 
         viewModel.markAllMessagesAsRead()
-        SignalNotificationManager.updateUnreadMessagesNumber()
 
         preferLargeTitleIfPossible(true)
     }
@@ -380,7 +380,7 @@ extension ChatViewController: UIImagePickerControllerDelegate {
             return
         }
 
-        viewModel.interactor.sendImage(image)
+        viewModel.interactor.send(image: image)
     }
 }
 
@@ -491,6 +491,14 @@ extension ChatViewController: UITableViewDataSource {
         }
     }
 
+    func authorId(for message: TSMessage?) -> String? {
+        if let incomingSignalMessage = message as? TSIncomingMessage {
+            return incomingSignalMessage.authorId
+        }
+
+        return TokenUser.current?.address
+    }
+
     private func positionType(for indexPath: IndexPath) -> MessagePositionType {
 
         guard let currentMessage = viewModel.messageModels.element(at: indexPath.row) else {
@@ -498,34 +506,33 @@ extension ChatViewController: UITableViewDataSource {
             return .single
         }
 
-        guard let previousMessage = viewModel.messageModels.element(at: indexPath.row - 1) else {
-            guard let nextMessage = viewModel.messageModels.element(at: indexPath.row + 1) else {
-                // this is the first and only cell
-                return .single
-            }
+        let currentAuthorId = authorId(for: currentMessage.signalMessage)
 
-            // this is the first cell of many
-            return currentMessage.isOutgoing == nextMessage.isOutgoing ? .bottom : .single
+        guard let previousMessage = viewModel.messageModels.element(at: indexPath.row - 1) else {
+
+            guard let nextMessage = viewModel.messageModels.element(at: indexPath.row + 1) else { return .single }
+
+            let nextAuthorId = authorId(for: nextMessage.signalMessage)
+            return currentAuthorId == nextAuthorId ? .bottom : .single
         }
+
+        let previousAuthorId = authorId(for: previousMessage.signalMessage)
 
         guard let nextMessage = viewModel.messageModels.element(at: indexPath.row + 1) else {
-            // this is the last cell
-            return currentMessage.isOutgoing == previousMessage.isOutgoing ? .top : .single
+            return currentAuthorId == previousAuthorId ? .top : .single
         }
 
-        if currentMessage.isOutgoing != previousMessage.isOutgoing, currentMessage.isOutgoing != nextMessage.isOutgoing {
-            // the previous and next messages are not from the same user
-            return .single
-        } else if currentMessage.isOutgoing == previousMessage.isOutgoing, currentMessage.isOutgoing == nextMessage.isOutgoing {
-            // the previous and next messages are from the same user
+        let nextAuthorId = authorId(for: nextMessage.signalMessage)
+
+        if currentAuthorId == previousAuthorId && currentAuthorId == nextAuthorId {
             return .middle
-        } else if currentMessage.isOutgoing == previousMessage.isOutgoing {
-            // the previous message is from the same user but the next message is not
+        } else if currentAuthorId == previousAuthorId {
             return .top
-        } else {
-            // the next message is from the same user but the previous message is not
+        } else if currentAuthorId == nextAuthorId {
             return .bottom
         }
+
+        return .single
     }
 }
 

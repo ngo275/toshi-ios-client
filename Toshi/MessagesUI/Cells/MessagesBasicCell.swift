@@ -116,7 +116,7 @@ class MessagesBasicCell: UITableViewCell {
             let isFirstMessage = positionType == .single || positionType == .top
             contentLayoutGuideTopConstraint?.constant = isFirstMessage ? 8 : 4
 
-            let isAvatarHidden = positionType == .top || positionType == .middle || isOutGoing
+            let isAvatarHidden = positionType == .middle || positionType == .top || isOutGoing
             avatarImageView.isHidden = isAvatarHidden
 
             messagesCornerView.setImage(for: positionType, isOutGoing: isOutGoing, isPayment: self is MessagesPaymentCell)

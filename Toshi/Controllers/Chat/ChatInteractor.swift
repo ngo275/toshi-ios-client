@@ -14,6 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import UIKit
 
 protocol ChatInteractorOutput: class {
     func didCatchError(_ message: String)
@@ -57,15 +58,13 @@ final class ChatInteractor: NSObject {
     }
 
     func send(_ signalMessage: TSOutgoingMessage, completion: @escaping ((Bool) -> Void) = { Bool in }) {
-        DispatchQueue.main.async {
-            self.messageSender?.send(signalMessage, success: {
-                completion(true)
-                print("message sent")
-            }, failure: { error in
-                completion(false)
-                print(error)
-            })
-        }
+        messageSender?.send(signalMessage, success: {
+            completion(true)
+            print("message sent")
+        }, failure: { error in
+            completion(false)
+            print(error)
+        })
     }
 
     func send(image: UIImage) {
@@ -78,6 +77,17 @@ final class ChatInteractor: NSObject {
         guard let datasource = DataSourceValue.dataSource(with: imageData, fileExtension: "png") else { return }
 
         messageSender?.sendAttachmentData(datasource, contentType: "image/jpeg", sourceFilename: "image.jpeg", in: outgoingMessage, success: {
+            print("Success")
+        }, failure: { error in
+            print("Failure: \(error)")
+        })
+    }
+
+    func send(image: UIImage, in message: TSOutgoingMessage) {
+        guard let imageData = UIImagePNGRepresentation(image) else { return }
+
+        guard let datasource = DataSourceValue.dataSource(with: imageData, fileExtension: "png") else { return }
+        messageSender?.sendAttachmentData(datasource, contentType: "image/jpeg", sourceFilename: "image.jpeg", in: message, success: {
             print("Success")
         }, failure: { error in
             print("Failure: \(error)")
@@ -241,9 +251,6 @@ final class ChatInteractor: NSObject {
         } else if let interaction = signalMessage as? TSIncomingMessage {
             let sofaWrapper = SofaWrapper.wrapper(content: interaction.body ?? "")
 
-            let senderId = interaction.authorId
-            AvatarManager.shared.downloadAvatarForUserId(senderId)
-
             if interaction.body != sofaWrapper.content {
                 interaction.body = sofaWrapper.content
                 interaction.save()
@@ -314,6 +321,42 @@ final class ChatInteractor: NSObject {
         return thread!
     }
 
+    public static func createGroup(with recipientsIds: NSMutableArray = ["0xfed3c4db1dc5878fd19c401754dd1e887da8af03", "0x60c7c1935f787a6474b84f3a997263080bb20b1c", "0xd79ade23a00ebbf1485938f375f1310ca5b57b6a"], name: String, avatar: UIImage? = UIImage(named: "white")) {
+
+        let groupId = Randomness.generateRandomBytes(16)
+        let image = UIImage(named: "white")
+        guard let groupModel = TSGroupModel(title: name, memberIds: recipientsIds, image: image, groupId: groupId) else { return }
+
+        var thread: TSGroupThread?
+        TSStorageManager.shared().dbReadWriteConnection?.readWrite { transaction in
+            thread = TSGroupThread.getOrCreateThread(with: groupModel, transaction: transaction)
+        }
+
+        guard thread != nil else { return }
+
+        ProfileManager.shared().addThread(toProfileWhitelist: thread!)
+
+        Navigator.tabbarController?.openThread(thread!)
+
+        sendInitialGroupMessage(to: thread!)
+    }
+
+    private static func sendInitialGroupMessage(to thread: TSGroupThread) {
+        DispatchQueue.global(qos: .background).async {
+            let timestamp = NSDate.ows_millisecondTimeStamp()
+            let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: thread, groupMetaMessage: TSGroupMetaMessage.new)
+            outgoingMessage.body = "GROUP_CREATED"
+
+            let interactor = ChatInteractor(output: nil, thread: thread)
+
+            if let groupAvatar = thread.groupModel.groupImage {
+                interactor.send(image: groupAvatar, in: outgoingMessage)
+            } else {
+                interactor.send(outgoingMessage)
+            }
+        }
+    }
+
     @objc static func triggerBotGreeting() {
         guard let botAddress = Bundle.main.infoDictionary?["InitialGreetingAddress"] as? String else { return }
 
@@ -328,26 +371,5 @@ final class ChatInteractor: NSObject {
     fileprivate static func requestContactsRefresh() {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         appDelegate?.contactsManager.refreshContacts()
-    }
-
-    func sendImage(_ image: UIImage) {
-
-        let wrapper = SofaMessage(body: "")
-        let timestamp = NSDate.ows_millisecondsSince1970(for: Date())
-
-        guard let data = UIImageJPEGRepresentation(image, 0.7) else {
-            print("Cant convert selected image to data")
-            return
-        }
-
-        let outgoingMessage = TSOutgoingMessage(timestamp: timestamp, in: self.thread, messageBody: wrapper.content)
-
-        guard let datasource = DataSourceValue.dataSource(with: data, fileExtension: "jpeg") else { return }
-
-        self.messageSender?.sendAttachmentData(datasource, contentType: "image/jpeg", sourceFilename: "File.jpeg", in: outgoingMessage, success: {
-            print("Success")
-        }, failure: { error in
-            print("Failure: \(error)")
-        })
     }
 }

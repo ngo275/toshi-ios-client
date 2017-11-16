@@ -151,8 +151,17 @@ open class RecentViewController: SweetTableController, Emptiable {
         if let insertedRow = yapDatabaseChanges.rowChanges.first(where: { $0.type == .insert }) {
 
             if let newIndexPath = insertedRow.newIndexPath {
-                if let thread = self.thread(at: newIndexPath), let contactIdentifier = thread.contactIdentifier() {
-                    IDAPIClient.shared.updateContact(with: contactIdentifier)
+                if let thread = self.thread(at: newIndexPath) {
+
+                    if let contactIdentifier = thread.contactIdentifier() {
+                        IDAPIClient.shared.updateContact(with: contactIdentifier)
+                    }
+
+                    if thread.isGroupThread() && ProfileManager.shared().isThread(inProfileWhitelist: thread) == false {
+                        ProfileManager.shared().addThread(toProfileWhitelist: thread)
+
+                        (thread as? TSGroupThread)?.groupModel.groupMemberIds.forEach { AvatarManager.shared.downloadAvatarForUserId($0) }
+                    }
                 }
             }
         }

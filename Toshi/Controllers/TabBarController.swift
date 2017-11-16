@@ -140,6 +140,10 @@ open class TabBarController: UITabBarController, OfflineAlertDisplaying {
         messagingController.openThread(withAddress: address, completion: completion)
     }
 
+    public func openThread(_ thread: TSThread, animated:  Bool = true) {
+        messagingController.openThread(thread, animated: animated)
+    }
+
     public func `switch`(to tab: Tab) {
         switch tab {
         case .browsing:

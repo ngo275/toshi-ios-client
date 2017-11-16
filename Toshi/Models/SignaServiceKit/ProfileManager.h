@@ -16,6 +16,9 @@ extern const NSUInteger kOWSProfileManager_NameDataLength;
 
 + (instancetype)sharedManager;
 
+- (void)addThreadToProfileWhitelist:(TSThread *)thread;
+- (BOOL)isThreadInProfileWhitelist:(TSThread *)thread;
+
 @end
 
 NS_ASSUME_NONNULL_END

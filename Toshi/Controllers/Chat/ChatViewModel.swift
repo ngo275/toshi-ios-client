@@ -371,6 +371,8 @@ final class ChatViewModel {
     func markAllMessagesAsRead() {
         TSStorageManager.shared().dbReadWriteConnection?.asyncReadWrite { [weak self] transaction in
             self?.thread.markAllAsRead(with: transaction)
+
+            SignalNotificationManager.updateUnreadMessagesNumber()
         }
     }
     

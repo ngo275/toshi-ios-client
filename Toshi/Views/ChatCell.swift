@@ -47,6 +47,7 @@ class ChatCell: UITableViewCell {
 
             // unread badge
             if let thread = self.thread {
+
                 let unreadMessagesCount = OWSMessageManager.shared().unreadMessages(in: thread)
                 if unreadMessagesCount > 0 {
                     unreadLabel.text = "\(unreadMessagesCount)"
@@ -57,15 +58,19 @@ class ChatCell: UITableViewCell {
                     unreadView.isHidden = true
                     lastMessageDateLabel.textColor = Theme.greyTextColor
                 }
-            }
 
-            guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            if let contact = delegate.contactsManager.tokenContact(forAddress: self.thread?.contactIdentifier() ?? "") {
-                updateContact(contact)
-            } else {
-                IDAPIClient.shared.retrieveUser(username: thread?.contactIdentifier() ?? "") { [weak self] contact in
-                    guard let contact = contact else { return }
-                    self?.updateContact(contact)
+                guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+                if thread.isGroupThread() {
+                    usernameLabel.text = thread.name()
+                    avatarImageView.image = (thread as? TSGroupThread)?.groupModel.groupImage
+                } else if let contact = delegate.contactsManager.tokenContact(forAddress: self.thread?.contactIdentifier() ?? "") {
+                    updateContact(contact)
+                } else {
+                    IDAPIClient.shared.retrieveUser(username: thread.contactIdentifier() ?? "") { [weak self] contact in
+                        guard let contact = contact else { return }
+                        self?.updateContact(contact)
+                    }
                 }
             }
 
