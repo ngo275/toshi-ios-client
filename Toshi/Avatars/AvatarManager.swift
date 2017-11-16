@@ -105,7 +105,7 @@ final class AvatarManager: NSObject {
             return
         }
 
-        IDAPIClient.shared.retrieveUser(username: userId) { [weak self] user in
+        IDAPIClient.shared.findContact(name: userId) { [weak self] user in
 
             guard let retrievedUser = user else {
                 completion?(nil)
