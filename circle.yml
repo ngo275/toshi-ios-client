@@ -5,7 +5,7 @@ machine:
 test:
   test:
   override:
-    - set -o pipefail && xcodebuild test -workspace Toshi.xcworkspace -scheme "Tests" -destination 'platform=iOS Simulator,name=iPhone 7' | xcpretty --color && exit ${PIPESTATUS[0]}
+    - set -o pipefail && xcodebuild clean build test -workspace Toshi.xcworkspace -scheme "Tests" -destination 'platform=iOS Simulator,name=iPhone 7' | xcpretty --color && exit ${PIPESTATUS[0]}
   post:
     - bundle exec danger
 
