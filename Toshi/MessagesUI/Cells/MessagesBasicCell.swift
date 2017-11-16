@@ -16,6 +16,10 @@ enum OutGoingMessageSentState {
     case failed
 }
 
+protocol MessagesBasicCellDelegate: class {
+    func didTapAvatarImageView(from cell: MessagesBasicCell)
+}
+
 /* Messages Basic Cell:
  This UITableViewCell is the base cell for the different
  advanced cells used in messages. It provides the ground layout. */
@@ -45,6 +49,7 @@ class MessagesBasicCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 18
+        view.isUserInteractionEnabled = true
 
         return view
     }()
@@ -94,6 +99,18 @@ class MessagesBasicCell: UITableViewCell {
     private var bubbleRightConstantConstraint: NSLayoutConstraint?
     private var contentLayoutGuideTopConstraint: NSLayoutConstraint?
     private var bottomLayoutGuideHeightConstraint: NSLayoutConstraint?
+
+    private lazy var avatarTapGestureRecogniser: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(didTapAvatarImageView(_:)))
+    }()
+
+    @objc private func didTapAvatarImageView(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+
+        delegate?.didTapAvatarImageView(from: self)
+    }
+
+    weak var delegate: MessagesBasicCellDelegate?
 
     var isOutGoing: Bool = false {
         didSet {
@@ -216,6 +233,8 @@ class MessagesBasicCell: UITableViewCell {
 
         contentView.addSubview(errorlabel)
         errorlabel.edges(to: bottomLayoutGuide)
+
+        avatarImageView.addGestureRecognizer(avatarTapGestureRecogniser)
     }
 
     func showSentError(_ show: Bool, animated: Bool = false) {

@@ -447,6 +447,7 @@ extension ChatViewController: UITableViewDataSource {
 
             cell.isOutGoing = messageModel.isOutgoing
             cell.positionType = positionType(for: indexPath)
+            cell.delegate = self
 
             updateMessageState(messageModel, in: cell)
         }
@@ -533,6 +534,23 @@ extension ChatViewController: UITableViewDataSource {
         }
 
         return .single
+    }
+}
+
+extension ChatViewController: MessagesBasicCellDelegate {
+
+    func didTapAvatarImageView(from cell: MessagesBasicCell) {
+
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        guard let message = viewModel.messageModels.element(at: indexPath.row) else { return }
+        guard let authorId = authorId(for: message.signalMessage) else { return }
+
+        IDAPIClient.shared.findContact(name: authorId) { [weak self] user in
+            guard let retrievedUser = user else { return }
+
+            let contactController = ProfileViewController(contact: retrievedUser)
+            self?.navigationController?.pushViewController(contactController, animated: true)
+        }
     }
 }
 
