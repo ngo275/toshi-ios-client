@@ -58,7 +58,7 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
         if (!_attachmentFilenameMap) {
             _attachmentFilenameMap = [NSMutableDictionary new];
         }
-        
+
         // Migrate message state.
         if (_messageState == TSOutgoingMessageStateSent_OBSOLETE) {
             _messageState = TSOutgoingMessageStateSentToService;
@@ -147,7 +147,7 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
                   expireStartedAt:(uint64_t)expireStartedAt
 {
     TSGroupMetaMessage groupMetaMessage
-        = ([thread isKindOfClass:[TSGroupThread class]] ? TSGroupMessageDeliver : TSGroupMessageNone);
+    = ([thread isKindOfClass:[TSGroupThread class]] ? TSGroupMetaMessageDeliver : TSGroupMetaMessageNone);
     return [self initWithTimestamp:timestamp
                           inThread:thread
                        messageBody:body
@@ -200,7 +200,7 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
 
 - (void)saveWithTransaction:(YapDatabaseReadWriteTransaction *)transaction
 {
-    if (!(self.groupMetaMessage == TSGroupMessageDeliver || self.groupMetaMessage == TSGroupMessageNone)) {
+    if (!(self.groupMetaMessage == TSGroupMetaMessageDeliver || self.groupMetaMessage == TSGroupMetaMessageNone)) {
         DDLogDebug(@"%@ Skipping save for group meta message.", self.tag);
         return;
     }
@@ -331,9 +331,9 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
 
                                             if (deliveryTimestamp) {
                                                 NSMutableDictionary<NSString *, NSNumber *> *recipientDeliveryMap
-                                                    = (message.recipientDeliveryMap
-                                                            ? [message.recipientDeliveryMap mutableCopy]
-                                                            : [NSMutableDictionary new]);
+                                                = (message.recipientDeliveryMap
+                                                   ? [message.recipientDeliveryMap mutableCopy]
+                                                   : [NSMutableDictionary new]);
                                                 recipientDeliveryMap[recipientId] = deliveryTimestamp;
                                                 message.recipientDeliveryMap = [recipientDeliveryMap copy];
                                             }
@@ -438,8 +438,8 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
     [self applyChangeToSelfAndLatestOutgoingMessage:transaction
                                         changeBlock:^(TSOutgoingMessage *message) {
                                             NSMutableDictionary<NSString *, NSNumber *> *recipientReadMap
-                                                = (message.recipientReadMap ? [message.recipientReadMap mutableCopy]
-                                                                            : [NSMutableDictionary new]);
+                                            = (message.recipientReadMap ? [message.recipientReadMap mutableCopy]
+                                               : [NSMutableDictionary new]);
                                             recipientReadMap[recipientId] = @(readTimestamp);
                                             message.recipientReadMap = [recipientReadMap copy];
                                         }];
@@ -469,15 +469,15 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
         OWSSignalServiceProtosGroupContextBuilder *groupBuilder = [OWSSignalServiceProtosGroupContextBuilder new];
 
         switch (self.groupMetaMessage) {
-            case TSGroupMessageQuit:
+            case TSGroupMetaMessageQuit:
                 [groupBuilder setType:OWSSignalServiceProtosGroupContextTypeQuit];
                 break;
-            case TSGroupMessageUpdate:
-            case TSGroupMessageNew: {
+            case TSGroupMetaMessageUpdate:
+            case TSGroupMetaMessageNew: {
                 if (gThread.groupModel.groupImage != nil && self.attachmentIds.count == 1) {
                     attachmentWasGroupAvatar = YES;
                     [groupBuilder
-                        setAvatar:[self buildAttachmentProtoForAttachmentId:self.attachmentIds[0] filename:nil]];
+                     setAvatar:[self buildAttachmentProtoForAttachmentId:self.attachmentIds[0] filename:nil]];
                 }
 
                 [groupBuilder setMembersArray:gThread.groupModel.groupMemberIds];
@@ -565,3 +565,4 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
 @end
 
 NS_ASSUME_NONNULL_END
+

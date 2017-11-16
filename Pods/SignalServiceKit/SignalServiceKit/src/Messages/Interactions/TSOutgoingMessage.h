@@ -22,12 +22,12 @@ typedef NS_ENUM(NSInteger, TSOutgoingMessageState) {
 };
 
 typedef NS_ENUM(NSInteger, TSGroupMetaMessage) {
-    TSGroupMessageNone,
-    TSGroupMessageNew,
-    TSGroupMessageUpdate,
-    TSGroupMessageDeliver,
-    TSGroupMessageQuit,
-    TSGroupMessageRequestInfo,
+    TSGroupMetaMessageNone,
+    TSGroupMetaMessageNew,
+    TSGroupMetaMessageUpdate,
+    TSGroupMetaMessageDeliver,
+    TSGroupMetaMessageQuit,
+    TSGroupMetaMessageRequestInfo,
 };
 
 @class OWSSignalServiceProtosAttachmentPointer;
@@ -201,3 +201,4 @@ typedef NS_ENUM(NSInteger, TSGroupMetaMessage) {
 @end
 
 NS_ASSUME_NONNULL_END
+

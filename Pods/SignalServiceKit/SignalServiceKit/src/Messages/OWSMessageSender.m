@@ -1333,10 +1333,10 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 
 - (void)saveGroupMessage:(TSOutgoingMessage *)message inThread:(TSThread *)thread
 {
-    if (message.groupMetaMessage == TSGroupMessageDeliver) {
+    if (message.groupMetaMessage == TSGroupMetaMessageDeliver) {
         // TODO: Why is this necessary?
         [message save];
-    } else if (message.groupMetaMessage == TSGroupMessageQuit) {
+    } else if (message.groupMetaMessage == TSGroupMetaMessageQuit) {
         [[[TSInfoMessage alloc] initWithTimestamp:message.timestamp
                                          inThread:thread
                                       messageType:TSInfoMessageTypeGroupQuit
@@ -1387,3 +1387,4 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 @end
 
 NS_ASSUME_NONNULL_END
+
